@@ -67,8 +67,8 @@ h1 {
   height: 100%;
   max-height: calc(100vh - 7.5rem);
 }
-.container-readings{
-  overflow:auto;
+.container-readings {
+  overflow: auto;
   padding: 0 0.75rem 0 0;
   margin-right: 0.5rem;
 }
@@ -82,10 +82,10 @@ h1 {
     max-height: none;
     margin-bottom: 3rem;
   }
-  .container-readings{
+  .container-readings {
     overflow: unset;
     margin-right: 0;
-  }  
+  }
 }
 
 .readings table {
@@ -112,7 +112,7 @@ h1 {
 .scale-factors td {
   color: #505050;
   padding-bottom: 0.5rem;
-  text-transform: capitalize;  
+  text-transform: capitalize;
 }
 .container-graph {
   overflow: auto;
