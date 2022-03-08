@@ -1,16 +1,32 @@
-# EnviroPlusWeb
+# 🌿 Enviro Plus Web
 
-Forked from https://github.com/nophead/EnviroPlusWeb
+Web interface for Enviro+ sensor board plugged into a Raspberry Pi
 
-*This version has a less contrasted color scheme and also a different responsive rescale for the graph.
-
-Web interface for Enviro+ sensor board plugged into a Raspberry PI
+![Screenshot](screenshot.jpg)
 
 A very simple Flask application that serves a wep page with the current sensor readings and a graph over a specified time period.
 
-By default it expects a particle sensor to be attached. Change line 20 of app.py to `particle_sensor = False` to run without one.
+Forked from <https://github.com/nophead/EnviroPlusWeb>
+
+## 🗂️ User guide
+
+By default it expects a particle sensor to be attached.
+Change line 20 of enviroplusweb.py to `particle_sensor = False` to run without one.
 Also by default a gas sensor is expected. If you have and Enviro board without one also set `gas_sensor = False`.
 
-Run `sudo ./install-service.sh` and it will be installed as a service that starts on boot.
+To run at boot just type in the terminal:
+```
+crontab -e
+```
+Add a new entry at the very bottom with @reboot to specify that you want to run the command at boot, followed by the path where you clone the project and the command. Here you have an example:
+```
+@reboot sudo python3 /home/EnviroPlusWeb/enviroplusweb.py
+```
 
-![Screenshot](screenshot.jpg)
+## 🚀 Improve me
+
+Feel free to add/improve the styles and add more features.
+
+## ⚖️ License
+
+GNU GENERAL PUBLIC LICENSE v3.0
