@@ -1,6 +1,6 @@
 # 🌿 Enviro Plus Web
 
-Web interface for [Enviro+](https://shop.pimoroni.com/products/enviro?variant=31155658457171) sensor board plugged into a Raspberry Pi.
+Web interface for [Enviro](https://shop.pimoroni.com/products/enviro?variant=31155658489939) and [Enviro+](https://shop.pimoroni.com/products/enviro?variant=31155658457171) sensor board plugged into a Raspberry Pi.
 
 ![Screenshot](screenshot.jpg)
 
