@@ -4,8 +4,6 @@
 # nop.head@gmail.com
 # hydraraptor.blogspot.com
 #
-# This file is part of EnviroPlusWeb.
-#
 # EnviroPlusWeb is free software: you can redistribute it and/or modify it under the terms of the
 # GNU General Public License as published by the Free Software Foundation, either version 3 of
 # the License, or (at your option) any later version.
@@ -15,11 +13,18 @@
 # See the GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License along with EnviroPlusWeb.
-# If not, see <https:#www.gnu.org/licenses/>.
+# If not, visit <https:#www.gnu.org/licenses/>.
 #
-particle_sensor = True
+
+# If you have an Enviro board without gas sensor, change the next value to False
 gas_sensor = True
-assert gas_sensor or not particle_sensor # cant have particle sensor without gas sensor
+# In case that you don't have a particle sensor PMS5003 attached, change the next value to False
+particle_sensor = True
+# If you prefer to keep the Enviro screen off, change the next value to False
+lcd_screen = True
+# If you don't have a fan plugged on GPIO, change the next value to False
+fan_gpio = True
+assert gas_sensor or not particle_sensor # Can't have particle sensor without gas sensor
 from flask import Flask, render_template, url_for, request
 import logging
 from bme280 import BME280
@@ -179,7 +184,7 @@ def read_data(time):
     }
     return record
 
-record = read_data(time()) # throw away the first readings as not accurate
+record = read_data(time()) # Throw away the first readings as not accurate
 data = []
 days = []
 

@@ -10,12 +10,14 @@ Forked from <https://github.com/nophead/EnviroPlusWeb>
 
 ## 🗂️ User guide
 
-By default it expects a particle sensor [PMS5003](https://shop.pimoroni.com/products/pms5003-particulate-matter-sensor-with-cable?variant=29075640352851) to be attached.
-Change line 20 of *enviroplusweb.py* to `particle_sensor = False` to run without one.
+First be sure to have the right config, check at the beginning of the file *enviroplusweb.py* the following values:
 
-Also by default a gas sensor is expected. If you have and Enviro board without one also set `gas_sensor = False`.
+By default a gas sensor is expected. If you have and Enviro board without one set, change line 20 to  `gas_sensor = False`.
 
-If you want to run Enviro Plus Web at boot just type in the terminal:
+If you don't have a particle sensor [PMS5003](https://shop.pimoroni.com/products/pms5003-particulate-matter-sensor-with-cable?variant=29075640352851) attached, then change line 22 to `particle_sensor = False` to run without one.
+
+
+Maybe you want to run Enviro Plus Web at boot, then just type in the terminal:
 ```
 crontab -e
 ```
