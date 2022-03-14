@@ -20,7 +20,7 @@
 gas_sensor = True
 # In case that you don't have a particle sensor PMS5003 attached, change the next value to False
 particle_sensor = True
-# If you prefer to keep the Enviro screen off, change the next value to False
+# If you prefer to keep the Enviro LCD screen off, change the next value to False
 lcd_screen = True
 # If you don't have a fan plugged on GPIO, change the next value to False
 fan_gpio = True
@@ -253,7 +253,7 @@ background_thread = threading.Thread(target = background)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', fan_gpio=fan_gpio)
 
 @app.route('/readings')
 def readings():
