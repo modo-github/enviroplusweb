@@ -19,7 +19,7 @@ console.log('fan_gpio: ', fan_gpio);
 
 function getData() {
     var xhttp = new XMLHttpRequest();
-    var fan = document.getElementById("fan").value;
+    
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("readings").innerHTML = this.responseText;
@@ -27,7 +27,12 @@ function getData() {
             gas_sensor_readings = this.responseText.search("Oxidising") > 0;
         }
     };
-    xhttp.open("GET", "readings?fan=" + fan, true);
+    if (fan_gpio) {
+        var fan = document.getElementById("fan").value;
+        xhttp.open("GET", "readings?fan=" + fan, true);
+    } else {
+        xhttp.open("GET", "readings", true);
+    }
     xhttp.send();
 }
 

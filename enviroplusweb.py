@@ -23,7 +23,7 @@ particle_sensor = True
 # If you prefer to keep the Enviro LCD screen off, change the next value to False
 lcd_screen = True
 # If you don't have a fan plugged on GPIO, change the next value to False
-fan_gpio = True
+fan_gpio = False
 assert gas_sensor or not particle_sensor # Can't have particle sensor without gas sensor
 from flask import Flask, render_template, url_for, request
 import logging
