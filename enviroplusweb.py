@@ -16,14 +16,14 @@
 # If not, visit <https:#www.gnu.org/licenses/>.
 #
 
-# If you have an Enviro board without gas sensor, change the next value to False
-gas_sensor = True
-# In case that you don't have a particle sensor PMS5003 attached, change the next value to False
-particle_sensor = True
 # If you prefer to keep the Enviro LCD screen off, change the next value to False
 lcd_screen = True
 # If you don't have a fan plugged on GPIO, change the next value to False
 fan_gpio = False
+# If you have an Enviro board without gas sensor, change the next value to False
+gas_sensor = True
+# If you don't have a particle sensor PMS5003 attached, change the next value to False
+particle_sensor = True
 assert gas_sensor or not particle_sensor # Can't have particle sensor without gas sensor
 from flask import Flask, render_template, url_for, request
 import logging
@@ -65,66 +65,67 @@ if fan_gpio:
     pwm.start(100)       # Duty cycle
 
 # Create ST7735 LCD display class
-st7735 = ST7735.ST7735(
-    port=0,
-    cs=1,
-    dc=9,
-    backlight=12,
-    rotation=270,
-    spi_speed_hz=10000000
-)
+if lcd_screen:
+    st7735 = ST7735.ST7735(
+        port=0,
+        cs=1,
+        dc=9,
+        backlight=12,
+        rotation=270,
+        spi_speed_hz=10000000
+    )
 
-# Initialize display
-st7735.begin()
+    # Initialize display
+    st7735.begin()
 
-WIDTH = st7735.width
-HEIGHT = st7735.height
+    WIDTH = st7735.width
+    HEIGHT = st7735.height
 
-# Set up canvas and font
-img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
-draw = ImageDraw.Draw(img)
+    # Set up canvas and font
+    img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
+    draw = ImageDraw.Draw(img)
 
-path = os.path.dirname(os.path.realpath(__file__)) + "/static/fonts"
-smallfont = ImageFont.truetype(path + "/asap/Asap-Bold.ttf", 10)
-x_offset = 2
-y_offset = 2
+    path = os.path.dirname(os.path.realpath(__file__)) + "/static/fonts"
+    smallfont = ImageFont.truetype(path + "/asap/Asap-Bold.ttf", 10)
+    x_offset = 2
+    y_offset = 2
 
-units = ["°C",
-         "%",
-         "mBar",
-         "Lux"]
-         
-if gas_sensor:
-    units += [
-         "kΩ",
-         "kΩ",
-         "kΩ"]
-         
-if particle_sensor:
-    units += [
-         "/0.ll",
-         "/0.1l",
-         "/0.1l"]
+    units = ["°C",
+            "%",
+            "mBar",
+            "Lux"]
+            
+    if gas_sensor:
+        units += [
+            "kΩ",
+            "kΩ",
+            "kΩ"]
+            
+    if particle_sensor:
+        units += [
+            "/0.ll",
+            "/0.1l",
+            "/0.1l"]
 
-# Displays all the text on the 0.96" LCD
-def display_everything():
-    draw.rectangle((0, 0, WIDTH, HEIGHT), (0, 0, 0))
-    column_count = 2
-    variables = list(record.keys())
-    row_count = ceil(len(units) / column_count)
-    last_values = days[-1][-1]
-    for i in range(len(units)):
-        variable = variables[i + 1]
-        data_value = record[variable]
-        last_value = last_values[variable]
-        unit = units[i]
-        x = x_offset + (WIDTH // column_count) * (i // row_count)
-        y = y_offset + (HEIGHT // row_count) * (i % row_count)
-        message = "{}: {:s} {}".format(variable[:4], str(data_value), unit)
-        tol = 1.01
-        rgb = (255, 0, 255) if data_value > last_value * tol  else (0, 255, 255) if data_value < last_value / tol else (0, 255, 0)
-        draw.text((x, y), message, font = smallfont, fill = rgb)
-    st7735.display(img)
+    # Displays all the text on the 0.96" LCD
+    def display_everything():
+        draw.rectangle((0, 0, WIDTH, HEIGHT), (0, 0, 0))
+        column_count = 2
+        variables = list(record.keys())
+        row_count = ceil(len(units) / column_count)
+        last_values = days[-1][-1]
+        for i in range(len(units)):
+            variable = variables[i + 1]
+            data_value = record[variable]
+            last_value = last_values[variable]
+            unit = units[i]
+            x = x_offset + (WIDTH // column_count) * (i // row_count)
+            y = y_offset + (HEIGHT // row_count) * (i % row_count)
+            message = "{}: {:s} {}".format(variable[:4], str(data_value), unit)
+            tol = 1.01
+            rgb = (255, 0, 255) if data_value > last_value * tol  else (0, 255, 255) if data_value < last_value / tol else (0, 255, 0)
+            draw.text((x, y), message, font = smallfont, fill = rgb)
+        st7735.display(img)
 
 
 app = Flask(__name__)
@@ -247,7 +248,7 @@ def background():
                 days.append([])
             last_file = fname
             add_record(days[-1], totals)        # Add to today, filling any gap from last reading if been stopped
-        if days:
+        if lcd_screen and days:
             display_everything()
         sleep(max(t + 1 - time(), 0.1))
 
