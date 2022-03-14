@@ -229,7 +229,7 @@ h1 {
   margin-right: 1rem;
 }
 .fan-gpio-False {
-  display: none;
+  display: none!important;
 }
 
 /* Main container */

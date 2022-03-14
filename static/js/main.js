@@ -15,7 +15,6 @@ var frequencies = {
 var particle_sensor_readings = false;
 var gas_sensor_readings = false;
 var fan_gpio = document.getElementById('fan_gpio').classList.contains('fan-gpio-True');
-console.log('fan_gpio: ', fan_gpio);
 
 function getData() {
     var xhttp = new XMLHttpRequest();
