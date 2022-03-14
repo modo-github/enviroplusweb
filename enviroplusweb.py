@@ -57,10 +57,12 @@ bme280 = BME280(i2c_dev=bus) # BME280 temperature, humidity and pressure sensor
 
 pms5003 = PMS5003() # PMS5003 particulate sensor
 
-IO.setmode(IO.BCM)   # Set pin numbering
-IO.setup(4,IO.OUT)   # Fan controller on GPIO 4
-pwm = IO.PWM(4,1000) # PWM frequency
-pwm.start(100)       # Duty cycle
+# Config the fan plugged to RPi
+if fan_gpio:
+    IO.setmode(IO.BCM)   # Set pin numbering
+    IO.setup(4,IO.OUT)   # Fan controller on GPIO 4
+    pwm = IO.PWM(4,1000) # PWM frequency
+    pwm.start(100)       # Duty cycle
 
 # Create ST7735 LCD display class
 st7735 = ST7735.ST7735(
@@ -258,7 +260,8 @@ def index():
 @app.route('/readings')
 def readings():
     arg = request.args["fan"]
-    pwm.ChangeDutyCycle(int(arg))
+    if fan_gpio:
+        pwm.ChangeDutyCycle(int(arg))
     return render_template('readings.html' if particle_sensor else 'readings_np.html' if gas_sensor else 'readings_ng.html', **record) 
 
 def compress_data(ndays, nsamples):
