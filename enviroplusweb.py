@@ -259,8 +259,8 @@ def index():
 
 @app.route('/readings')
 def readings():
-    arg = request.args["fan"]
     if fan_gpio:
+        arg = request.args["fan"]
         pwm.ChangeDutyCycle(int(arg))
     return render_template('readings.html' if particle_sensor else 'readings_np.html' if gas_sensor else 'readings_ng.html', **record) 
 

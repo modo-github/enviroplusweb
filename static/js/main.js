@@ -12,8 +12,10 @@ var frequencies = {
     'year': { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 }
 };
 
-var particle_sensor = false;
-var gas_sensor = false;
+var particle_sensor_readings = false;
+var gas_sensor_readings = false;
+var fan_gpio = document.getElementById('fan_gpio').classList.contains('fan-gpio-True');
+console.log('fan_gpio: ', fan_gpio);
 
 function getData() {
     var xhttp = new XMLHttpRequest();
@@ -21,8 +23,8 @@ function getData() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("readings").innerHTML = this.responseText;
-            particle_sensor = this.responseText.search("10.0um") > 0;
-            gas_sensor = this.responseText.search("Oxidising") > 0;
+            particle_sensor_readings = this.responseText.search("10.0um") > 0;
+            gas_sensor_readings = this.responseText.search("Oxidising") > 0;
         }
     };
     xhttp.open("GET", "readings?fan=" + fan, true);
@@ -143,8 +145,8 @@ function graph(d) {
 
     // Plot each item
     var scaleFactors = "";
-    var items = particle_sensor ? items_ngp.concat(items_g).concat(items_p) :
-        gas_sensor ? items_ngp.concat(items_g) : items_ngp;
+    var items = particle_sensor_readings ? items_ngp.concat(items_g).concat(items_p) :
+        gas_sensor_readings ? items_ngp.concat(items_g) : items_ngp;
     for (var item of items) {
         ctx.strokeStyle = item.colour;
         plotData(item.name, item.min, item.max);
