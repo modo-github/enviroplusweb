@@ -307,7 +307,7 @@ if __name__ == '__main__':
         days.append(read_day('data/' + f))
     background_thread.start()
     try:
-        app.run(debug = False, host = '0.0.0.0', port = 80, use_reloader = False)
+        app.run(debug = False, host = '0.0.0.0', port = 81, use_reloader = False)
     except Exception as e:
         print(e)
         pass
