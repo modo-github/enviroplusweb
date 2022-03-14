@@ -17,7 +17,7 @@
 #
 
 # If you prefer to keep the Enviro LCD screen off, change the next value to False
-lcd_screen = True
+lcd_screen = False
 # If you don't have a fan plugged on GPIO, change the next value to False
 fan_gpio = False
 # If you have an Enviro board without gas sensor, change the next value to False
