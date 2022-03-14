@@ -8,33 +8,33 @@ A very simple Flask application that serves a web page with the current sensor r
 
 Forked from <https://github.com/nophead/EnviroPlusWeb>
 
-## 🗂️ User guide
+## 📖 User guide
 
-First be sure to have the right config, check at the beginning of the file *enviroplusweb.py* the following values:
+Check at the beginning of the file *enviroplusweb.py* the following lines and choose `True` or `False` depending on your config:
 
-If you have an Enviro board without gas sensor
+- If you have an Enviro board without gas sensor, edit this line
 
-```
-gas_sensor = False
-```
+    ```
+    gas_sensor = False
+    ```
 
-If you don't have a particle sensor [PMS5003](https://shop.pimoroni.com/products/pms5003-particulate-matter-sensor-with-cable?variant=29075640352851) attached
+- If you don't have a particle sensor [PMS5003](https://shop.pimoroni.com/products/pms5003-particulate-matter-sensor-with-cable?variant=29075640352851) attached, edit this line
 
-```
-particle_sensor = False
-```
+    ```
+    particle_sensor = False
+    ```
 
-If you prefer to keep the Enviro LCD screen off
+- If you prefer to keep the Enviro LCD screen off, edit this line
 
-```
-lcd_screen = False
-```
+    ```
+    lcd_screen = False
+    ```
 
-If you don't have a fan plugged on GPIO
+- If you don't have a fan plugged on GPIO, edit this line
 
-```
-fan_gpio = False
-```
+    ```
+    fan_gpio = False
+    ```
 
 Maybe you want to run Enviro Plus Web at boot, then just type in the terminal:
 
