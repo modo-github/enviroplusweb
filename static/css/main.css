@@ -272,6 +272,7 @@ h1 {
 .readings-time {
   font-size: 1.15rem;
   font-weight: 700;
+  text-align: center;
 }
 .readings tr:nth-child(even) {
   color: #505050;
