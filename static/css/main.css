@@ -150,28 +150,28 @@ template {
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("./fonts/noto-sans/noto-sans-v25-latin-regular.eot");
+  src: url("/fonts/noto-sans/noto-sans-v25-latin-regular.eot");
   src: local(""),
-    url("./fonts/noto-sans/noto-sans-v25-latin-regular.eot?#iefix")
+    url("/fonts/noto-sans/noto-sans-v25-latin-regular.eot?#iefix")
       format("embedded-opentype"),
-    url("./fonts/noto-sans/noto-sans-v25-latin-regular.woff2") format("woff2"),
-    url("./fonts/noto-sans/noto-sans-v25-latin-regular.woff") format("woff"),
-    url("./fonts/noto-sans/noto-sans-v25-latin-regular.ttf") format("truetype"),
-    url("./fonts/noto-sans/noto-sans-v25-latin-regular.svg#NotoSans")
+    url("/fonts/noto-sans/noto-sans-v25-latin-regular.woff2") format("woff2"),
+    url("/fonts/noto-sans/noto-sans-v25-latin-regular.woff") format("woff"),
+    url("/fonts/noto-sans/noto-sans-v25-latin-regular.ttf") format("truetype"),
+    url("/fonts/noto-sans/noto-sans-v25-latin-regular.svg#NotoSans")
       format("svg");
 }
 @font-face {
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 700;
-  src: url("./fonts/noto-sans/noto-sans-v25-latin-700.eot");
+  src: url("/fonts/noto-sans/noto-sans-v25-latin-700.eot");
   src: local(""),
-    url("./fonts/noto-sans/noto-sans-v25-latin-700.eot?#iefix")
+    url("/fonts/noto-sans/noto-sans-v25-latin-700.eot?#iefix")
       format("embedded-opentype"),
-    url("./fonts/noto-sans/noto-sans-v25-latin-700.woff2") format("woff2"),
-    url("./fonts/noto-sans/noto-sans-v25-latin-700.woff") format("woff"),
-    url("./fonts/noto-sans/noto-sans-v25-latin-700.ttf") format("truetype"),
-    url("./fonts/noto-sans/noto-sans-v25-latin-700.svg#NotoSans") format("svg");
+    url("/fonts/noto-sans/noto-sans-v25-latin-700.woff2") format("woff2"),
+    url("/fonts/noto-sans/noto-sans-v25-latin-700.woff") format("woff"),
+    url("/fonts/noto-sans/noto-sans-v25-latin-700.ttf") format("truetype"),
+    url("/fonts/noto-sans/noto-sans-v25-latin-700.svg#NotoSans") format("svg");
 }
 
 html,
