@@ -84,7 +84,7 @@ HEIGHT = st7735.height
 img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
 draw = ImageDraw.Draw(img)
 
-path = os.path.dirname(os.path.realpath(__file__)) + "/fonts"
+path = os.path.dirname(os.path.realpath(__file__)) + "/static/fonts"
 smallfont = ImageFont.truetype(path + "/asap/Asap-Bold.ttf", 10)
 x_offset = 2
 y_offset = 2
