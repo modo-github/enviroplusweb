@@ -74,9 +74,7 @@ def get_cpu_temperature():
 
 # Tuning factor for compensation. Decrease this number to adjust the
 # temperature down, and increase to adjust up
-factor = 2.25
-
-cpu_temps = [get_cpu_temperature()] * 5        
+factor_temp = 2.25      
 
 # Create ST7735 LCD display class
 if lcd_screen:
@@ -153,12 +151,13 @@ def read_data(time):
     if fan_gpio:
         temperature = bme280.get_temperature()
     else:
+        cpu_temps = [get_cpu_temperature()] * 5  
         cpu_temp = get_cpu_temperature()
         # Smooth out with some averaging to decrease jitter
         cpu_temps = cpu_temps[1:] + [cpu_temp]
         avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
         raw_temp = bme280.get_temperature()
-        temperature = raw_temp - ((avg_cpu_temp - raw_temp) / factor)
+        temperature = raw_temp - ((avg_cpu_temp - raw_temp) / factor_temp)
 
     pressure = bme280.get_pressure()
     humidity = bme280.get_humidity()
