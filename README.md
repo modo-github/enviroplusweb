@@ -36,6 +36,10 @@ Check at the beginning of the file *enviroplusweb.py* the following lines and ch
     fan_gpio = False
     ```
 
+Temperature and humidity readings will vary depending on how you assambled your Enviro board with your Raspberry Pi.  
+Find an alternative device/reference for measurnig temperature and humidity to compare the readings. Then if needed you can compensate the values changing the `factor_temp` and `factor_humi` numbers to adjust them.
+
+
 Maybe you want to run Enviro Plus Web at boot, then just type in the terminal:
 
 ```
