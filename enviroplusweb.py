@@ -64,6 +64,20 @@ if fan_gpio:
     pwm = IO.PWM(4,1000) # PWM frequency
     pwm.start(100)       # Duty cycle
 
+# Get the temperature of the CPU for compensation
+# useful if your board has no fan plugged
+def get_cpu_temperature():
+    with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
+        temp = f.read()
+        temp = int(temp) / 1000.0
+    return temp
+
+# Tuning factor for compensation. Decrease this number to adjust the
+# temperature down, and increase to adjust up
+factor = 2.25
+
+cpu_temps = [get_cpu_temperature()] * 5        
+
 # Create ST7735 LCD display class
 if lcd_screen:
     st7735 = ST7735.ST7735(
@@ -135,7 +149,17 @@ log.disabled = True
 run_flag = True
 
 def read_data(time):
-    temperature = bme280.get_temperature()
+
+    if fan_gpio:
+        temperature = bme280.get_temperature()
+    else:
+        cpu_temp = get_cpu_temperature()
+        # Smooth out with some averaging to decrease jitter
+        cpu_temps = cpu_temps[1:] + [cpu_temp]
+        avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
+        raw_temp = bme280.get_temperature()
+        temperature = raw_temp - ((avg_cpu_temp - raw_temp) / factor)
+
     pressure = bme280.get_pressure()
     humidity = bme280.get_humidity()
     lux = ltr559.get_lux()
@@ -172,7 +196,7 @@ def read_data(time):
     record = {
         'time' : asctime(localtime(time)),
         'temp' : round(temperature,1),
-        'humi' : round(humidity, 1),
+        'humi' : round(humidity,1),
         'pres' : round(pressure,1),
         'lux'  : round(lux),
         'oxi'  : oxi,
