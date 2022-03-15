@@ -10,6 +10,40 @@ Forked from <https://github.com/nophead/EnviroPlusWeb>
 
 ## 📖 User guide
 
+### Install
+
+To use the Enviro board, you’ll need to install its Python library. Open a Terminal window and enter the following commands:
+
+```
+git clone https://github.com/pimoroni/enviroplus-python
+
+cd enviroplus-python
+
+sudo ./install.sh
+
+sudo pip install smbus2
+```
+
+Once that’s all done, enter `sudo reboot` to restart your Raspberry Pi to apply the changes. The install script enables I2C, SPI, and serial, disables the serial console, and enables the mini UART interface that Raspberry Pi uses to talk to the PMS5003 particulate sensor.  
+To check that everything is working correctly, go to the enviroplus-python folder and run the all-in-one example:
+
+```
+cd examples
+
+python all-in-one.py
+```
+
+Tap your finger on the board’s light sensor to cycle through data from different sensors being displayed on its LCD. When you’re happy it’s all working, press CTRL+C to stop the program.
+
+You can now install the EnviroPlusWeb, from a Terminal window enter:
+
+```
+cd
+
+git clone https://gitlab.com/idotj/enviroplusweb.git
+```
+
+### Setup
 Check at the beginning of the file *enviroplusweb.py* the following lines and choose `True` or `False` depending on your config:
 
 - If you have an Enviro board without gas sensor, edit this line
@@ -39,6 +73,7 @@ Check at the beginning of the file *enviroplusweb.py* the following lines and ch
 Temperature and humidity readings will vary depending on how you assambled your Enviro board with your Raspberry Pi.  
 Find an alternative device/reference for measurnig temperature and humidity to compare the readings. Then if needed you can compensate the values changing the `factor_temp` and `factor_humi` numbers to adjust them.
 
+### Extra setup
 
 Maybe you want to run Enviro Plus Web at boot, then just type in the terminal:
 
@@ -49,7 +84,7 @@ crontab -e
 Add a new entry at the very bottom with `@reboot` to specify that you want to run the command at boot, followed by the path where you clone the project and the command. Here you have an example:
 
 ```
-@reboot sudo python3 /home/EnviroPlusWeb/enviroplusweb.py
+@reboot sudo python3 /home/EnviroPlusWeb/enviroplusweb.py &
 ```
 
 ## 🚀 Improve me
