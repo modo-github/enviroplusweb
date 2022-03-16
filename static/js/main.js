@@ -120,7 +120,7 @@ function graph(d) {
     }
 
     ctx = canvas.getContext("2d");
-    ctx.fillStyle = hasThemeLight ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-darker');
+    ctx.fillStyle = hasThemeLight ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-dark');
     ctx.font = "20 pt Verdana"
 
     yScale = (canvas.height - yLabelHeight - xLabelHeight);
@@ -164,7 +164,8 @@ function graph(d) {
 
     // Print Y axis labels and draw horizontal grid lines
     ctx.beginPath();
-    ctx.strokeStyle = "#dcdcdc"; // colour of grid lines
+    // Color of grid lines
+    ctx.strokeStyle = hasThemeLight ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-darker');
     ctx.textAlign = 'left';
     for (var i = 0; i <= yScaleSteps; i++) {
         var y = yScale * (yScaleSteps - i) / yScaleSteps + yLabelHeight - 1;
