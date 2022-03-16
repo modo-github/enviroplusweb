@@ -1,5 +1,23 @@
+/* EnviroPlusWeb main JS code */
+
+// Update the graph layout (width/height) if window resize
+window.addEventListener("resize", function () {
+    firstLayoutRender = true;
+    getGraph('resized');
+});
+
+// Manages web color theme
+const themeLightBtn = document.getElementById('theme-light');
+const themeDarkBtn = document.getElementById('theme-dark');
+let changeColorTheme = function () {
+    body.className = this.id;
+    localStorage.setItem('theme-color', this.id);
+}
+themeLightBtn.onclick = changeColorTheme;
+themeDarkBtn.onclick = changeColorTheme;
+
+// Call a function repetitively with 1 second interval
 setInterval(function () {
-    // Call a function repetitively with 1 second interval
     getData();
     getGraph();
 }, 900); //~1s update rate
@@ -132,9 +150,9 @@ function graph(d) {
             ctx.beginPath();
             // Color of grid lines
             if (document.getElementById('body').classList.contains('theme-light')){
-                ctx.strokeStyle = is_major ? "#b6b6b6" : "#dcdcdc"; 
+                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-light'); 
             }else{
-                ctx.strokeStyle = is_major ? "#b6b6b6" : "#dcdcdc"; 
+                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-dark'); 
             }
             ctx.setLineDash([5, 3]);
             ctx.moveTo(x, 0);
@@ -183,22 +201,3 @@ function plotData(dataSet, min, max) {
     }
     ctx.stroke();
 }
-
-// Update the graph layout (width/height) if window resize
-window.addEventListener("resize", function () {
-    firstLayoutRender = true;
-    getGraph('resized');
-});
-
-// Manages web color theme
-const themeLightBtn = document.getElementById('theme-light');
-const themeDarkBtn = document.getElementById('theme-dark');
-
-let changeColorTheme = function () {
-    body.className = this.id;
-    localStorage.setItem('theme-color', this.id);
-}
-
-themeLightBtn.onclick = changeColorTheme;
-themeDarkBtn.onclick = changeColorTheme;
-

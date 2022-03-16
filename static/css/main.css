@@ -271,7 +271,7 @@ svg {
 }
 .theme-dark .header {
   background-color: var(--color-black);
-  box-shadow: 0 0.15rem 0.5rem 0 var(--color-gray-dark);
+  box-shadow: 0 0.01rem 0.5rem 0 var(--color-gray-dark);
 }
 .header-title {
   margin: 0 1rem;
