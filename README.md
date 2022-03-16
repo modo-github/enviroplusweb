@@ -24,7 +24,9 @@ sudo ./install.sh
 sudo pip install smbus2
 ```
 
-Once that’s all done, enter `sudo reboot` to restart your Raspberry Pi to apply the changes. The install script enables I2C, SPI, and serial, disables the serial console, and enables the mini UART interface that Raspberry Pi uses to talk to the PMS5003 particulate sensor.  
+Once that’s all done, enter `sudo reboot` to restart your Raspberry Pi to apply the changes.  
+The install script enables I2C, SPI, and serial, disables the serial console, and enables the mini UART interface that Raspberry Pi uses to talk to the PMS5003 particulate sensor.
+
 To check that everything is working correctly, go to the enviroplus-python folder and run the all-in-one example:
 
 ```
@@ -70,8 +72,9 @@ Check at the beginning of the file *enviroplusweb.py* the following lines and ch
     fan_gpio = False
     ```
 
-Temperature and humidity readings will vary depending on how you assambled your Enviro board with your Raspberry Pi.  
-Find an alternative device/reference for measurnig temperature and humidity to compare the readings. Then if needed you can compensate the values changing the `factor_temp` and `factor_humi` numbers to adjust them.
+Without a fan, temperature and humidity readings are not very accurate and will vary depending on how you assambled your Enviro board with your Raspberry Pi.  
+Find an alternative device/reference to measure the temperature and humidity. Then if needed you can compensate the values changing the `factor_temp` and `factor_humi` numbers to adjust them.  
+*(Remember that these factors work only if the variable `fan_gpio is False`)
 
 ### Extra setup
 
