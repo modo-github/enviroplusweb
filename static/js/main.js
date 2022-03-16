@@ -54,8 +54,11 @@ function getGraph(param) {
     }
 }
 
+// All colors values are declared at main.css
+var style = getComputedStyle(document.body);
+
 const items_ngp = [
-    { name: "temp", colour: "#ff595e", min: 0, max: 50 },
+    { name: "temp", colour: style.getPropertyValue('--color-red'), min: 0, max: 50 },
     { name: "humi", colour: "#006caf", min: 0, max: 100 },
     { name: "pres", colour: "#588f00", min: 950, max: 1050 },
     { name: "lux", colour: "#f5b60f", min: 0, max: 25000 },
@@ -81,12 +84,12 @@ var containerCanvas;
 var canvas;
 var ctx;
 var data;
-var yScaleSteps = 10;
-var yLabelHeight = 10;
-var xLabelHeight = 15;
+const yScaleSteps = 10;
+const yLabelHeight = 10;
+const xLabelHeight = 15;
 var xScale;
 var yScale;
-var yLabelWidth = 25;
+const yLabelWidth = 25;
 function graph(d) {
     data = d;
     containerCanvas = document.getElementById("container-graph");
@@ -98,7 +101,7 @@ function graph(d) {
     }
 
     ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#0099ff"
+    ctx.fillStyle = document.getElementById('body').classList.contains('theme-light') ? style.getPropertyValue('--color-blue') : style.getPropertyValue('--color-red');
     ctx.font = "20 pt Verdana"
 
     yScale = (canvas.height - yLabelHeight - xLabelHeight);
