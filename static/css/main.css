@@ -151,6 +151,7 @@ template {
   --color-gray-light: #eee;
   --color-gray: #ccc;
   --color-gray-dark: #505050;
+  --color-gray-darker: #242424;
   --color-red: #ff595e;
   --color-blue: #006caf;
   --color-green: #588f00;
@@ -216,7 +217,7 @@ body.theme-light {
   background: var(--color-gray-light);
 }
 body.theme-dark {
-  color: var(--color-white);
+  color: var(--color-gray);
   background-color: var(--color-black);
 }
 select,
@@ -229,9 +230,9 @@ input {
 }
 .theme-dark select,
 .theme-dark input {
-  color: var(--color-white);
+  color: var(--color-gray);
   background-color: var(--color-black);
-  border: 2px solid var(--color-white);
+  border: 2px solid var(--color-gray);
 }
 input[type="number"] {
   width: 3.25rem;
@@ -251,15 +252,15 @@ button,
 }
 .theme-dark button,
 .theme-dark .button {
-  border: 2px solid var(--color-white);
-  color: var(--color-white);
+  border: 2px solid var(--color-gray);
+  color: var(--color-gray);
   background-color: var(--color-black);
 }
 svg {
   fill: var(--color-black);
 }
 .theme-dark svg {
-  fill: var(--color-white);
+  fill: var(--color-gray);
 }
 
 /* Header */
@@ -291,7 +292,7 @@ h1 {
   background: linear-gradient(
     160deg,
     var(--color-green) 0%,
-    var(--color-white) 100%
+    var(--color-gray) 100%
   );
   -webkit-background-clip: text;
 }
@@ -306,6 +307,9 @@ h1 {
   display: flex;
   align-items: center;
   border-left: 1px solid var(--color-gray);
+}
+.theme-dark .header-settings > div {
+  border-left: 1px solid var(--color-gray-dark);
 }
 @media screen and (max-width: 640px) {
   .header-settings > div {

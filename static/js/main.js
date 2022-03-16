@@ -102,6 +102,7 @@ var containerCanvas;
 var canvas;
 var ctx;
 var data;
+var hasThemeLight = document.getElementById('body').classList.contains('theme-light');
 const yScaleSteps = 10;
 const yLabelHeight = 10;
 const xLabelHeight = 15;
@@ -119,7 +120,7 @@ function graph(d) {
     }
 
     ctx = canvas.getContext("2d");
-    ctx.fillStyle = style.getPropertyValue('--color-gray');
+    ctx.fillStyle = hasThemeLight ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-darker');
     ctx.font = "20 pt Verdana"
 
     yScale = (canvas.height - yLabelHeight - xLabelHeight);
@@ -149,10 +150,10 @@ function graph(d) {
                     : fields[3].slice(0, 5), x, canvas.height);
             ctx.beginPath();
             // Color of grid lines
-            if (document.getElementById('body').classList.contains('theme-light')){
+            if (hasThemeLight){
                 ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-light'); 
             }else{
-                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-dark'); 
+                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray-dark') : style.getPropertyValue('--color-gray-darker'); 
             }
             ctx.setLineDash([5, 3]);
             ctx.moveTo(x, 0);
