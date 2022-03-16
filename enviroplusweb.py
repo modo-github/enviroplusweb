@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# EnviroPlusWeb Copyright Chris Palmer 2019
-# nop.head@gmail.com
-# hydraraptor.blogspot.com
+# Forked from <https://github.com/nophead/EnviroPlusWeb>
 #
 # EnviroPlusWeb is free software: you can redistribute it and/or modify it under the terms of the
 # GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -11,9 +9,6 @@
 # EnviroPlusWeb is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 # without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 # See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with EnviroPlusWeb.
-# If not, visit <https:#www.gnu.org/licenses/>.
 #
 
 # If you prefer to keep the Enviro LCD screen off, change the next value to False
@@ -72,9 +67,10 @@ def get_cpu_temperature():
         temp = int(temp) / 1000.0
     return temp
 
-# Tuning factor for compensation. Decrease this number to adjust the
-# temperature down, and increase to adjust up
-factor_temp = 2.25      
+# Tuning factor for compensation
+# Change these values to adjust the temperature and humidity
+factor_temp = 2.5
+factor_humi = 0.79
 
 # Create ST7735 LCD display class
 if lcd_screen:
@@ -150,6 +146,7 @@ def read_data(time):
 
     if fan_gpio:
         temperature = bme280.get_temperature()
+        humidity = bme280.get_humidity()
     else:
         cpu_temps = [get_cpu_temperature()] * 5  
         cpu_temp = get_cpu_temperature()
@@ -158,9 +155,10 @@ def read_data(time):
         avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
         raw_temp = bme280.get_temperature()
         temperature = raw_temp - ((avg_cpu_temp - raw_temp) / factor_temp)
+        raw_humi = bme280.get_humidity()
+        humidity = raw_humi / factor_humi
 
     pressure = bme280.get_pressure()
-    humidity = bme280.get_humidity()
     lux = ltr559.get_lux()
     
     if gas_sensor:
@@ -260,7 +258,7 @@ def background():
     while run_flag:
         t = int(floor(time()))
         record = read_data(t)
-        data = data[-(samples - 1):] + [record]         # Keep five minutes
+        data = data[-(samples - 1):] + [record] # Keep five minutes
         if t % samples == samples - 1 and len(data) == samples: # At the end of a 5 minute period?
             totals = sum_data(data)
             fname = filename(t - (samples - 1))
