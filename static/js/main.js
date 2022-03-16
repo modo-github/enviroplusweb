@@ -43,10 +43,10 @@ const xLabelHeight = 15;
 var xScale;
 var yScale;
 const yLabelWidth = 25;
-
-// Manages web color theme
 const themeLightBtn = document.getElementById('theme-light');
 const themeDarkBtn = document.getElementById('theme-dark');
+
+// Manages web color theme
 function changeColorTheme () {
     body.className = this.id;
     localStorage.setItem('theme-color', this.id);
@@ -56,7 +56,7 @@ function changeColorTheme () {
 themeLightBtn.onclick = changeColorTheme;
 themeDarkBtn.onclick = changeColorTheme;
 
-// Request to get the readings
+// Request to get the readings data
 function getData() {
     var xhttp = new XMLHttpRequest();
 
@@ -76,7 +76,7 @@ function getData() {
     xhttp.send();
 }
 
-// Request to get the graph
+// Request to get the graph data
 function getGraph(param) {
     var frequency = document.getElementById("graph-sel").value;
     var t = Date.now() / 1000;
@@ -138,7 +138,7 @@ function graph(d) {
             ctx.beginPath();
             // Color of vertical grid lines
             if (hasThemeLight){
-                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-dust03'); 
+                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-dust03') : style.getPropertyValue('--color-gray'); 
             }else{
                 ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray-dark') : style.getPropertyValue('--color-gray-darker'); 
             }
@@ -172,7 +172,7 @@ function graph(d) {
         scaleFactors += '<tr><td>' + item.name + '</td><td>/' + (item.max - item.min) + '</td></tr>';
     }
 
-    // Update the legend
+    // Update the legend (Scale factors)
     document.getElementById("scale-factors-tbody").innerHTML = scaleFactors;
 }
 
@@ -188,7 +188,7 @@ function plotData(dataSet, min, max) {
     ctx.stroke();
 }
 
-// Calculate the place on Y axis due to min/max values
+// Calculate the place on the Y axis between the ranges min/max
 function scaley(y, min, max) {
     return (y - min) * yScale / (max - min);
 }
@@ -203,4 +203,4 @@ window.addEventListener("resize", function () {
 setInterval(function () {
     getData();
     getGraph();
-}, 900); //~1s update rate
+}, 900); // ~1s update rate
