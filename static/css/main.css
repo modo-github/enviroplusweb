@@ -151,21 +151,20 @@ template {
   --color-gray-light: #eee;
   --color-gray: #ccc;
   --color-gray-dark: #505050;
-  --color-red:#ff595e;
-  --color-blue:#006caf;
-  --color-green:#588f00;
-  --color-yellow:#f5b60f;
-  --color-violet:#6a4c93;
-  --color-darkorange:#ce7100;
-  --color-cyan:#6ca88a;
-  --color-dust100:#575757;
-  --color-dust90:#696969;
-  --color-dust80:#7c7c7c;
-  --color-dust70:#909090;
-  --color-dust60:#a4a4a4;
-  --color-dust50:#b0b0b0;  
+  --color-red: #ff595e;
+  --color-blue: #006caf;
+  --color-green: #588f00;
+  --color-yellow: #f5b60f;
+  --color-violet: #6a4c93;
+  --color-darkorange: #ce7100;
+  --color-cyan: #6ca88a;
+  --color-dust100: #575757;
+  --color-dust90: #696969;
+  --color-dust80: #7c7c7c;
+  --color-dust70: #909090;
+  --color-dust60: #a4a4a4;
+  --color-dust50: #b0b0b0;
 }
-
 
 /* Global styles */
 @font-face {
@@ -241,7 +240,7 @@ button,
 .button {
   display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
   min-width: 2rem;
   min-height: 2rem;
   padding: 0.15rem;
@@ -256,7 +255,7 @@ button,
   color: var(--color-white);
   background-color: var(--color-black);
 }
-svg{
+svg {
   fill: var(--color-black);
 }
 .theme-dark svg {
@@ -270,7 +269,7 @@ svg{
   background-color: var(--color-white);
   box-shadow: 0 0.15rem 0.5rem 0 var(--color-gray);
 }
-.theme-dark .header{
+.theme-dark .header {
   background-color: var(--color-black);
   box-shadow: 0 0.15rem 0.5rem 0 var(--color-gray-dark);
 }
@@ -280,12 +279,21 @@ svg{
 h1 {
   font-size: 1.75rem;
   margin: 0.5rem 0;
-  background: linear-gradient(160deg, var(--color-green) 0%, var(--color-black) 100%);
+  background: linear-gradient(
+    160deg,
+    var(--color-green) 0%,
+    var(--color-black) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .theme-dark h1 {
-  background: linear-gradient(160deg, var(--color-green) 0%, var(--color-white) 100%);
+  background: linear-gradient(
+    160deg,
+    var(--color-green) 0%,
+    var(--color-white) 100%
+  );
+  -webkit-background-clip: text;
 }
 .header-settings {
   display: flex;
@@ -372,6 +380,9 @@ h1 {
 .readings tr:nth-child(even) {
   color: var(--color-gray-dark);
 }
+.theme-dark .readings tr:nth-child(even) {
+  color: var(--color-gray);
+}
 .readings td {
   vertical-align: top;
 }
@@ -380,6 +391,9 @@ h1 {
   color: transparent;
   margin: 0.25rem 0;
 }
+.theme-dark .readings hr {
+  border-top: 1px solid var(--color-gray-dark);
+}
 .scale-factors {
   width: 100%;
 }
@@ -387,6 +401,9 @@ h1 {
   color: var(--color-gray-dark);
   padding-bottom: 0.5rem;
   text-transform: capitalize;
+}
+.theme-dark .scale-factors td {
+  color: var(--color-gray-light);
 }
 .container-graph {
   overflow: auto;

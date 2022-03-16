@@ -4,7 +4,7 @@ setInterval(function () {
     getGraph();
 }, 900); //~1s update rate
 
-var frequencies = {
+const frequencies = {
     '5min': { major: 300, minor: 60, poll: 1 },
     'day': { major: 3 * 3600, minor: 3600, poll: 60 },
     'week': { major: 24 * 3600, minor: 6 * 3600, poll: 600 },
@@ -54,20 +54,20 @@ function getGraph(param) {
     }
 }
 
-var items_ngp = [
+const items_ngp = [
     { name: "temp", colour: "#ff595e", min: 0, max: 50 },
     { name: "humi", colour: "#006caf", min: 0, max: 100 },
     { name: "pres", colour: "#588f00", min: 950, max: 1050 },
     { name: "lux", colour: "#f5b60f", min: 0, max: 25000 },
 ]
 
-var items_g = [
+const items_g = [
     { name: "oxi", colour: "#6a4c93", min: 0, max: 400 },
     { name: "red", colour: "#ce7100", min: 0, max: 1000 },
     { name: "nh3", colour: "#6ca88a", min: 0, max: 600 },
 ]
 
-var items_p = [
+const items_p = [
     { name: "pm03", colour: "#575757", min: 0, max: 20000 },
     { name: "pm05", colour: "#696969", min: 0, max: 10000 },
     { name: "pm10", colour: "#7c7c7c", min: 0, max: 2000 },
@@ -110,7 +110,7 @@ function graph(d) {
     var major = frequencies[frequency].major;
     var minor = frequencies[frequency].minor;
     var show_date = major >= 24 * 3600;
-    var months = {
+    const months = {
         'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
         'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
     }
@@ -186,29 +186,9 @@ window.addEventListener("resize", function () {
 const themeLightBtn = document.getElementById('theme-light');
 const themeDarkBtn = document.getElementById('theme-dark');
 
-// Check client config
-if (savedThemeColor) {
-  document.getElementById(savedThemeColor).classList.add('active');
-} else {
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    themeDarkBtn.classList.add('active');
-  } else {
-    // by default
-    themeLightBtn.classList.add('active');
-  }
-}
-
-// Switch color theme
 let changeColorTheme = function () {
   body.className = this.id;
-  themeRemoveCss();
-  this.classList.add('active');
   localStorage.setItem('theme-color', this.id);
-}
-
-function themeRemoveCss() {
-  themeLightBtn.classList.remove('active');
-  themeDarkBtn.classList.remove('active');
 }
 
 themeLightBtn.onclick = changeColorTheme;
