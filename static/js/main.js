@@ -123,7 +123,7 @@ function graph(d) {
 
     ctx = canvas.getContext("2d");
     // Color of the graph labels
-    ctx.fillStyle = hasThemeLight ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-dark');
+    ctx.fillStyle = hasThemeLight ? style.getPropertyValue('--color-dust10') : style.getPropertyValue('--color-gray-dark');
     ctx.font = "20 pt Verdana"
 
     yScale = (canvas.height - yLabelHeight - xLabelHeight);
