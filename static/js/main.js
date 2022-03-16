@@ -18,7 +18,7 @@ var fan_gpio = document.getElementById('fan_gpio').classList.contains('fan-gpio-
 
 function getData() {
     var xhttp = new XMLHttpRequest();
-    
+
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("readings").innerHTML = this.responseText;
@@ -59,24 +59,24 @@ var style = getComputedStyle(document.body);
 
 const items_ngp = [
     { name: "temp", colour: style.getPropertyValue('--color-red'), min: 0, max: 50 },
-    { name: "humi", colour: "#006caf", min: 0, max: 100 },
-    { name: "pres", colour: "#588f00", min: 950, max: 1050 },
-    { name: "lux", colour: "#f5b60f", min: 0, max: 25000 },
+    { name: "humi", colour: style.getPropertyValue('--color-blue'), min: 0, max: 100 },
+    { name: "pres", colour: style.getPropertyValue('--color-green'), min: 950, max: 1050 },
+    { name: "lux", colour: style.getPropertyValue('--color-yellow'), min: 0, max: 25000 },
 ]
 
 const items_g = [
-    { name: "oxi", colour: "#6a4c93", min: 0, max: 400 },
-    { name: "red", colour: "#ce7100", min: 0, max: 1000 },
-    { name: "nh3", colour: "#6ca88a", min: 0, max: 600 },
+    { name: "oxi", colour: style.getPropertyValue('--color-violet'), min: 0, max: 400 },
+    { name: "red", colour: style.getPropertyValue('--color-orange'), min: 0, max: 1000 },
+    { name: "nh3", colour: style.getPropertyValue('--color-turquoise'), min: 0, max: 600 },
 ]
 
 const items_p = [
-    { name: "pm03", colour: "#575757", min: 0, max: 20000 },
-    { name: "pm05", colour: "#696969", min: 0, max: 10000 },
-    { name: "pm10", colour: "#7c7c7c", min: 0, max: 2000 },
-    { name: "pm25", colour: "#909090", min: 0, max: 500 },
-    { name: "pm50", colour: "#a4a4a4", min: 0, max: 200 },
-    { name: "pm100", colour: "#b0b0b0", min: 0, max: 100 },
+    { name: "pm03", colour: style.getPropertyValue('--color-dust03'), min: 0, max: 20000 },
+    { name: "pm05", colour: style.getPropertyValue('--color-dust05'), min: 0, max: 10000 },
+    { name: "pm10", colour: style.getPropertyValue('--color-dust10'), min: 0, max: 2000 },
+    { name: "pm25", colour: style.getPropertyValue('--color-dust25'), min: 0, max: 500 },
+    { name: "pm50", colour: style.getPropertyValue('--color-dust50'), min: 0, max: 200 },
+    { name: "pm100", colour: style.getPropertyValue('--color-dust100'), min: 0, max: 100 },
 ];
 
 var firstLayoutRender = true;
@@ -101,7 +101,7 @@ function graph(d) {
     }
 
     ctx = canvas.getContext("2d");
-    ctx.fillStyle = document.getElementById('body').classList.contains('theme-light') ? style.getPropertyValue('--color-blue') : style.getPropertyValue('--color-red');
+    ctx.fillStyle = style.getPropertyValue('--color-gray');
     ctx.font = "20 pt Verdana"
 
     yScale = (canvas.height - yLabelHeight - xLabelHeight);
@@ -130,7 +130,12 @@ function graph(d) {
                 ctx.fillText(show_date ? fields[0] + ' ' + fields[1] + ' ' + fields[2]
                     : fields[3].slice(0, 5), x, canvas.height);
             ctx.beginPath();
-            ctx.strokeStyle = is_major ? "#b6b6b6" : "#dcdcdc"; // colour of grid lines
+            // Color of grid lines
+            if (document.getElementById('body').classList.contains('theme-light')){
+                ctx.strokeStyle = is_major ? "#b6b6b6" : "#dcdcdc"; 
+            }else{
+                ctx.strokeStyle = is_major ? "#b6b6b6" : "#dcdcdc"; 
+            }
             ctx.setLineDash([5, 3]);
             ctx.moveTo(x, 0);
             ctx.lineTo(x, canvas.height - xLabelHeight);
@@ -190,8 +195,8 @@ const themeLightBtn = document.getElementById('theme-light');
 const themeDarkBtn = document.getElementById('theme-dark');
 
 let changeColorTheme = function () {
-  body.className = this.id;
-  localStorage.setItem('theme-color', this.id);
+    body.className = this.id;
+    localStorage.setItem('theme-color', this.id);
 }
 
 themeLightBtn.onclick = changeColorTheme;
