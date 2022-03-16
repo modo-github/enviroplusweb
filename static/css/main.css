@@ -115,9 +115,11 @@ button,
 }
 svg {
   fill: var(--color-black);
+  stroke: var(--color-black);
 }
 .theme-dark svg {
   fill: var(--color-gray);
+  stroke: var(--color-gray);
 }
 
 /* Header */
