@@ -3,7 +3,7 @@
 // Update the graph layout (width/height) if window resize
 window.addEventListener("resize", function () {
     firstLayoutRender = true;
-    getGraph('resized');
+    getGraph(true);
 });
 
 // Manages web color theme
@@ -12,6 +12,7 @@ const themeDarkBtn = document.getElementById('theme-dark');
 let changeColorTheme = function () {
     body.className = this.id;
     localStorage.setItem('theme-color', this.id);
+    getGraph(true);
 }
 themeLightBtn.onclick = changeColorTheme;
 themeDarkBtn.onclick = changeColorTheme;
@@ -58,7 +59,7 @@ var last_graph = 0;
 function getGraph(param) {
     var frequency = document.getElementById("graph-sel").value;
     var t = Date.now() / 1000;
-    if (frequency != last_frequency || t - last_graph >= frequencies[frequency].poll || param == 'resized') {
+    if (frequency != last_frequency || t - last_graph >= frequencies[frequency].poll || param ) {
         last_frequency = frequency;
         last_graph = t;
         var xhttp = new XMLHttpRequest();
