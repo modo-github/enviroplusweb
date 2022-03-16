@@ -181,3 +181,36 @@ window.addEventListener("resize", function () {
     firstLayoutRender = true;
     getGraph('resized');
 });
+
+// Manages web color theme
+const themeLightBtn = document.getElementById('theme-light');
+const themeDarkBtn = document.getElementById('theme-dark');
+
+// Check client config
+if (savedThemeColor) {
+  document.getElementById(savedThemeColor).classList.add('active');
+} else {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    themeDarkBtn.classList.add('active');
+  } else {
+    // by default
+    themeLightBtn.classList.add('active');
+  }
+}
+
+// Switch color theme
+let changeColorTheme = function () {
+  body.className = this.id;
+  themeRemoveCss();
+  this.classList.add('active');
+  localStorage.setItem('theme-color', this.id);
+}
+
+function themeRemoveCss() {
+  themeLightBtn.classList.remove('active');
+  themeDarkBtn.classList.remove('active');
+}
+
+themeLightBtn.onclick = changeColorTheme;
+themeDarkBtn.onclick = changeColorTheme;
+
