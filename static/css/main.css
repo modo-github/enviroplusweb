@@ -116,6 +116,7 @@ button,
 svg {
   fill: var(--color-black);
   stroke: var(--color-black);
+  stroke-width: 0.02rem;
 }
 .theme-dark svg {
   fill: var(--color-gray);
