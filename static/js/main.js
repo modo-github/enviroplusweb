@@ -12,6 +12,7 @@ const themeDarkBtn = document.getElementById('theme-dark');
 let changeColorTheme = function () {
     body.className = this.id;
     localStorage.setItem('theme-color', this.id);
+    hasThemeLight = !hasThemeLight;
     getGraph(true);
 }
 themeLightBtn.onclick = changeColorTheme;
