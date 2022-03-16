@@ -73,7 +73,7 @@ Check at the beginning of the file *enviroplusweb.py* the following lines and ch
     ```
 
 Without a fan, temperature and humidity readings are not very accurate and will vary depending on how you assambled your Enviro board with your Raspberry Pi.  
-Find an alternative device/reference to measure the temperature and humidity. Then if needed you can compensate the values changing the `factor_temp` and `factor_humi` numbers to adjust them.  
+Find an alternative device/reference to measure the temperature and humidity. Then if needed you can compensate them changing the `factor_temp` and `factor_humi` values.  
 *(Remember that these factors work only if the variable `fan_gpio is False`)
 
 ### Extra setup
