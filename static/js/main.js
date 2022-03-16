@@ -1,15 +1,53 @@
-/* EnviroPlusWeb main JS code */
-
-// Update the graph layout (width/height) if window resize
-window.addEventListener("resize", function () {
-    firstLayoutRender = true;
-    getGraph(true);
-});
+/* EnviroPlusWeb */
+const frequencies = {
+    '5min': { major: 300, minor: 60, poll: 1 },
+    'day': { major: 3 * 3600, minor: 3600, poll: 60 },
+    'week': { major: 24 * 3600, minor: 6 * 3600, poll: 600 },
+    'month': { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
+    'year': { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 }
+};
+var particle_sensor_readings = false;
+var gas_sensor_readings = false;
+const fan_gpio = document.getElementById('fan_gpio').classList.contains('fan-gpio-True');
+var last_frequency = "";
+var last_graph = 0;
+var hasThemeLight = document.getElementById('body').classList.contains('theme-light');
+const style = getComputedStyle(document.body); // All colors values are declared at main.css
+const items_ngp = [
+    { name: "temp", colour: style.getPropertyValue('--color-red'), min: 0, max: 50 },
+    { name: "humi", colour: style.getPropertyValue('--color-blue'), min: 0, max: 100 },
+    { name: "pres", colour: style.getPropertyValue('--color-green'), min: 950, max: 1050 },
+    { name: "lux", colour: style.getPropertyValue('--color-yellow'), min: 0, max: 25000 },
+];
+const items_g = [
+    { name: "oxi", colour: style.getPropertyValue('--color-violet'), min: 0, max: 400 },
+    { name: "red", colour: style.getPropertyValue('--color-orange'), min: 0, max: 1000 },
+    { name: "nh3", colour: style.getPropertyValue('--color-turquoise'), min: 0, max: 600 },
+];
+const items_p = [
+    { name: "pm03", colour: style.getPropertyValue('--color-dust03'), min: 0, max: 20000 },
+    { name: "pm05", colour: style.getPropertyValue('--color-dust05'), min: 0, max: 10000 },
+    { name: "pm10", colour: style.getPropertyValue('--color-dust10'), min: 0, max: 2000 },
+    { name: "pm25", colour: style.getPropertyValue('--color-dust25'), min: 0, max: 500 },
+    { name: "pm50", colour: style.getPropertyValue('--color-dust50'), min: 0, max: 200 },
+    { name: "pm100", colour: style.getPropertyValue('--color-dust100'), min: 0, max: 100 },
+];
+var firstLayoutRender = true;
+var containerCanvas;
+var canvas;
+var ctx;
+var data;
+const yScaleSteps = 10;
+const yLabelHeight = 10;
+const xLabelHeight = 15;
+var xScale;
+var yScale;
+const yLabelWidth = 25;
 
 // Manages web color theme
 const themeLightBtn = document.getElementById('theme-light');
 const themeDarkBtn = document.getElementById('theme-dark');
-let changeColorTheme = function () {
+function changeColorTheme () {
     body.className = this.id;
     localStorage.setItem('theme-color', this.id);
     hasThemeLight = !hasThemeLight;
@@ -18,24 +56,7 @@ let changeColorTheme = function () {
 themeLightBtn.onclick = changeColorTheme;
 themeDarkBtn.onclick = changeColorTheme;
 
-// Call a function repetitively with 1 second interval
-setInterval(function () {
-    getData();
-    getGraph();
-}, 900); //~1s update rate
-
-const frequencies = {
-    '5min': { major: 300, minor: 60, poll: 1 },
-    'day': { major: 3 * 3600, minor: 3600, poll: 60 },
-    'week': { major: 24 * 3600, minor: 6 * 3600, poll: 600 },
-    'month': { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
-    'year': { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 }
-};
-
-var particle_sensor_readings = false;
-var gas_sensor_readings = false;
-var fan_gpio = document.getElementById('fan_gpio').classList.contains('fan-gpio-True');
-
+// Request to get the readings
 function getData() {
     var xhttp = new XMLHttpRequest();
 
@@ -55,8 +76,7 @@ function getData() {
     xhttp.send();
 }
 
-var last_frequency = "";
-var last_graph = 0;
+// Request to get the graph
 function getGraph(param) {
     var frequency = document.getElementById("graph-sel").value;
     var t = Date.now() / 1000;
@@ -74,43 +94,7 @@ function getGraph(param) {
     }
 }
 
-// All colors values are declared at main.css
-var style = getComputedStyle(document.body);
-
-const items_ngp = [
-    { name: "temp", colour: style.getPropertyValue('--color-red'), min: 0, max: 50 },
-    { name: "humi", colour: style.getPropertyValue('--color-blue'), min: 0, max: 100 },
-    { name: "pres", colour: style.getPropertyValue('--color-green'), min: 950, max: 1050 },
-    { name: "lux", colour: style.getPropertyValue('--color-yellow'), min: 0, max: 25000 },
-]
-
-const items_g = [
-    { name: "oxi", colour: style.getPropertyValue('--color-violet'), min: 0, max: 400 },
-    { name: "red", colour: style.getPropertyValue('--color-orange'), min: 0, max: 1000 },
-    { name: "nh3", colour: style.getPropertyValue('--color-turquoise'), min: 0, max: 600 },
-]
-
-const items_p = [
-    { name: "pm03", colour: style.getPropertyValue('--color-dust03'), min: 0, max: 20000 },
-    { name: "pm05", colour: style.getPropertyValue('--color-dust05'), min: 0, max: 10000 },
-    { name: "pm10", colour: style.getPropertyValue('--color-dust10'), min: 0, max: 2000 },
-    { name: "pm25", colour: style.getPropertyValue('--color-dust25'), min: 0, max: 500 },
-    { name: "pm50", colour: style.getPropertyValue('--color-dust50'), min: 0, max: 200 },
-    { name: "pm100", colour: style.getPropertyValue('--color-dust100'), min: 0, max: 100 },
-];
-
-var firstLayoutRender = true;
-var containerCanvas;
-var canvas;
-var ctx;
-var data;
-var hasThemeLight = document.getElementById('body').classList.contains('theme-light');
-const yScaleSteps = 10;
-const yLabelHeight = 10;
-const xLabelHeight = 15;
-var xScale;
-var yScale;
-const yLabelWidth = 25;
+// Draw the background grid and labels
 function graph(d) {
     data = d;
     containerCanvas = document.getElementById("container-graph");
@@ -192,10 +176,7 @@ function graph(d) {
     document.getElementById("scale-factors-tbody").innerHTML = scaleFactors;
 }
 
-function scaley(y, min, max) {
-    return (y - min) * yScale / (max - min);
-}
-
+// Draw each reading value on the grid
 function plotData(dataSet, min, max) {
     ctx.beginPath();
     ctx.setLineDash([]);
@@ -206,3 +187,20 @@ function plotData(dataSet, min, max) {
     }
     ctx.stroke();
 }
+
+// Calculate the place on Y axis due to min/max values
+function scaley(y, min, max) {
+    return (y - min) * yScale / (max - min);
+}
+
+// Update the graph layout (width/height) if window resize
+window.addEventListener("resize", function () {
+    firstLayoutRender = true;
+    getGraph(true);
+});
+
+// Call a function repetitively with 1 second interval
+setInterval(function () {
+    getData();
+    getGraph();
+}, 900); //~1s update rate

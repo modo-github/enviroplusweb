@@ -227,6 +227,7 @@ input {
   padding: 0.15rem;
   border: 2px solid var(--color-black);
   border-radius: 0.25rem;
+  cursor: pointer;
 }
 .theme-dark select,
 .theme-dark input {
@@ -249,6 +250,7 @@ button,
   border-radius: 0.25rem;
   color: var(--color-black);
   background-color: var(--color-white);
+  cursor: pointer;
 }
 .theme-dark button,
 .theme-dark .button {
