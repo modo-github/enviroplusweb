@@ -69,8 +69,8 @@ def get_cpu_temperature():
 
 # Tuning factor for compensation
 # Change these values to adjust the temperature and humidity
-factor_temp = 2.95
-factor_humi = 0.90
+factor_temp = 3.05
+factor_humi = 0.86
 
 # Create ST7735 LCD display class
 if lcd_screen:
