@@ -122,7 +122,8 @@ function graph(d) {
     }
 
     ctx = canvas.getContext("2d");
-    ctx.fillStyle = hasThemeLight ? style.getPropertyValue('--color-yellow') : style.getPropertyValue('--color-green');
+    // Color of the graph labels
+    ctx.fillStyle = hasThemeLight ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-dark');
     ctx.font = "20 pt Verdana"
 
     yScale = (canvas.height - yLabelHeight - xLabelHeight);
@@ -151,11 +152,11 @@ function graph(d) {
                 ctx.fillText(show_date ? fields[0] + ' ' + fields[1] + ' ' + fields[2]
                     : fields[3].slice(0, 5), x, canvas.height);
             ctx.beginPath();
-            // Color of grid lines
+            // Color of vertical grid lines
             if (hasThemeLight){
-                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-turquoise') : style.getPropertyValue('--color-black'); 
+                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-dust03'); 
             }else{
-                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-orange') : style.getPropertyValue('--color-violet'); 
+                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray-dark') : style.getPropertyValue('--color-gray-darker'); 
             }
             ctx.setLineDash([5, 3]);
             ctx.moveTo(x, 0);
@@ -166,8 +167,8 @@ function graph(d) {
 
     // Print Y axis labels and draw horizontal grid lines
     ctx.beginPath();
-    // Color of grid lines
-    ctx.strokeStyle = hasThemeLight ? style.getPropertyValue('--color-red') : style.getPropertyValue('--color-blue');
+    // Color of horizontal grid lines
+    ctx.strokeStyle = hasThemeLight ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-darker');
     ctx.textAlign = 'left';
     for (var i = 0; i <= yScaleSteps; i++) {
         var y = yScale * (yScaleSteps - i) / yScaleSteps + yLabelHeight - 1;
