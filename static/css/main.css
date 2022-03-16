@@ -144,6 +144,28 @@ template {
 [hidden] {
   display: none;
 }
+/* CSS variables */
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-gray-light: #eee;
+  --color-gray: #ccc;
+  --color-gray-dark: #505050;
+  --color-red:#ff595e;
+  --color-blue:#006caf;
+  --color-green:#588f00;
+  --color-yellow:#f5b60f;
+  --color-violet:#6a4c93;
+  --color-darkorange:#ce7100;
+  --color-cyan:#6ca88a;
+  --color-dust100:#575757;
+  --color-dust90:#696969;
+  --color-dust80:#7c7c7c;
+  --color-dust70:#909090;
+  --color-dust60:#a4a4a4;
+  --color-dust50:#b0b0b0;  
+}
+
 
 /* Global styles */
 @font-face {
@@ -186,15 +208,23 @@ body {
   height: 100%;
 }
 body {
-  background: #eee;
   font-family: "Noto Sans", Arial, Helvetica, Sans-Serif;
   font-size: 16px; /* 1rem */
 }
+body,
+body.theme-light {
+  color: var(--color-black);
+  background: var(--color-gray-light);
+}
+body.theme-dark {
+  color: var(--color-white);
+  background-color: var(--black);
+}
 select,
 input {
-  background-color: white;
+  background-color: var(--color-white);
   padding: 0.15rem;
-  border: 2px solid #505050;
+  border: 2px solid var(--color-black);
   border-radius: 0.25rem;
 }
 input[type="number"] {
@@ -202,20 +232,23 @@ input[type="number"] {
 }
 button,
 .button {
-  min-width: 1.25rem;
-  min-height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  min-width: 2rem;
+  min-height: 2rem;
   padding: 0.15rem;
-  border: 2px solid #505050;
+  border: 2px solid var(--color-black);
   border-radius: 0.25rem;
-  background-color: white;
+  background-color: var(--color-white);
 }
 
 /* Header */
 .header {
   display: flex;
   height: 3rem;
-  background-color: white;
-  box-shadow: 0 0.15rem 0.5rem 0 #858585;
+  background-color: var(--color-white);
+  box-shadow: 0 0.15rem 0.5rem 0 var(--color-gray);
 }
 .header-title {
   margin: 0 1rem;
@@ -223,7 +256,7 @@ button,
 h1 {
   font-size: 1.75rem;
   margin: 0.5rem 0;
-  background: linear-gradient(160deg, #0ba90e 0%, #000 100%);
+  background: linear-gradient(160deg, var(--color-green) 0%, var(--color-black) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -237,7 +270,7 @@ h1 {
   padding: 0 2rem;
   display: flex;
   align-items: center;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid var(--color-gray);
 }
 @media screen and (max-width: 640px) {
   .header-settings > div {
@@ -253,8 +286,8 @@ h1 {
   display: none !important;
 }
 .button-icon-svg {
-  max-width: 1.5rem;
-  max-height: 1.5rem;
+  max-width: 1.25rem;
+  max-height: 1.25rem;
   width: 100%;
   height: auto;
 }
@@ -306,19 +339,19 @@ h1 {
 .readings-time {
   font-size: 1.15rem;
   text-align: center;
-  color: #505050;
-  background-color: white;
+  color: var(--color-gray-dark);
+  background-color: var(--color-white);
   padding: 0.5rem 0;
   border-radius: 0.25rem;
 }
 .readings tr:nth-child(even) {
-  color: #505050;
+  color: var(--color-gray-dark);
 }
 .readings td {
   vertical-align: top;
 }
 .readings hr {
-  border-top: 1px solid silver;
+  border-top: 1px solid var(--color-gray);
   color: transparent;
   margin: 0.25rem 0;
 }
@@ -326,7 +359,7 @@ h1 {
   width: 100%;
 }
 .scale-factors td {
-  color: #505050;
+  color: var(--color-gray-dark);
   padding-bottom: 0.5rem;
   text-transform: capitalize;
 }
@@ -338,7 +371,7 @@ h1 {
   display: block;
 }
 .container-scale-factors details {
-  border: 1px solid silver;
+  border: 1px solid var(--color-gray);
   border-radius: 0.25rem;
   padding: 0.5rem;
 }
@@ -355,7 +388,7 @@ h1 {
   right: 0;
 }
 .container-scale-factors details[open] > summary {
-  border-bottom: 1px solid silver;
+  border-bottom: 1px solid var(--color-gray);
   padding-bottom: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -375,7 +408,7 @@ h1 {
   width: 1px;
 }
 
-/* colors */
+/* Readings colors */
 .color-red {
   color: #ff595e;
 }
