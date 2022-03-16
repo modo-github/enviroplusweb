@@ -309,7 +309,7 @@ h1 {
   border-left: 1px solid var(--color-gray);
 }
 .theme-dark .header-settings > div {
-  border-left: 1px solid var(--color-gray-dark);
+  border-left: 1px solid var(--color-gray-darker);
 }
 @media screen and (max-width: 640px) {
   .header-settings > div {
@@ -388,7 +388,7 @@ h1 {
   color: var(--color-gray-dark);
 }
 .theme-dark .readings tr:nth-child(even) {
-  color: var(--color-gray);
+  color: var(--color-dust25);
 }
 .readings td {
   vertical-align: top;
@@ -399,7 +399,7 @@ h1 {
   margin: 0.25rem 0;
 }
 .theme-dark .readings hr {
-  border-top: 1px solid var(--color-gray-dark);
+  border-top: 1px solid var(--color-gray-darker);
 }
 .scale-factors {
   width: 100%;

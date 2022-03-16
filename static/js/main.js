@@ -153,7 +153,7 @@ function graph(d) {
             if (hasThemeLight){
                 ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray') : style.getPropertyValue('--color-gray-light'); 
             }else{
-                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray-dark') : style.getPropertyValue('--color-gray-darker'); 
+                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray-darker') : style.getPropertyValue('--color-gray-darker'); 
             }
             ctx.setLineDash([5, 3]);
             ctx.moveTo(x, 0);
