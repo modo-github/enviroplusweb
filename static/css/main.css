@@ -214,7 +214,7 @@ h1 {
 .container-readings,
 .container-graph {
   height: 100%;
-  max-height: calc(100vh - 7.5rem);
+  max-height: calc(100vh - 6.25rem);
 }
 .container-readings {
   overflow: auto;
@@ -241,6 +241,12 @@ h1 {
 .readings {
   margin-bottom: 1rem;
 }
+.readings-time {
+  text-align: center;
+  line-height: 1;
+  padding-bottom: 1rem;
+  opacity: 0.5;
+}
 .readings table {
   width: 100%;
   table-layout: fixed;
@@ -251,12 +257,6 @@ h1 {
 }
 .theme-dark .readings table {
   background-color: var(--color-gray-darker);  
-}
-.readings-time {
-  text-align: center;
-  line-height: 1;
-  padding-bottom: 0.5rem;
-  opacity: 0.5;
 }
 .readings tr:nth-child(even) {
   color: var(--color-gray-dark);

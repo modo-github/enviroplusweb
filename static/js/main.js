@@ -6,7 +6,7 @@ const frequencies = {
     'month': { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
     'year': { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 }
 };
-var particle_sensor_readings = false;
+var particulate_sensor_readings = false;
 var gas_sensor_readings = false;
 const fan_gpio = document.getElementById('fan_gpio').classList.contains('fan-gpio-True');
 var last_frequency = "";
@@ -63,7 +63,7 @@ function getData() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("readings").innerHTML = this.responseText;
-            particle_sensor_readings = this.responseText.search("10.0um") > 0;
+            particulate_sensor_readings = this.responseText.search("10.0um") > 0;
             gas_sensor_readings = this.responseText.search("Oxidising") > 0;
         }
     };
@@ -164,7 +164,7 @@ function graph(d) {
 
     // Plot each item
     var scaleFactors = "";
-    var items = particle_sensor_readings ? items_ngp.concat(items_g).concat(items_p) :
+    var items = particulate_sensor_readings ? items_ngp.concat(items_g).concat(items_p) :
         gas_sensor_readings ? items_ngp.concat(items_g) : items_ngp;
     for (var item of items) {
         ctx.strokeStyle = item.colour;

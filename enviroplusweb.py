@@ -18,8 +18,8 @@ fan_gpio = False
 # If you have an Enviro board without gas sensor, change the next value to False
 gas_sensor = True
 # If you don't have a particle sensor PMS5003 attached, change the next value to False
-particle_sensor = True
-assert gas_sensor or not particle_sensor # Can't have particle sensor without gas sensor
+particulate_sensor = True
+assert gas_sensor or not particulate_sensor # Can't have particle sensor without gas sensor
 from flask import Flask, render_template, url_for, request
 import logging
 from bme280 import BME280
@@ -109,7 +109,7 @@ if lcd_screen:
             "kΩ",
             "kΩ"]
             
-    if particle_sensor:
+    if particulate_sensor:
         units += [
             "/0.ll",
             "/0.1l",
@@ -169,7 +169,7 @@ def read_data(time):
     else:
         oxi = red = nh3 = 0
         
-    if particle_sensor:
+    if particulate_sensor:
         while True:
             try:
                 particles = pms5003.read()
@@ -284,7 +284,7 @@ def readings():
     if fan_gpio:
         arg = request.args["fan"]
         pwm.ChangeDutyCycle(int(arg))
-    return render_template('readings.html' if particle_sensor else 'readings_np.html' if gas_sensor else 'readings_ng.html', **record) 
+    return render_template('readings.html' if particulate_sensor else 'readings_np.html' if gas_sensor else 'readings_ng.html', **record) 
 
 def compress_data(ndays, nsamples):
     cdata = []
