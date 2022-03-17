@@ -272,6 +272,36 @@ h1 {
 .theme-dark .readings hr {
   border-top: 1px solid var(--color-gray-darker);
 }
+.container-readings details {
+  border: 1px solid var(--color-gray);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  background-color: var(--color-white);
+}
+.theme-dark .container-readings details {
+  background-color: var(--color-gray-darker);
+}
+.container-readings details > summary {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  list-style: none;
+}
+.container-readings details > summary:after {
+  content: "\25bc";
+  position: absolute;
+  top: -0.25rem;
+  right: 0;
+}
+.container-readings details[open] > summary {
+  border-bottom: 1px solid var(--color-gray);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.container-readings details[open] > summary:after {
+  content: "\2303";
+  top: 0.25rem;
+}
 .scale-factors {
   width: 100%;
 }
@@ -291,36 +321,6 @@ h1 {
   display: block;
 }
 
-.container-scale-factors details {
-  border: 1px solid var(--color-gray);
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  background-color: var(--color-white);
-}
-.theme-dark .container-scale-factors details {
-  background-color: var(--color-gray-darker);
-}
-.container-scale-factors details > summary {
-  position: relative;
-  border: none;
-  cursor: pointer;
-  list-style: none;
-}
-.container-scale-factors details > summary:after {
-  content: "\25bc";
-  position: absolute;
-  top: -0.25rem;
-  right: 0;
-}
-.container-scale-factors details[open] > summary {
-  border-bottom: 1px solid var(--color-gray);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-.container-scale-factors details[open] > summary:after {
-  content: "\2303";
-  top: 0.25rem;
-}
 
 /* a11y */
 .visually-hidden:not(:focus):not(:active) {
