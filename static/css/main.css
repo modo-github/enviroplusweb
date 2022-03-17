@@ -239,16 +239,17 @@ h1 {
 
 /* Readings */
 .readings {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .readings table {
   width: 100%;
   table-layout: fixed;
   margin-bottom: 1rem;
   border-radius: 0.25rem;
-  background-color: var(--color-gray);  
+  background-color: var(--color-gray);
+  padding: 0.25rem 0.5rem;
 }
-.readings table {
+.theme-dark .readings table {
   background-color: var(--color-gray-darker);  
 }
 .readings-time {
@@ -288,6 +289,12 @@ h1 {
 .container-graph > canvas {
   width: 100%;
   display: block;
+}
+.container-scale-factors {
+  background-color: var(--color-gray);
+}
+.theme-dark .container-scale-factors {
+  background-color: var(--color-gray-darker);
 }
 .container-scale-factors details {
   border: 1px solid var(--color-gray);
