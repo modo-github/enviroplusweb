@@ -209,7 +209,7 @@ h1 {
   display: grid;
   grid-template-columns: 19rem 1fr;
   grid-template-rows: 1fr;
-  margin: 2rem;
+  margin: 2rem 2rem 1rem 2rem;
 }
 .container-readings,
 .container-graph {
@@ -245,8 +245,10 @@ h1 {
   width: 100%;
 }
 .readings-time {
-  font-size: 1.15rem;
   text-align: center;
+  line-height: 1;
+  padding-bottom: 0.5rem;
+  opacity: 0.5;
 }
 .readings tr:nth-child(even) {
   color: var(--color-gray-dark);
