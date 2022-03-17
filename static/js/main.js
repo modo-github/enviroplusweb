@@ -77,15 +77,16 @@ function getData() {
     }
     xhttp.send();
     */
+
+
+
     fetch('readings')
-    .then(function (response) {
-        return response.json();
-    })
     .then(function (data) {
         console.log('data', data);
+        data = '';
     })
     .catch(function (err) {
-        console.log("Something went wrong!", err);
+        console.log("Impossible to get the readings: ", err);
     });  
 }
 
