@@ -54,10 +54,10 @@ Check at the beginning of the file *enviroplusweb.py* the following lines and ch
     gas_sensor = False
     ```
 
-- If you don't have a particle sensor [PMS5003](https://shop.pimoroni.com/products/pms5003-particulate-matter-sensor-with-cable?variant=29075640352851) attached, edit this line
+- If you don't have a particulate sensor [PMS5003](https://shop.pimoroni.com/products/pms5003-particulate-matter-sensor-with-cable?variant=29075640352851) attached, edit this line
 
     ```
-    particle_sensor = False
+    particulate_sensor = False
     ```
 
 - If you prefer to keep the Enviro LCD screen off, edit this line
