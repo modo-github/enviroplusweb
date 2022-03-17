@@ -184,10 +184,14 @@ h1 {
   width: 100%;
   height: auto;
   stroke-width: 0.02rem;
+}
+.button-icon-svg,
+.header-icon svg {
   fill: var(--color-black);
   stroke: var(--color-black);
 }
-.theme-dark .button-icon-svg {
+.theme-dark .button-icon-svg,
+.theme-dark .header-icon svg {
   fill: var(--color-gray);
   stroke: var(--color-gray);
 }
