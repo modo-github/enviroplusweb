@@ -63,7 +63,7 @@ function getData() {
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log('responseText: ', this.responseText);
+            console.log('responseText: ', this.responseText.json());
             particulate_sensor_readings = true;
             gas_sensor_readings = true;
         }
