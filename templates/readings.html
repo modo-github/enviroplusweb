@@ -1,66 +1,68 @@
+<div class="readings-time">{{ time }}</div>
+
 <table>
+  <tbody>
     <tr>
-        <td class="readings-time" colspan="2">{{ time }}</td>
+      <td><span class="color-red">▣ Temperature:</span></td>
+      <td>{{ temp }}&deg;C</td>
     </tr>
     <tr>
-        <td colspan="2"><hr></td>
-    </tr>    
-    <tr>
-        <td><span class="color-red">▣ Temperature:</span></td>
-        <td>{{ temp }}&deg;C</td>
+      <td><span class="color-blue">▣ Humidity:</span></td>
+      <td>{{ humi }}%</td>
     </tr>
     <tr>
-        <td><span class="color-blue">▣ Humidity:</span></td>
-        <td>{{ humi }}%</td>
+      <td><span class="color-green">▣ Pressure:</span></td>
+      <td>{{ pres }}&nbsp;mBar</td>
     </tr>
     <tr>
-        <td><span class="color-green">▣ Pressure:</span></td>
-        <td>{{ pres }}&nbsp;mBar</td>
+      <td><span class="color-yellow">▣ Light:</span></td>
+      <td>{{ lux }} lux</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td><span class="color-violet">▣ Oxidising:</span></td>
+      <td>{{ oxi }}&nbsp;k&Omega;</td>
     </tr>
     <tr>
-        <td><span class="color-yellow">▣ Light:</span></td>
-        <td>{{ lux }} lux</td>
+      <td><span class="color-orange">▣ Reducing:</span></td>
+      <td>{{ red }}&nbsp;k&Omega;</td>
     </tr>
     <tr>
-        <td colspan="2"><hr></td>
-    </tr>    
+      <td><span class="color-turquoise">▣ NH<sub>3</sub>:</span></td>
+      <td>{{ nh3 }}&nbsp;k&Omega;</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
     <tr>
-        <td><span class="color-violet">▣ Oxidising:</span></td>
-        <td>{{ oxi }}&nbsp;k&Omega;</td>
+      <td><span class="color-pmColor03">▣ &gt;0.3um:</span></td>
+      <td>{{ pm03 }}&nbsp;/&nbsp;0.1l</td>
     </tr>
     <tr>
-        <td><span class="color-orange">▣ Reducing:</span></td>
-        <td>{{ red }}&nbsp;k&Omega;</td>
+      <td><span class="color-pmColor05">▣ &gt;0.5um:</span></td>
+      <td>{{ pm05 }}&nbsp;/&nbsp;0.1l</td>
     </tr>
     <tr>
-        <td><span class="color-turquoise">▣ NH<sub>3</sub>:</span></td>
-        <td>{{ nh3 }}&nbsp;k&Omega;</td>
+      <td><span class="color-pmColor10">▣ &gt;1.0um:</span></td>
+      <td>{{ pm10 }}&nbsp;/&nbsp;0.1l</td>
     </tr>
     <tr>
-        <td colspan="2"><hr></td>
-    </tr> 
-    <tr>        
-        <td><span class="color-pmColor03">▣ &gt;0.3um:</span></td>
-        <td>{{ pm03 }}&nbsp;/&nbsp;0.1l</td>
+      <td><span class="color-pmColor25">▣ &gt;2.5um:</span></td>
+      <td>{{ pm25 }}&nbsp;/&nbsp;0.1l</td>
     </tr>
     <tr>
-        <td><span class="color-pmColor05">▣ &gt;0.5um:</span></td>
-        <td>{{ pm05 }}&nbsp;/&nbsp;0.1l</td>
+      <td><span class="color-pmColor50">▣ &gt;5.0um:</span></td>
+      <td>{{ pm50 }}&nbsp;/&nbsp;0.1l</td>
     </tr>
     <tr>
-        <td><span class="color-pmColor10">▣ &gt;1.0um:</span></td>
-        <td>{{ pm10 }}&nbsp;/&nbsp;0.1l</td>
+      <td><span class="color-pmColor100">▣ &gt;10.0um:</span></td>
+      <td>{{ pm100 }}&nbsp;/&nbsp;0.1l</td>
     </tr>
-    <tr>
-        <td><span class="color-pmColor25">▣  &gt;2.5um:</span></td>
-        <td>{{ pm25 }}&nbsp;/&nbsp;0.1l</td>
-    </tr>
-    <tr>
-        <td><span class="color-pmColor50">▣ &gt;5.0um:</span></td>
-        <td>{{ pm50 }}&nbsp;/&nbsp;0.1l</td>
-    </tr>
-    <tr>
-        <td><span class="color-pmColor100">▣ &gt;10.0um:</span></td>
-        <td>{{ pm100 }}&nbsp;/&nbsp;0.1l</td>
-    </tr>   
+  </tbody>
 </table>
