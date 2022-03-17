@@ -113,15 +113,6 @@ button,
   color: var(--color-gray);
   background-color: var(--color-black);
 }
-svg {
-  fill: var(--color-black);
-  stroke: var(--color-black);
-  stroke-width: 0.02rem;
-}
-.theme-dark svg {
-  fill: var(--color-gray);
-  stroke: var(--color-gray);
-}
 
 /* Header */
 .header {
@@ -192,8 +183,14 @@ h1 {
   max-height: 1.25rem;
   width: 100%;
   height: auto;
+  stroke-width: 0.02rem;
+  fill: var(--color-black);
+  stroke: var(--color-black);
 }
-
+.theme-dark .button-icon-svg {
+  fill: var(--color-gray);
+  stroke: var(--color-gray);
+}
 .theme-light button#theme-light {
   display: none;
 }
