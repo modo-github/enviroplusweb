@@ -58,6 +58,24 @@ themeDarkBtn.onclick = changeColorTheme;
 
 // Request to get the readings data
 function getData() {
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log('responseText: ', this.responseText);
+            particulate_sensor_readings = true;
+            gas_sensor_readings = true;
+        }
+    };
+    if (fan_gpio) {
+        var fan = document.getElementById("fan").value;
+        xhttp.open("GET", "readings?fan=" + fan, true);
+    } else {
+        xhttp.open("GET", "readings", true);
+    }
+    xhttp.send();
+
     /*
     var xhttp = new XMLHttpRequest();
 
@@ -78,19 +96,18 @@ function getData() {
     xhttp.send();
     */
 
-
-
+    /*
     fetch('readings')
     .then(function (response) {
         return response.json();
     })
     .then(function (dataReadings) {
         console.log('dataReadings', dataReadings);
-        // dataReadings = '';
     })
     .catch(function (err) {
         console.log("Impossible to get the readings: ", err);
-    });  
+    }); 
+    */
 }
 
 // Request to get the graph data
