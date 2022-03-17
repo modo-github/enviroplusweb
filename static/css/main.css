@@ -246,7 +246,7 @@ h1 {
   table-layout: fixed;
   margin-bottom: 1rem;
   border-radius: 0.25rem;
-  background-color: var(--color-gray);
+  background-color: var(--color-white);
   padding: 0.25rem 0.5rem;
 }
 .theme-dark .readings table {
@@ -290,16 +290,15 @@ h1 {
   width: 100%;
   display: block;
 }
-.container-scale-factors {
-  background-color: var(--color-gray);
-}
-.theme-dark .container-scale-factors {
-  background-color: var(--color-gray-darker);
-}
+
 .container-scale-factors details {
   border: 1px solid var(--color-gray);
   border-radius: 0.25rem;
   padding: 0.5rem;
+  background-color: var(--color-white);
+}
+.theme-dark .container-scale-factors details {
+  background-color: var(--color-gray-darker);
 }
 .container-scale-factors details > summary {
   position: relative;
