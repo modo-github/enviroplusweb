@@ -137,6 +137,7 @@ h1 {
     var(--color-black) 100%
   );
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .theme-dark h1 {
@@ -146,6 +147,7 @@ h1 {
     var(--color-gray) 100%
   );
   -webkit-background-clip: text;
+  background-clip: text;
 }
 .header-settings {
   display: flex;
@@ -245,17 +247,12 @@ h1 {
 .readings-time {
   font-size: 1.15rem;
   text-align: center;
-  padding: 0.5rem 0;
-  border-radius: 0.25rem;
 }
 .readings tr:nth-child(even) {
   color: var(--color-gray-dark);
 }
 .theme-dark .readings tr:nth-child(even) {
   color: var(--color-dust25);
-}
-.readings td {
-  vertical-align: top;
 }
 .readings hr {
   border-top: 1px solid var(--color-gray);
