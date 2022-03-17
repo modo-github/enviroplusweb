@@ -58,6 +58,7 @@ themeDarkBtn.onclick = changeColorTheme;
 
 // Request to get the readings data
 function getData() {
+    /*
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function () {
@@ -75,6 +76,9 @@ function getData() {
         xhttp.open("GET", "readings", true);
     }
     xhttp.send();
+    */
+    fetch('readings')
+    .then((res)=>{ console.log('res: ', res) })   
 }
 
 // Request to get the graph data
@@ -87,7 +91,7 @@ function getGraph(param) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log('graph: ', this.responseText);
+                // console.log('graph: ', this.responseText);
 
                 graph(JSON.parse(this.responseText));
             }

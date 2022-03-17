@@ -20,7 +20,7 @@ gas_sensor = True
 # If you don't have a particle sensor PMS5003 attached, change the next value to False
 particulate_sensor = True
 assert gas_sensor or not particulate_sensor # Can't have particle sensor without gas sensor
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, jsonify, request
 import logging
 from bme280 import BME280
 try:
@@ -284,7 +284,8 @@ def readings():
     if fan_gpio:
         arg = request.args["fan"]
         pwm.ChangeDutyCycle(int(arg))
-    return render_template('readings.html' if particulate_sensor else 'readings_np.html' if gas_sensor else 'readings_ng.html', **record) 
+    # return render_template('readings.html' if particulate_sensor else 'readings_np.html' if gas_sensor else 'readings_ng.html', **record) 
+    return jsonify(record)
 
 def compress_data(ndays, nsamples):
     cdata = []
