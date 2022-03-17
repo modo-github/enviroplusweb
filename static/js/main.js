@@ -78,7 +78,15 @@ function getData() {
     xhttp.send();
     */
     fetch('readings')
-    .then((res)=>{ console.log('res: ', res) })   
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log('data', data);
+    })
+    .catch(function (err) {
+        console.log("Something went wrong!", err);
+    });  
 }
 
 // Request to get the graph data
