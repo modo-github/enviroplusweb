@@ -238,9 +238,6 @@ h1 {
 }
 
 /* Readings */
-.readings {
-  margin-bottom: 1rem;
-}
 .readings-time {
   text-align: center;
   line-height: 1;
@@ -277,6 +274,7 @@ h1 {
   border-radius: 0.25rem;
   padding: 0.5rem;
   background-color: var(--color-white);
+  margin-bottom: 1rem;
 }
 .theme-dark .container-readings details {
   background-color: var(--color-gray-darker);

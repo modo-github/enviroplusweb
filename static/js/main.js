@@ -62,6 +62,7 @@ function getData() {
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            console.log('responseText: ', responseText);
             document.getElementById("readings").innerHTML = this.responseText;
             particulate_sensor_readings = this.responseText.search("10.0um") > 0;
             gas_sensor_readings = this.responseText.search("Oxidising") > 0;
