@@ -84,9 +84,9 @@ function getData() {
     .then(function (response) {
         return response.json();
     })
-    .then(function (paco) {
-        console.log('paco', paco);
-        paco = '';
+    .then(function (dataReadings) {
+        console.log('dataReadings', dataReadings);
+        // dataReadings = '';
     })
     .catch(function (err) {
         console.log("Impossible to get the readings: ", err);

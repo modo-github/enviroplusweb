@@ -285,7 +285,7 @@ def readings():
         arg = request.args["fan"]
         pwm.ChangeDutyCycle(int(arg))
     # return render_template('readings.html' if particulate_sensor else 'readings_np.html' if gas_sensor else 'readings_ng.html', **record) 
-    return json.dumps(data)
+    return record
 
 def compress_data(ndays, nsamples):
     cdata = []
