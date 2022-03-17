@@ -36,7 +36,7 @@ var firstLayoutRender = true;
 var containerCanvas;
 var canvas;
 var ctx;
-var dataGraph;
+var data;
 const yScaleSteps = 10;
 const yLabelHeight = 10;
 const xLabelHeight = 15;
@@ -84,9 +84,9 @@ function getData() {
     .then(function (response) {
         return response.json();
     })
-    .then(function (data) {
-        console.log('data', data);
-        data = '';
+    .then(function (paco) {
+        console.log('paco', paco);
+        paco = '';
     })
     .catch(function (err) {
         console.log("Impossible to get the readings: ", err);
@@ -115,7 +115,7 @@ function getGraph(param) {
 
 // Draw the background grid and labels
 function graph(d) {
-    var dataGraph = d;
+    data = d;
     containerCanvas = document.getElementById("container-graph");
     canvas = document.getElementById("canvas-graph");
     if (firstLayoutRender) {
@@ -130,7 +130,7 @@ function graph(d) {
     ctx.font = "20 pt Verdana"
 
     yScale = (canvas.height - yLabelHeight - xLabelHeight);
-    xScale = (canvas.width - yLabelWidth) / (dataGraph.length - 1);
+    xScale = (canvas.width - yLabelWidth) / (data.length - 1);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // Print X axis vertical time lines
@@ -143,8 +143,8 @@ function graph(d) {
         'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
     }
     ctx.textAlign = 'center';
-    for (var i = 0; i < dataGraph.length; i++) {
-        var fields = dataGraph[i]['time'].match(/\S+/g); // split is broken!
+    for (var i = 0; i < data.length; i++) {
+        var fields = data[i]['time'].match(/\S+/g); // split is broken!
         var t = fields[3].split(':');
         var date = months[fields[1]] * 31 + parseInt(fields[2]) - 1;
         var time = date * 24 * 3600 + parseInt(t[0]) * 3600 + parseInt(t[1]) * 60 + parseInt(t[2]);
@@ -200,9 +200,9 @@ function plotData(dataSet, min, max) {
     ctx.beginPath();
     ctx.setLineDash([]);
     y0 = canvas.height - xLabelHeight;
-    ctx.moveTo(yLabelWidth, y0 - scaley(dataGraph[0][dataSet], min, max));
-    for (var i = 1; i < dataGraph.length; i++) {
-        ctx.lineTo(yLabelWidth + i * xScale, y0 - scaley(dataGraph[i][dataSet], min, max));
+    ctx.moveTo(yLabelWidth, y0 - scaley(data[0][dataSet], min, max));
+    for (var i = 1; i < data.length; i++) {
+        ctx.lineTo(yLabelWidth + i * xScale, y0 - scaley(data[i][dataSet], min, max));
     }
     ctx.stroke();
 }
