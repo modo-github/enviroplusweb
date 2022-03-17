@@ -243,6 +243,13 @@ h1 {
 }
 .readings table {
   width: 100%;
+  table-layout: fixed;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  background-color: var(--color-gray);  
+}
+.readings table {
+  background-color: var(--color-gray-darker);  
 }
 .readings-time {
   text-align: center;
