@@ -316,6 +316,8 @@ body[data-hasParticulateSensor="False"] .readings-pm {
 }
 .theme-dark .container-readings details {
   background-color: var(--color-gray-darker);
+  border-color: var(--color-gray-dark);
+
 }
 .container-readings details table{
   padding: 0;
