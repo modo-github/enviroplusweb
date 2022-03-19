@@ -9,6 +9,8 @@ const frequencies = {
 const gas_sensor = document.getElementById('body').dataset.hasgassensor;
 const particulate_sensor = document.getElementById('body').dataset.hasparticulatesensor;
 const fan_gpio = document.getElementById('body').dataset.hasfangpio;
+console.log('gas_sensor: ', gas_sensor);
+console.log('particulate_sensor: ', particulate_sensor);
 console.log('fan_gpio: ', fan_gpio);
 var last_frequency = "";
 var last_graph = 0;
