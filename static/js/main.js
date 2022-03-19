@@ -80,12 +80,10 @@ function getData() {
 // Load the data in the readings tables
 function listReadings(d) {
     dataReadings = d;
-    console.log('dataReadings:', dataReadings)
+    // console.log('dataReadings:', dataReadings)
     for (var i = 0; i < Object.keys(dataReadings).length; i++) {
-        console.log('Object.keys: ', Object.keys(dataReadings)[i]);
-        console.log('Object.value: ', Object.values(dataReadings)[i]);
+        document.getElementById(Object.keys(dataReadings)[i]).innerHTML = Object.values(dataReadings)[i];
     }
-    // document.getElementById('')
 }
 
 // Request to get the graph data
