@@ -37,6 +37,7 @@ var containerCanvas;
 var canvas;
 var ctx;
 var data;
+var dataReadings;
 const yScaleSteps = 10;
 const yLabelHeight = 10;
 const xLabelHeight = 15;
@@ -63,7 +64,8 @@ function getData() {
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log('responseText: ', JSON.parse(this.responseText));
+            // console.log('responseText: ', JSON.parse(this.responseText));
+            listReadings(JSON.parse(this.responseText));
         }
     };
     if (fan_gpio) {
@@ -73,54 +75,28 @@ function getData() {
         xhttp.open("GET", "readings", true);
     }
     xhttp.send();
+}
 
-    /*
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log('responseText: ', this.responseText);
-            document.getElementById("readings").innerHTML = this.responseText;
-            particulate_sensor = this.responseText.search("10.0um") > 0;
-            gas_sensor = this.responseText.search("Oxidising") > 0;
-        }
-    };
-    if (fan_gpio) {
-        var fan = document.getElementById("fan").value;
-        xhttp.open("GET", "readings?fan=" + fan, true);
-    } else {
-        xhttp.open("GET", "readings", true);
+// Load the data in the readings tables
+function listReadings(d) {
+    dataReadings = d;
+    console.log('dataReadings:', dataReadings)
+    for (var i = 0; i < dataReadings.length; i++) {
+        console.log('dataReadings inside for: ', dataReadings);
     }
-    xhttp.send();
-    */
-
-    /*
-    fetch('readings')
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (dataReadings) {
-        console.log('dataReadings', dataReadings);
-    })
-    .catch(function (err) {
-        console.log("Impossible to get the readings: ", err);
-    }); 
-    */
+    // document.getElementById('')
 }
 
 // Request to get the graph data
 function getGraph(param) {
-    console.log('getGraph');
     var frequency = document.getElementById("graph-sel").value;
     var t = Date.now() / 1000;
     if (frequency != last_frequency || t - last_graph >= frequencies[frequency].poll || param) {
-        console.log('getGraph inside if');
         last_frequency = frequency;
         last_graph = t;
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log('graph: ', this.responseText);
                 graph(JSON.parse(this.responseText));
             }
         };
