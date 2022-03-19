@@ -277,10 +277,12 @@ background_thread = threading.Thread(target = background)
 
 @app.route('/')
 def index():
-    hasGasSensor = gas_sensor
-    hasParticulateSensor = particulate_sensor
-    hasFanGPIO = fan_gpio
-    return render_template('index.html', **locals())
+    hardwareConfig = {
+        hasGasSensor: gas_sensor,
+        hasParticulateSensor: particulate_sensor,
+        hasFanGPIO: fan_gpio,
+    }
+    return render_template('index.html', **hardwareConfig)
 
 @app.route('/readings')
 def readings():
