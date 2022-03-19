@@ -6,7 +6,7 @@ const frequencies = {
     'month': { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
     'year': { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 }
 };
-const body = document.getElementById('body');
+var body = document.getElementById('body');
 const gas_sensor = body.dataset.hasgassensor;
 const particulate_sensor = body.dataset.hasparticulatesensor;
 const fan_gpio = body.dataset.hasfangpio;
