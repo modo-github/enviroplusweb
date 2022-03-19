@@ -81,8 +81,9 @@ function getData() {
 function listReadings(d) {
     dataReadings = d;
     console.log('dataReadings:', dataReadings)
-    for (var i = 0; i < dataReadings.length; i++) {
-        console.log('dataReadings inside for: ', dataReadings);
+    for (var i = 0; i < Object.keys(dataReadings).length; i++) {
+        console.log('Object.keys: ', Object.keys(dataReadings)[i]);
+        console.log('Object.value: ', Object.values(dataReadings)[i]);
     }
     // document.getElementById('')
 }
