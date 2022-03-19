@@ -318,7 +318,8 @@ body[data-hasParticulateSensor="False"] .readings-pm {
   background-color: var(--color-gray-darker);
 }
 .container-readings details table{
-  padding: 0 0.75rem;
+  padding: 0;
+  margin-bottom: 0;
 }
 
 .container-readings details > summary {
