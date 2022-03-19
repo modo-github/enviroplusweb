@@ -6,9 +6,10 @@ const frequencies = {
     'month': { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
     'year': { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 }
 };
-var particulate_sensor_readings = false;
-var gas_sensor_readings = false;
-const fan_gpio = document.getElementById('fan_gpio').classList.contains('fan-gpio-True');
+const gas_sensor = document.getElementById('body').dataset.hasGasSensor;
+const particulate_sensor = document.getElementById('body').dataset.hasParticulateSensor;
+const fan_gpio = document.getElementById('body').dataset.hasFanGPIO;
+console.log(fan_gpio);
 var last_frequency = "";
 var last_graph = 0;
 var hasThemeLight = document.getElementById('body').classList.contains('theme-light');
@@ -64,8 +65,8 @@ function getData() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log('responseText: ', JSON.parse(this.responseText));
-            particulate_sensor_readings = true;
-            gas_sensor_readings = true;
+            particulate_sensor = true;
+            gas_sensor = true;
         }
     };
     if (fan_gpio) {
@@ -83,8 +84,8 @@ function getData() {
         if (this.readyState == 4 && this.status == 200) {
             console.log('responseText: ', this.responseText);
             document.getElementById("readings").innerHTML = this.responseText;
-            particulate_sensor_readings = this.responseText.search("10.0um") > 0;
-            gas_sensor_readings = this.responseText.search("Oxidising") > 0;
+            particulate_sensor = this.responseText.search("10.0um") > 0;
+            gas_sensor = this.responseText.search("Oxidising") > 0;
         }
     };
     if (fan_gpio) {
@@ -200,8 +201,8 @@ function graph(d) {
 
     // Plot each item
     var scaleFactors = "";
-    var items = particulate_sensor_readings ? items_ngp.concat(items_g).concat(items_p) :
-        gas_sensor_readings ? items_ngp.concat(items_g) : items_ngp;
+    var items = particulate_sensor ? items_ngp.concat(items_g).concat(items_p) :
+        gas_sensor ? items_ngp.concat(items_g) : items_ngp;
     for (var item of items) {
         ctx.strokeStyle = item.colour;
         plotData(item.name, item.min, item.max);

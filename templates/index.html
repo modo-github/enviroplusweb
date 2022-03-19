@@ -27,7 +27,7 @@
     />
   </head>
 
-  <body id="body">
+  <body id="body" data-hasGasSensor="{{ gas_sensor }}" data-hasParticulateSensor="{{ particulate_sensor }}" data-hasFanGPIO="{{ fan_gpio }}">
     <script>
       // Load user theme-color
       const savedThemeColor = localStorage.getItem("theme-color");
@@ -84,7 +84,7 @@
           </select>
         </div>
 
-        <div id="fan_gpio" class="fan-gpio-{{ fan_gpio }}">
+        <div class="container-fan-gpio">
           <span class="header-icon" title="Fan power">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -233,7 +233,9 @@
     <main class="main">
       <div class="container-readings">
         <div id="readings" class="readings">
+
           <div class="readings-time">{{ time }}</div>
+
           <table>
             <tbody>
               <tr>
@@ -255,7 +257,7 @@
             </tbody>
           </table>
 
-          <details>
+          <details class="readings-gas">
             <summary>Gas</summary>
             <table>
               <tbody>
@@ -277,7 +279,7 @@
             </table>
           </details>
 
-          <details>
+          <details class="readings-pm">
             <summary>Particulate matter</summary>
             <table>
               <tbody>
@@ -308,7 +310,9 @@
               </tbody>
             </table>
           </details>
+
         </div>
+
         <div class="container-scale-factors">
           <details>
             <summary>Scale factors</summary>
