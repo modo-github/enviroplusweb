@@ -285,27 +285,22 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
 }
 
 /* Readings */
-.readings-time {
-  text-align: center;
-  line-height: 1;
-  padding-bottom: 1rem;
-  opacity: 0.5;
-}
-.readings table {
+.container-readings table {
   width: 100%;
   table-layout: fixed;
   margin-bottom: 1rem;
   border-radius: 0.25rem;
   background-color: var(--color-white);
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-spacing: 0 0.5rem;
 }
-.theme-dark .readings table {
+.theme-dark .container-readings table {
   background-color: var(--color-gray-darker);
 }
-.readings tr:nth-child(even) {
+.container-readings tr:nth-child(even) {
   color: var(--color-gray-dark);
 }
-.theme-dark .readings tr:nth-child(even) {
+.theme-dark .container-readings tr:nth-child(even) {
   color: var(--color-gray-light);
 }
 body[data-hasGasSensor="False"] .readings-gas,
@@ -313,7 +308,7 @@ body[data-hasParticulateSensor="False"] .readings-pm {
   display: none !important;
 }
 .container-readings details {
-  border: 2px solid var(--color-gray-dark);
+  border: 2px solid var(--color-gray);
   border-radius: 0.25rem;
   padding: 0.5rem;
   background-color: var(--color-white);
@@ -322,6 +317,10 @@ body[data-hasParticulateSensor="False"] .readings-pm {
 .theme-dark .container-readings details {
   background-color: var(--color-gray-darker);
 }
+.container-readings details table{
+  padding: 0 0.75rem;
+}
+
 .container-readings details > summary {
   position: relative;
   border: none;
