@@ -6,15 +6,13 @@ const frequencies = {
     'month': { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
     'year': { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 }
 };
-const gas_sensor = document.getElementById('body').dataset.hasgassensor;
-const particulate_sensor = document.getElementById('body').dataset.hasparticulatesensor;
-const fan_gpio = document.getElementById('body').dataset.hasfangpio;
-console.log('gas_sensor: ', gas_sensor);
-console.log('particulate_sensor: ', particulate_sensor);
-console.log('fan_gpio: ', fan_gpio);
+const body = document.getElementById('body');
+const gas_sensor = body.dataset.hasgassensor;
+const particulate_sensor = body.dataset.hasparticulatesensor;
+const fan_gpio = body.dataset.hasfangpio;
 var last_frequency = "";
 var last_graph = 0;
-var hasThemeLight = document.getElementById('body').classList.contains('theme-light');
+var hasThemeLight = body.classList.contains('theme-light');
 const style = getComputedStyle(document.body); // All colors values are declared at main.css
 const items_ngp = [
     { name: "temp", colour: style.getPropertyValue('--color-red'), min: 0, max: 50 },
@@ -50,7 +48,7 @@ const themeLightBtn = document.getElementById('theme-light');
 const themeDarkBtn = document.getElementById('theme-dark');
 
 // Manages web color theme
-function changeColorTheme () {
+function changeColorTheme() {
     body.className = this.id;
     localStorage.setItem('theme-color', this.id);
     hasThemeLight = !hasThemeLight;
@@ -113,16 +111,17 @@ function getData() {
 
 // Request to get the graph data
 function getGraph(param) {
+    console.log('getGraph');
     var frequency = document.getElementById("graph-sel").value;
     var t = Date.now() / 1000;
-    if (frequency != last_frequency || t - last_graph >= frequencies[frequency].poll || param ) {
+    if (frequency != last_frequency || t - last_graph >= frequencies[frequency].poll || param) {
+        console.log('getGraph inside if');
         last_frequency = frequency;
         last_graph = t;
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                // console.log('graph: ', this.responseText);
-
+                console.log('graph: ', this.responseText);
                 graph(JSON.parse(this.responseText));
             }
         };
@@ -174,10 +173,10 @@ function graph(d) {
                     : fields[3].slice(0, 5), x, canvas.height);
             ctx.beginPath();
             // Color of vertical grid lines
-            if (hasThemeLight){
-                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-dust03') : style.getPropertyValue('--color-gray'); 
-            }else{
-                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray-dark') : style.getPropertyValue('--color-gray-darker'); 
+            if (hasThemeLight) {
+                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-dust03') : style.getPropertyValue('--color-gray');
+            } else {
+                ctx.strokeStyle = is_major ? style.getPropertyValue('--color-gray-dark') : style.getPropertyValue('--color-gray-darker');
             }
             ctx.setLineDash([5, 3]);
             ctx.moveTo(x, 0);

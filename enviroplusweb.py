@@ -20,7 +20,7 @@ gas_sensor = True
 # If you don't have a particle sensor PMS5003 attached, change the next value to False
 particulate_sensor = True
 assert gas_sensor or not particulate_sensor # Can't have particle sensor without gas sensor
-from flask import Flask, render_template, url_for, jsonify, request
+from flask import Flask, render_template, url_for, request
 import logging
 from bme280 import BME280
 try:

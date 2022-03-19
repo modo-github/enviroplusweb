@@ -306,7 +306,7 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
   color: var(--color-gray-dark);
 }
 .theme-dark .readings tr:nth-child(even) {
-  color: var(--color-dust25);
+  color: var(--color-gray-light);
 }
 body[data-hasGasSensor="False"] .readings-gas,
 body[data-hasParticulateSensor="False"] .readings-pm {
