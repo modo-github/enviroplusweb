@@ -6,10 +6,10 @@ const frequencies = {
     'month': { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
     'year': { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 }
 };
-const gas_sensor = document.getElementById('body').dataset.hasGasSensor;
-const particulate_sensor = document.getElementById('body').dataset.hasParticulateSensor;
-const fan_gpio = document.getElementById('body').dataset.hasFanGPIO;
-console.log(fan_gpio);
+const gas_sensor = document.getElementById('body').dataset.hasgassensor;
+const particulate_sensor = document.getElementById('body').dataset.hasparticulatesensor;
+const fan_gpio = document.getElementById('body').dataset.hasfangpio;
+console.log('fan_gpio: ', fan_gpio);
 var last_frequency = "";
 var last_graph = 0;
 var hasThemeLight = document.getElementById('body').classList.contains('theme-light');
@@ -65,8 +65,6 @@ function getData() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log('responseText: ', JSON.parse(this.responseText));
-            particulate_sensor = true;
-            gas_sensor = true;
         }
     };
     if (fan_gpio) {
