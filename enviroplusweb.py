@@ -59,16 +59,14 @@ if fan_gpio:
     pwm = IO.PWM(4,1000) # PWM frequency
     pwm.start(100)       # Duty cycle
 
-# Get the temperature of the CPU for compensation
-# useful if your board has no fan plugged
+# Get the temperature of the CPU
 def get_cpu_temperature():
     with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
         temp = f.read()
         temp = int(temp) / 1000.0
     return temp
 
-# Tuning factor for compensation
-# Change these values to adjust the temperature and humidity
+# Tuning factor for compensation the temperature and humidity
 factor_temp = 3.10
 factor_humi = 2
 
