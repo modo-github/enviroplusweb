@@ -196,22 +196,22 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
 }
-.header-settings {
+.container-menu-settings {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   margin: 0 0 0 auto;
 }
-.header-settings > div {
+.container-menu-settings > div {
   padding: 0 2rem;
   display: flex;
   align-items: center;
   border-left: 1px solid var(--color-gray);
 }
-.theme-dark .header-settings > div {
+.theme-dark .container-menu-settings > div {
   border-left: 1px solid var(--color-gray-dark);
 }
-.header-settings > div:first-child {
+.container-menu-settings > div:first-child {
   border-left: none;
 }
 .header-icon {
