@@ -1,10 +1,9 @@
 # 🌿 Enviro Plus Web
 
-Web interface for [Enviro](https://shop.pimoroni.com/products/enviro?variant=31155658489939) and [Enviro+](https://shop.pimoroni.com/products/enviro?variant=31155658457171) sensor board plugged into a Raspberry Pi.
+Web interface for [Enviro](https://shop.pimoroni.com/products/enviro?variant=31155658489939) and [Enviro+](https://shop.pimoroni.com/products/enviro?variant=31155658457171) sensor board plugged into a Raspberry Pi.  
+This simple Flask application serves a web page with the current sensor readings and a graph over a specified time period.
 
 ![Screenshot](screenshot.jpg)
-
-A very simple Flask application that serves a web page with the current sensor readings and a graph over a specified time period.
 
 Forked from <https://github.com/nophead/EnviroPlusWeb>
 
@@ -92,15 +91,22 @@ Add a new entry at the very bottom with `@reboot` to specify that you want to ru
 
 ## 💬 FAQ
 
-**Where are my data readings?**
+### Where are my data readings?
+Depends on where you run `enviroplusweb.py`. By default your data will be stored in the same place where you have the application, in a JSON format inside a folder called `/data`.  
+But if you run the app at bootup (for example, using the *crontab*) then your folder `/data` will be at root.
 
-Depends on where you run `enviroplusweb.py`. By default your data will be stored in the same place where you have the application, in a JSON format inside a folder called /data.  
-But if you run the app at bootup (using the crontab) then your folder /data will be at root.
+### How can I get my Raspberry Pi IP?
+Enter `hostname -I` in a Terminal window on your Raspberry Pi, then you will see the IPv4 and the IPv6.
 
+### My Raspberry Pi is running other services at localhost
+You can change the port to avoind any conflict with other applications. In that case edit the file `enviroplusweb.py` and find at the end this line: 
 
-**How can I get my Raspberry Pi IP?**
+```
+app.run(debug = False, host = '0.0.0.0', port = 80, use_reloader = False)
+```
 
-Enter `hostname -I` in a Terminal window on your Raspberry Pi, you will see the IPv4 and the IPv6.
+Just change the `port = 80` value for another number (for example 81) and now you can access to your EnviroPlusWeb typing the ip address followed by :81
+
 
 ## 🚀 Improve me
 
