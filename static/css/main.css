@@ -214,11 +214,6 @@ h1 {
 .header-settings > div:first-child {
   border-left: none;
 }
-@media screen and (max-width: 640px) {
-  .header-settings > div {
-    padding: 0 1rem;
-  }
-}
 .header-icon {
   width: 2rem;
   max-height: 3rem;
@@ -244,11 +239,22 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
   fill: var(--color-gray);
   stroke: var(--color-gray);
 }
-.theme-light button#theme-light {
-  display: none;
-}
+.theme-light button#theme-light,
 .theme-dark button#theme-dark {
   display: none;
+}
+
+/* Header Mobile version */
+@media screen and (min-width: 1261px) { 
+  .container-menu-hamburger {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1260px) { 
+  .container-menu-hamburger {
+    width: 100%;
+  }
 }
 
 /* Main container */
