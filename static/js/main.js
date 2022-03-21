@@ -145,10 +145,15 @@ function getData() {
 function listReadings(d) {
   dataReadings = d;
   for (var i = 0; i < Object.keys(dataReadings).length; i++) {
-    var elementKey = document.getElementById(Object.keys(dataReadings)[i]);
-    var elementValue = Object.values(dataReadings)[i];
-    if (typeof(elementKey) != "undefined" && elementKey != null) {
-        elementKey.innerHTML = elementValue;
+    var dataKey = Object.keys(dataReadings)[i];
+    var elementIdKey = document.getElementById(dataKey);
+    var dataValue = Object.values(dataReadings)[i];
+    if (typeof(elementIdKey) != "undefined" && elementIdKey != null) {
+      if(dataKey === 'time'){
+        elementIdKey.innerHTML = dataValue.toLocaleString('en-US');
+      }else{
+        elementIdKey.innerHTML = dataValue;
+      }
     }
   }
 }
