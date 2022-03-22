@@ -198,6 +198,7 @@ h1 {
 }
 .container-menu-settings {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   margin: 0 0 0 auto;
@@ -219,7 +220,7 @@ h1 {
   max-height: 3rem;
   margin-right: 1rem;
 }
-body[data-hasFanGPIO="False"] .container-fan-gpio {
+body[data-hasFanGPIO="False"] .container-btn-fanGpio {
   display: none !important;
 }
 .button-icon-svg {
@@ -251,8 +252,8 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
   }
 }
 .menu-hamburger {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
   background-color: transparent;
   cursor: pointer;
   display: flex;
@@ -314,10 +315,11 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
     visibility: hidden;
     opacity: 0;
     padding: 2rem;
+    flex-direction: column;
   }
   .container-menu-settings.menu-settings-open {
     width: 66%;
-    max-width: 18rem;
+    max-width: 14rem;
     height: 100%;
     visibility: visible;
     opacity: 1;
@@ -325,6 +327,14 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
     border-left: 1px solid var(--color-gray);
     background: var(--color-white);
   }
+  .container-menu-settings > div {
+    padding: 0;
+    width: 100%;
+    justify-content: center;
+    border-left: none;
+  }
+
+  .container-btn-fanGpio
 }
 
 /* Main container */
