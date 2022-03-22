@@ -186,6 +186,12 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: logo-gradient-animation 15s ease infinite;
+}
+@keyframes logo-gradient-animation {
+  0%{background-position:0% 42%}
+  50%{background-position:100% 59%}
+  100%{background-position:0% 42%}
 }
 .theme-dark h1 {
   background: linear-gradient(
