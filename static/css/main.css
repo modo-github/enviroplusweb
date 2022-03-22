@@ -267,6 +267,9 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
     stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1),
     stroke 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
+.theme-dark .menu-hamburger {
+  stroke: var(--color-gray);
+}
 .menu-hamburger.btn-active {
   transform: rotate(180deg);
 }
@@ -327,14 +330,21 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
     border-left: 1px solid var(--color-gray);
     background: var(--color-white);
   }
+  .theme-dark .container-menu-settings.menu-settings-open {
+    background: var(--color-black);
+  }
   .container-menu-settings > div {
     padding: 0;
     width: 100%;
-    justify-content: center;
-    border-left: none;
+    border-left: none !important;
+    margin-bottom: 1rem;
   }
-
-  .container-btn-fanGpio
+  .container-info-time  {
+    margin-top: -1.10rem;
+  }
+  .header-icon {
+    margin: 0;
+  }
 }
 
 /* Main container */
