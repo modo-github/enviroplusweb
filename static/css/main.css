@@ -255,7 +255,7 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
     width: 100%;
   }
 }
-.menu-main-btn {
+.menu-hamburger {
   width: 2.5rem;
   height: 2.5rem;
   background-color: transparent;
@@ -268,13 +268,13 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
   z-index: 1;
   min-width: auto;
 }
-.menu-main-btn:hover {
+.menu-hamburger:hover {
   border: none;
 }
-.menu-main-btn.btn-active {
+.menu-hamburger.btn-active {
   transform: rotate(180deg);
 }
-.menu-main-hamburger {
+.menu-hamburger {
   fill: none;
   stroke-width: 6;
 }
