@@ -245,21 +245,15 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
 }
 
 /* Header Mobile version */
-@media screen and (min-width: 1260px) { 
+@media screen and (min-width: 1260px) {
   .container-menu-hamburger {
     display: none;
-  }
-}
-@media screen and (max-width: 1259px) { 
-  .container-menu-hamburger {
-    width: 100%;
   }
 }
 .menu-hamburger {
   width: 2.5rem;
   height: 2.5rem;
   background-color: transparent;
-  border: none;
   cursor: pointer;
   display: flex;
   padding: 0;
@@ -267,14 +261,12 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
   position: relative;
   z-index: 1;
   min-width: auto;
-}
-.menu-hamburger:hover {
-  border: none;
+  stroke: var(--color-black);
 }
 .menu-hamburger.btn-active {
   transform: rotate(180deg);
 }
-.menu-hamburger {
+.menu-main-hamburger {
   fill: none;
   stroke-width: 6;
 }
@@ -305,7 +297,44 @@ body[data-hasFanGPIO="False"] .container-fan-gpio {
   stroke-dashoffset: -134;
   stroke-width: 6;
 }
+@media screen and (max-width: 1259px) {
+  .container-menu-hamburger {
+    width: 100%;
+  }
+  .container-menu-settings {
+    width: 0;
+    height: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    padding: 2rem;
+  }
+  .container-menu-settings.menu-settings-open {
+    width: 66%;
+    max-width: 18rem;
+    height: 100%;
+    visibility: visible;
+    opacity: 1;
+    overflow-y: auto;
+  }
 
+  .container-menu-settings.menu-settings-open .theme-switcher ul {
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+  }
+  .sticky-active .theme-switcher {
+    opacity: 1;
+  }
+
+  .container-menu-settings.menu-settings-open .nav-main ul {
+    flex-direction: column;
+  }
+  .container-menu-settings.menu-settings-open .nav-main li {
+    margin: 1rem 0 1rem 0;
+  }
+}
 
 /* Main container */
 .main {
@@ -373,9 +402,8 @@ body[data-hasParticulateSensor="False"] .readings-pm {
 .theme-dark .container-readings details {
   background-color: var(--color-gray-darker);
   border-color: var(--color-gray-dark);
-
 }
-.container-readings details table{
+.container-readings details table {
   padding: 0;
   margin-bottom: 0;
 }
