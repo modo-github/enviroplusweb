@@ -170,6 +170,7 @@ button,
   top: 0;
   background-color: var(--color-white);
   box-shadow: 0 0.15rem 0.5rem 0 var(--color-gray);
+  z-index: 1;
 }
 .theme-dark .header {
   background-color: var(--color-black);
@@ -181,15 +182,16 @@ button,
 h1 {
   font-size: 1.75rem;
   margin: 0.5rem 0;
-  background: linear-gradient(
-    160deg,
-    var(--color-green),
-    var(--color-black)
-  );
+  background: linear-gradient(160deg, var(--color-green), var(--color-black));
   background-size: 200% 200%;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: logo-gradient-animation 15s ease infinite;
+}
+.theme-dark h1 {
+  background: linear-gradient(160deg, var(--color-green), var(--color-gray));
+  background-size: 200% 200%;
+  background-clip: text;
 }
 @keyframes logo-gradient-animation {
   0% {
@@ -201,15 +203,6 @@ h1 {
   100% {
     background-position: 0% 42%;
   }
-}
-.theme-dark h1 {
-  background: linear-gradient(
-    160deg,
-    var(--color-green),
-    var(--color-gray)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
 }
 .container-menu-settings {
   display: flex;
@@ -346,7 +339,6 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
     overflow-y: auto;
     border-left: 1px solid var(--color-gray);
     background: var(--color-white);
-    z-index: 1;
   }
   .theme-dark .container-menu-settings.menu-settings-open {
     background: var(--color-black);
