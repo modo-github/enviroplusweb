@@ -319,6 +319,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
     opacity: 0;
     padding: 2rem;
     flex-direction: column;
+    flex-wrap: nowrap;
   }
   .container-menu-settings.menu-settings-open {
     width: 66%;
@@ -337,13 +338,13 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
     padding: 0;
     width: 100%;
     border-left: none !important;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
   .container-info-time  {
     margin-top: -1.10rem;
   }
-  .header-icon {
-    margin: 0;
+  .container-menu-settings:last-child{
+    margin-bottom: 4rem;
   }
 }
 
