@@ -248,6 +248,9 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
 .theme-dark button#theme-dark {
   display: none;
 }
+.container-btn-gitlab span {
+  display: none;
+}
 
 /* Header Mobile version */
 @media screen and (min-width: 1260px) {
@@ -348,6 +351,9 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
   .container-info-time {
     margin-top: -1.1rem;
   }
+  .container-btn-gitlab span {
+    display: inline-block;
+  }
   .container-menu-settings > div:last-child {
     margin-bottom: 4rem;
   }
@@ -383,6 +389,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
   .container-readings {
     overflow: unset;
     margin-right: 0;
+    padding: 0;
   }
 }
 
