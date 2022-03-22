@@ -183,15 +183,20 @@ h1 {
     var(--color-green) 0%,
     var(--color-black) 100%
   );
-  -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: logo-gradient-animation 15s ease infinite;
 }
 @keyframes logo-gradient-animation {
-  0%{background-position:0% 42%}
-  50%{background-position:100% 59%}
-  100%{background-position:0% 42%}
+  0% {
+    background-position: 0% 42%;
+  }
+  50% {
+    background-position: 100% 59%;
+  }
+  100% {
+    background-position: 0% 42%;
+  }
 }
 .theme-dark h1 {
   background: linear-gradient(
@@ -346,10 +351,10 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
     border-left: none !important;
     margin-bottom: 2rem;
   }
-  .container-info-time  {
-    margin-top: -1.10rem;
+  .container-info-time {
+    margin-top: -1.1rem;
   }
-  .container-menu-settings:last-child{
+  .container-menu-settings:last-child {
     margin-bottom: 4rem;
   }
 }
