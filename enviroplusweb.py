@@ -100,13 +100,13 @@ if lcd_screen:
             "%",
             "mBar",
             "Lux"]
-            
+
     if gas_sensor:
         units += [
             "kΩ",
             "kΩ",
             "kΩ"]
-            
+
     if particulate_sensor:
         units += [
             "/0.ll",
@@ -132,7 +132,6 @@ if lcd_screen:
             rgb = (255, 0, 255) if data_value > last_value * tol  else (0, 255, 255) if data_value < last_value / tol else (0, 255, 0)
             draw.text((x, y), message, font = smallfont, fill = rgb)
         st7735.display(img)
-
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -166,7 +165,7 @@ def read_data(time):
         nh3 = round(gases.nh3 / 1000)
     else:
         oxi = red = nh3 = 0
-        
+
     if particulate_sensor:
         while True:
             try:
@@ -178,7 +177,7 @@ def read_data(time):
                     raise e
                 pms5003.reset()
                 sleep(30)
-                
+
         pm100 = particles.pm_per_1l_air(10.0)
         pm50  = particles.pm_per_1l_air(5.0) - pm100
         pm25  = particles.pm_per_1l_air(2.5) - pm100 - pm50
@@ -187,7 +186,7 @@ def read_data(time):
         pm3   = particles.pm_per_1l_air(0.3) - pm100 - pm50 - pm25 - pm10 - pm5
     else:
         pm100 = pm50 = pm25 = pm10 = pm5 = pm3 = 0
-        
+
     record = {
         'time' : asctime(localtime(time)),
         'temp' : round(temperature,1),
@@ -282,7 +281,6 @@ def readings():
     if fan_gpio:
         arg = request.args["fan"]
         pwm.ChangeDutyCycle(int(arg))
-    # return render_template('readings.html' if particulate_sensor else 'readings_np.html' if gas_sensor else 'readings_ng.html', **record) 
     return record
 
 def compress_data(ndays, nsamples):
