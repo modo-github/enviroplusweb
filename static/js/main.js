@@ -324,6 +324,7 @@ function scaley(y, min, max) {
 
 // Update the graph layout (width/height) if window resize
 window.addEventListener("resize", function () {
+  console.log('resize window');
   firstLayoutRender = true;
   getGraph(true);
 });
