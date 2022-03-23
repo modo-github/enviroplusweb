@@ -361,7 +361,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
 /* Main container */
 .main {
   display: grid;
-  height: 100%;
+  height: calc(100% - 6.5rem);
   grid-template-columns: 19rem 1fr;
   grid-template-rows: 1fr;
   margin: 2.5rem 2rem 1rem 2rem;
