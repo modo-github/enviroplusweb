@@ -119,7 +119,6 @@ const ctx = document.getElementById('myChart');
 const myChart = new Chart(ctx, {
   type: 'line',
   data: {
-      labels: labels,
       datasets: [{
           label: 'Lorem ipsum',
           data: [{x:'2022-02-25', y:20}, {x:'2022-02-26', y:10}]
