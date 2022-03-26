@@ -160,9 +160,19 @@ def read_data(time):
 
     if gas_sensor:
         gases = gas.read_all()
+        # Pass ohms to ppm
+        # oxi_base = 1
+        # oxi = round(gases.oxidising, 0)
         oxi = round(gases.oxidising / 1000, 1)
+        # red_base = 1
+        # red = round(gases.reducing, 0)
         red = round(gases.reducing / 1000)
+        # nh3 = round(gases.nh3, 0)
+        # nh3_base = 1
         nh3 = round(gases.nh3 / 1000)
+        # red_in_ppm = math.pow(10, -1.25 * math.log10(red/red_base) + 0.64)
+        # oxi_in_ppm = math.pow(10, math.log10(oxi/oxi_base) - 0.8129)
+        # nh3_in_ppm = math.pow(10, -1.8 * math.log10(nh3/nh3_base) - 0.163)
     else:
         oxi = red = nh3 = 0
 
