@@ -15,6 +15,8 @@
 lcd_screen = False
 # If you don't have a fan plugged on GPIO, change the next value to False
 fan_gpio = False
+# Temperature and humidity compensation (edit values 'factor_temp' and 'factor_humi' to adjust them)
+temp_humi_compensation = True
 # If you have an Enviro board without gas sensor, change the next value to False
 gas_sensor = True
 # If you don't have a particle sensor PMS5003 attached, change the next value to False
@@ -59,16 +61,17 @@ if fan_gpio:
     pwm = IO.PWM(4,1000) # PWM frequency
     pwm.start(100)       # Duty cycle
 
-# Get the temperature of the CPU
-def get_cpu_temperature():
-    with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
-        temp = f.read()
-        temp = int(temp) / 1000.0
-    return temp
+if temp_humi_compensation:
+    # Get the temperature of the CPU
+    def get_cpu_temperature():
+        with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
+            temp = f.read()
+            temp = int(temp) / 1000.0
+        return temp
 
-# Tuning factor for compensation the temperature and humidity
-factor_temp = 3.10
-factor_humi = 1.80
+    # Tuning factor for compensation the temperature and humidity
+    factor_temp = 3.10
+    factor_humi = 1.80
 
 # Create ST7735 LCD display class
 if lcd_screen:
@@ -141,10 +144,7 @@ run_flag = True
 
 def read_data(time):
 
-    if fan_gpio:
-        temperature = bme280.get_temperature()
-        humidity = bme280.get_humidity()
-    else:
+    if temp_humi_compensation:
         cpu_temps = [get_cpu_temperature()] * 5  
         cpu_temp = get_cpu_temperature()
         # Smooth out with some averaging to decrease jitter
@@ -154,6 +154,9 @@ def read_data(time):
         temperature = raw_temp - ((avg_cpu_temp - raw_temp) / factor_temp)
         raw_humi = bme280.get_humidity()
         humidity = raw_humi + ((avg_cpu_temp - raw_temp) / factor_humi)
+    else:
+        temperature = bme280.get_temperature()
+        humidity = bme280.get_humidity()
 
     pressure = bme280.get_pressure()
     lux = ltr559.get_lux()
@@ -161,14 +164,14 @@ def read_data(time):
     if gas_sensor:
         gases = gas.read_all()
         # Pass ohms to ppm
-        # oxi_base = 1
+        # oxi_base = 20000
         # oxi = round(gases.oxidising, 0)
         oxi = round(gases.oxidising / 1000, 1)
-        # red_base = 1
+        # red_base = 200000
         # red = round(gases.reducing, 0)
         red = round(gases.reducing / 1000)
         # nh3 = round(gases.nh3, 0)
-        # nh3_base = 1
+        # nh3_base = 750000
         nh3 = round(gases.nh3 / 1000)
         # red_in_ppm = math.pow(10, -1.25 * math.log10(red/red_base) + 0.64)
         # oxi_in_ppm = math.pow(10, math.log10(oxi/oxi_base) - 0.8129)
