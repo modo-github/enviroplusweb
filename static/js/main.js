@@ -101,7 +101,7 @@ const items_p = [
 var firstLayoutRender = true;
 var containerCanvas;
 var canvas;
-var ctx;
+// var ctx;
 var dataGraph;
 var dataReadings;
 const yScaleSteps = 10;
