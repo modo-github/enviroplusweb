@@ -113,6 +113,47 @@ const yLabelWidth = 25;
 const themeLightBtn = document.getElementById("theme-light");
 const themeDarkBtn = document.getElementById("theme-dark");
 
+
+////////////////////////////////////////////////////////////////////////
+const ctx = document.getElementById('myChart');
+const myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+      }]
+  },
+  options: {
+      scales: {
+          y: {
+              beginAtZero: true
+          }
+      }
+  }
+});
+
+//////////////////////////////////////////////////////
+
+
 // Manages theme color
 function changeColorTheme() {
   body.className = this.id;
@@ -177,7 +218,7 @@ function getGraph(param) {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         console.log('Graph data: ', JSON.parse(this.responseText))
-        graph(JSON.parse(this.responseText));
+        // graph(JSON.parse(this.responseText));
       }
     };
     xhttp.open("GET", "graph?time=" + frequency, true);
@@ -186,6 +227,7 @@ function getGraph(param) {
 }
 
 // Draw the background grid and labels
+/*
 function graph(d) {
   dataGraph = d;
   containerCanvas = document.getElementById("container-graph");
@@ -321,6 +363,7 @@ function plotData(dataSet, min, max) {
 function scaley(y, min, max) {
   return ((y - min) * yScale) / (max - min);
 }
+*/
 
 // Update the graph layout (width/height) if window resize
 window.addEventListener('resize', function () {
