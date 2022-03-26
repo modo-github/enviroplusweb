@@ -71,7 +71,7 @@ if temp_humi_compensation:
 
     # Tuning factor for compensation the temperature and humidity
     factor_temp = 3.10
-    factor_humi = 1.80
+    factor_humi = 1.26
 
 # Create ST7735 LCD display class
 if lcd_screen:
@@ -153,7 +153,7 @@ def read_data(time):
         raw_temp = bme280.get_temperature()
         temperature = raw_temp - ((avg_cpu_temp - raw_temp) / factor_temp)
         raw_humi = bme280.get_humidity()
-        humidity = raw_humi + ((avg_cpu_temp - raw_temp) / factor_humi)
+        humidity = raw_humi * factor_humi
     else:
         temperature = bme280.get_temperature()
         humidity = bme280.get_humidity()

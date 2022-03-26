@@ -128,7 +128,7 @@ function getData() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      // console.log('getData: ', JSON.parse(this.responseText));
+      // console.log('Readings data: ', JSON.parse(this.responseText));
       listReadings(JSON.parse(this.responseText));
     }
   };
@@ -176,7 +176,7 @@ function getGraph(param) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        // console.log('getGraph', JSON.parse(this.responseText))
+        console.log('Graph data: ', JSON.parse(this.responseText))
         graph(JSON.parse(this.responseText));
       }
     };
