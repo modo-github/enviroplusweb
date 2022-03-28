@@ -65,13 +65,13 @@ const items_p = [
     name: "pm10",
     colour: style.getPropertyValue("--color-dust10"),
     min: 0,
-    max: 2000,
+    max: 100,
   },
   {
     name: "pm25",
     colour: style.getPropertyValue("--color-dust25"),
     min: 0,
-    max: 500,
+    max: 100,
   },
   {
     name: "pm100",
