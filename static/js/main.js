@@ -199,7 +199,7 @@ function graph(d) {
   ctx = canvas.getContext("2d");
   // Color of the graph labels
   ctx.fillStyle = hasThemeLight
-    ? style.getPropertyValue("--color-gray-dark")
+    ? style.getPropertyValue("--color-gray")
     : style.getPropertyValue("--color-gray-dark");
   ctx.font = "20 pt Verdana";
 
@@ -251,8 +251,8 @@ function graph(d) {
       // Color of vertical grid lines
       if (hasThemeLight) {
         ctx.strokeStyle = is_major
-          ? style.getPropertyValue("--color-gray-dark")
-          : style.getPropertyValue("--color-gray");
+          ? style.getPropertyValue("--color-gray")
+          : style.getPropertyValue("--color-gray-light");
       } else {
         ctx.strokeStyle = is_major
           ? style.getPropertyValue("--color-gray-dark")
@@ -269,7 +269,7 @@ function graph(d) {
   ctx.beginPath();
   // Color of horizontal grid lines
   ctx.strokeStyle = hasThemeLight
-    ? style.getPropertyValue("--color-gray")
+    ? style.getPropertyValue("--color-gray-light")
     : style.getPropertyValue("--color-gray-darker");
   ctx.textAlign = "left";
   for (var i = 0; i <= yScaleSteps; i++) {

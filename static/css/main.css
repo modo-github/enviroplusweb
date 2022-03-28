@@ -3,8 +3,9 @@
 :root {
   --color-white: #fff;
   --color-black: #14161b;
-  --color-gray-light: #eee;
-  --color-gray: #ccc;
+  --color-gray-lighter: #eee;
+  --color-gray-light: #ccc;
+  --color-gray: #999;
   --color-gray-dark: #505050;
   --color-gray-darker: #242424;
   --color-red: #df2f34;
@@ -110,10 +111,10 @@ body {
 body,
 body.theme-light {
   color: var(--color-black);
-  background: var(--color-gray-light);
+  background: var(--color-gray-lighter);
 }
 body.theme-dark {
-  color: var(--color-gray);
+  color: var(--color-gray-light);
   background-color: var(--color-black);
 }
 select,
@@ -133,7 +134,7 @@ input {
 }
 .theme-dark select,
 .theme-dark input {
-  color: var(--color-gray);
+  color: var(--color-gray-light);
   background-color: var(--color-black);
   border: 2px solid var(--color-gray-dark);
 }
@@ -156,7 +157,7 @@ button,
 }
 .theme-dark button,
 .theme-dark .button {
-  color: var(--color-gray);
+  color: var(--color-gray-light);
   background-color: var(--color-black);
   border: 2px solid var(--color-gray-dark);
 }
@@ -169,7 +170,7 @@ button,
   position: sticky;
   top: 0;
   background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-gray);
+  border-bottom: 1px solid var(--color-gray-light);
   z-index: 1;
 }
 .theme-dark .header {
@@ -189,7 +190,7 @@ h1 {
   animation: logo-gradient-animation 15s ease infinite;
 }
 .theme-dark h1 {
-  background: linear-gradient(160deg, var(--color-green), var(--color-gray));
+  background: linear-gradient(160deg, var(--color-green), var(--color-gray-light));
   background-size: 200% 200%;
   background-clip: text;
 }
@@ -215,7 +216,7 @@ h1 {
   padding: 0 2rem;
   display: flex;
   align-items: center;
-  border-left: 1px solid var(--color-gray);
+  border-left: 1px solid var(--color-gray-light);
 }
 .theme-dark .container-menu-settings > div {
   border-left: 1px solid var(--color-gray-dark);
@@ -245,8 +246,8 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
 }
 .theme-dark .button-icon-svg,
 .theme-dark .header-icon svg {
-  fill: var(--color-gray);
-  stroke: var(--color-gray);
+  fill: var(--color-gray-light);
+  stroke: var(--color-gray-light);
 }
 .theme-light button#theme-light,
 .theme-dark button#theme-dark {
@@ -276,7 +277,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
     stroke 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 .theme-dark .menu-hamburger {
-  stroke: var(--color-gray);
+  stroke: var(--color-gray-light);
 }
 .menu-hamburger.btn-active {
   transform: rotate(180deg);
@@ -337,7 +338,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
     visibility: visible;
     opacity: 1;
     overflow-y: auto;
-    border-left: 1px solid var(--color-gray);
+    border-left: 1px solid var(--color-gray-light);
     background: var(--color-white);
   }
   .theme-dark .container-menu-settings.menu-settings-open {
@@ -409,7 +410,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
   color: var(--color-gray-dark);
 }
 .theme-dark .container-readings tr:nth-child(even) {
-  color: var(--color-gray-light);
+  color: var(--color-gray-lighter);
 }
 .container-readings table span[id]{
   padding-right: 0.5rem;
@@ -419,7 +420,7 @@ body[data-hasParticulateSensor="False"] .readings-pm {
   display: none !important;
 }
 .container-readings details {
-  border: 2px solid var(--color-gray);
+  border: 2px solid var(--color-gray-light);
   border-radius: 0.25rem;
   padding: 0.5rem;
   background-color: var(--color-white);
