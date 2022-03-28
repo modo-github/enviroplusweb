@@ -46,7 +46,7 @@ const items_g = [
     colour: style.getPropertyValue("--color-violet"),
     min: 0,
     max: 600,
-  },  
+  },
   {
     name: "oxi",
     colour: style.getPropertyValue("--color-turquoise"),
@@ -159,6 +159,15 @@ function listReadings(d) {
       }
       */
     }
+  }
+}
+
+// Load the scale factors in the readings tables
+function listScaleFactors(item) {
+  var itemIdKey = document.getElementById(item.name + '-scale');
+  var itemValue = (item.max - item.min);
+  if (typeof itemIdKey != "undefined" && itemIdKey != null) {
+    itemIdKey.innerHTML = itemValue;
   }
 }
 
@@ -281,7 +290,7 @@ function graph(d) {
   ctx.stroke();
 
   // Plot each item
-  var scaleFactors = "";
+  // var scaleFactors = "";
   var items = particulate_sensor
     ? items_ngp.concat(items_g).concat(items_p)
     : gas_sensor
@@ -290,16 +299,19 @@ function graph(d) {
   for (var item of items) {
     ctx.strokeStyle = item.colour;
     plotData(item.name, item.min, item.max);
+    listScaleFactors(item);
+    /*
     scaleFactors +=
       "<tr><td>" +
       item.name +
       "</td><td>/" +
       (item.max - item.min) +
       "</td></tr>";
+      */
   }
 
   // Update the legend (Scale factors)
-  document.getElementById("scale-factors-tbody").innerHTML = scaleFactors;
+  // document.getElementById("scale-factors-tbody").innerHTML = scaleFactors;
 }
 
 // Draw each reading value on the grid
