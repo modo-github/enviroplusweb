@@ -409,7 +409,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
 .container-readings :not(.scale-factors) tr:nth-child(even) {
   color: var(--color-gray-dark);
 }
-.theme-dark .container-readings :not(.scale-factors) tr:nth-child(even) {
+.theme-dark .container-readings table:not(.scale-factors) tr:nth-child(even) {
   color: var(--color-gray-lighter);
 }
 .container-readings table span[id]{
