@@ -176,8 +176,8 @@ function getGraph(param) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        console.log('Graph data: ', JSON.parse(this.responseText))
-        // graph(JSON.parse(this.responseText));
+        // console.log('Graph data: ', JSON.parse(this.responseText))
+        graph(JSON.parse(this.responseText));
       }
     };
     xhttp.open("GET", "graph?time=" + frequency, true);
