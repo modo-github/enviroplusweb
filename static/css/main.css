@@ -398,10 +398,10 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
   color: var(--color-gray-dark);
 }
 .theme-dark .container-readings table:not(.scale-factors) tr:nth-child(even) {
-  color: var(--color-gray-lighter);
+  color: var(--color-gray);
 }
 .container-readings table span[id]{
-  padding-right: 0.5rem;
+  padding-left: 0.5rem;
 }
 body[data-hasGasSensor="False"] .readings-gas,
 body[data-hasParticulateSensor="False"] .readings-pm {
