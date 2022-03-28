@@ -16,11 +16,8 @@
   --color-orange: #c45300;
   --color-turquoise: #40826c;
   --color-dust100: #694330;
-  --color-dust50: #765442;
   --color-dust25: #836454;
-  --color-dust10: #8f7667;
-  --color-dust05: #9c877b;
-  --color-dust03: #a89990;
+  --color-dust10: #9c877b;
 }
 
 /* Class colors */
@@ -48,20 +45,11 @@
 .color-pmColor100 {
   color: var(--color-dust100);
 }
-.color-pmColor50 {
-  color: var(--color-dust50);
-}
 .color-pmColor25 {
   color: var(--color-dust25);
 }
 .color-pmColor10 {
   color: var(--color-dust10);
-}
-.color-pmColor05 {
-  color: var(--color-dust05);
-}
-.color-pmColor03 {
-  color: var(--color-dust03);
 }
 
 /* Global styles */
