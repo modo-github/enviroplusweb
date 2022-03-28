@@ -169,12 +169,12 @@ button,
   position: sticky;
   top: 0;
   background-color: var(--color-white);
-  box-shadow: 0 0.15rem 0.5rem 0 var(--color-gray);
+  border-bottom: 1px solid var(--color-gray);
   z-index: 1;
 }
 .theme-dark .header {
   background-color: var(--color-black);
-  box-shadow: 0 0.01rem 0.5rem 0 var(--color-gray-dark);
+  border-bottom: 1px solid var(--color-gray-dark);
 }
 .header-title {
   margin: 0 1rem;
@@ -224,8 +224,8 @@ h1 {
   border-left: none;
 }
 .header-icon {
-  width: 2rem;
-  max-height: 3rem;
+  width: 1.75rem;
+  max-height: 2rem;
   margin-right: 1rem;
 }
 body[data-hasFanGPIO="False"] .container-btn-fanGpio {
@@ -373,8 +373,8 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
 }
 .container-readings {
   overflow: auto;
-  padding: 0 0.75rem 0 0;
-  margin-right: 0.5rem;
+  padding-right: 0.5rem;
+  margin-right: 1rem;
 }
 @media screen and (max-width: 578px) {
   .main {
@@ -389,7 +389,6 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
   .container-readings {
     overflow: unset;
     margin-right: 0;
-    padding: 0;
   }
 }
 
@@ -400,7 +399,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
   margin-bottom: 1rem;
   border-radius: 0.25rem;
   background-color: var(--color-white);
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0 0.5rem 0.75rem;
   border-spacing: 0 0.5rem;
 }
 .theme-dark .container-readings table {
@@ -411,6 +410,9 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
 }
 .theme-dark .container-readings tr:nth-child(even) {
   color: var(--color-gray-light);
+}
+.container-readings table span[id]{
+  padding-right: 0.5rem;
 }
 body[data-hasGasSensor="False"] .readings-gas,
 body[data-hasParticulateSensor="False"] .readings-pm {

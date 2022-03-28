@@ -42,8 +42,14 @@ const items_ngp = [
 ];
 const items_g = [
   {
-    name: "oxi",
+    name: "nh3",
     colour: style.getPropertyValue("--color-violet"),
+    min: 0,
+    max: 600,
+  },  
+  {
+    name: "oxi",
+    colour: style.getPropertyValue("--color-turquoise"),
     min: 0,
     max: 400,
   },
@@ -52,13 +58,7 @@ const items_g = [
     colour: style.getPropertyValue("--color-orange"),
     min: 0,
     max: 1000,
-  },
-  {
-    name: "nh3",
-    colour: style.getPropertyValue("--color-turquoise"),
-    min: 0,
-    max: 600,
-  },
+  }
 ];
 const items_p = [
   {
@@ -101,7 +101,7 @@ const items_p = [
 var firstLayoutRender = true;
 var containerCanvas;
 var canvas;
-// var ctx;
+var ctx;
 var dataGraph;
 var dataReadings;
 const yScaleSteps = 10;
@@ -112,30 +112,6 @@ var yScale;
 const yLabelWidth = 25;
 const themeLightBtn = document.getElementById("theme-light");
 const themeDarkBtn = document.getElementById("theme-dark");
-
-
-////////////////////////////////////////////////////////////////////////
-const ctx = document.getElementById('myChart');
-const myChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-      datasets: [{
-          label: 'Lorem ipsum',
-          data: [{x:'2022-02-25', y:20}, {x:'2022-02-26', y:10}]
-      }]
-  },
-  options: {
-      scales: {
-          y: {
-              beginAtZero: true,
-              grace: '10%'
-          }
-      }
-  }
-});
-
-//////////////////////////////////////////////////////
-
 
 // Manages theme color
 function changeColorTheme() {
@@ -210,7 +186,6 @@ function getGraph(param) {
 }
 
 // Draw the background grid and labels
-/*
 function graph(d) {
   dataGraph = d;
   containerCanvas = document.getElementById("container-graph");
@@ -346,7 +321,7 @@ function plotData(dataSet, min, max) {
 function scaley(y, min, max) {
   return ((y - min) * yScale) / (max - min);
 }
-*/
+
 
 // Update the graph layout (width/height) if window resize
 window.addEventListener('resize', function () {
