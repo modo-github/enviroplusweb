@@ -191,12 +191,20 @@ def read_data(time):
                 pms5003.reset()
                 sleep(30)
 
-        pm100 = particles.pm_per_1l_air(10.0)
-        pm50  = particles.pm_per_1l_air(5.0) - pm100
-        pm25  = particles.pm_per_1l_air(2.5) - pm100 - pm50
-        pm10  = particles.pm_per_1l_air(1.0) - pm100 - pm50 - pm25
-        pm5   = particles.pm_per_1l_air(0.5) - pm100 - pm50 - pm25 - pm10
-        pm3   = particles.pm_per_1l_air(0.3) - pm100 - pm50 - pm25 - pm10 - pm5
+        # pm100 = particles.pm_per_1l_air(10.0)
+        # pm50  = particles.pm_per_1l_air(5.0) - pm100
+        # pm25  = particles.pm_per_1l_air(2.5) - pm100 - pm50
+        # pm10  = particles.pm_per_1l_air(1.0) - pm100 - pm50 - pm25
+        # pm5   = particles.pm_per_1l_air(0.5) - pm100 - pm50 - pm25 - pm10
+        # pm3   = particles.pm_per_1l_air(0.3) - pm100 - pm50 - pm25 - pm10 - pm5
+
+        pm100 = particles.pm_ug_per_m3(10.0)
+        pm50  = particles.pm_ug_per_m3(5.0) - pm100
+        pm25  = particles.pm_ug_per_m3(2.5) - pm100 - pm50
+        pm10  = particles.pm_ug_per_m3(1.0) - pm100 - pm50 - pm25
+        pm5   = particles.pm_ug_per_m3(0.5) - pm100 - pm50 - pm25 - pm10
+        pm3   = particles.pm_ug_per_m3(0.3) - pm100 - pm50 - pm25 - pm10 - pm5
+
     else:
         pm100 = pm50 = pm25 = pm10 = pm5 = pm3 = 0
 
