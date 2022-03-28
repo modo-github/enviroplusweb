@@ -406,10 +406,10 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
 .theme-dark .container-readings table {
   background-color: var(--color-gray-darker);
 }
-.container-readings tr:nth-child(even) {
+.container-readings :not(.scale-factors) tr:nth-child(even) {
   color: var(--color-gray-dark);
 }
-.theme-dark .container-readings tr:nth-child(even) {
+.theme-dark .container-readings :not(.scale-factors) tr:nth-child(even) {
   color: var(--color-gray-lighter);
 }
 .container-readings table span[id]{

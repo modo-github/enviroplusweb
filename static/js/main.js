@@ -167,7 +167,7 @@ function listScaleFactors(item) {
   var itemIdKey = document.getElementById(item.name + '-scale');
   var itemValue = (item.max - item.min);
   if (typeof itemIdKey != "undefined" && itemIdKey != null) {
-    itemIdKey.innerHTML = itemValue;
+    itemIdKey.innerHTML = '/' + itemValue;
   }
 }
 
