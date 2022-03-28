@@ -199,7 +199,7 @@ function graph(d) {
   ctx = canvas.getContext("2d");
   // Color of the graph labels
   ctx.fillStyle = hasThemeLight
-    ? style.getPropertyValue("--color-dust10")
+    ? style.getPropertyValue("--color-gray-dark")
     : style.getPropertyValue("--color-gray-dark");
   ctx.font = "20 pt Verdana";
 
@@ -251,7 +251,7 @@ function graph(d) {
       // Color of vertical grid lines
       if (hasThemeLight) {
         ctx.strokeStyle = is_major
-          ? style.getPropertyValue("--color-gray-darker")
+          ? style.getPropertyValue("--color-gray-dark")
           : style.getPropertyValue("--color-gray");
       } else {
         ctx.strokeStyle = is_major
