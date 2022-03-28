@@ -62,18 +62,6 @@ const items_g = [
 ];
 const items_p = [
   {
-    name: "pm03",
-    colour: style.getPropertyValue("--color-dust03"),
-    min: 0,
-    max: 20000,
-  },
-  {
-    name: "pm05",
-    colour: style.getPropertyValue("--color-dust05"),
-    min: 0,
-    max: 10000,
-  },
-  {
     name: "pm10",
     colour: style.getPropertyValue("--color-dust10"),
     min: 0,
@@ -84,12 +72,6 @@ const items_p = [
     colour: style.getPropertyValue("--color-dust25"),
     min: 0,
     max: 500,
-  },
-  {
-    name: "pm50",
-    colour: style.getPropertyValue("--color-dust50"),
-    min: 0,
-    max: 200,
   },
   {
     name: "pm100",

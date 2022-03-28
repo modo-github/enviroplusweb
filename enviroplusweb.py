@@ -198,15 +198,13 @@ def read_data(time):
         # pm5   = particles.pm_per_1l_air(0.5) - pm100 - pm50 - pm25 - pm10
         # pm3   = particles.pm_per_1l_air(0.3) - pm100 - pm50 - pm25 - pm10 - pm5
 
-        pm100 = particles.pm_ug_per_m3(10.0)
-        pm50  = particles.pm_ug_per_m3(5.0) - pm100
-        pm25  = particles.pm_ug_per_m3(2.5) - pm100 - pm50
-        pm10  = particles.pm_ug_per_m3(1.0) - pm100 - pm50 - pm25
-        pm5   = particles.pm_ug_per_m3(0.5) - pm100 - pm50 - pm25 - pm10
-        pm3   = particles.pm_ug_per_m3(0.3) - pm100 - pm50 - pm25 - pm10 - pm5
+        pm100 = particles.pm_ug_per_m3(10)
+        pm25  = particles.pm_ug_per_m3(2.5)
+        pm10  = particles.pm_ug_per_m3(1.0)
 
     else:
-        pm100 = pm50 = pm25 = pm10 = pm5 = pm3 = 0
+        # pm100 = pm50 = pm25 = pm10 = pm5 = pm3 = 0
+        pm100 = pm25 = pm10 = 0
 
     record = {
         'time' : asctime(localtime(time)),
@@ -217,11 +215,11 @@ def read_data(time):
         'oxi'  : oxi,
         'red'  : red,
         'nh3'  : nh3,
-        'pm03' : pm3,
-        'pm05' : pm5,
+        # 'pm03' : pm3,
+        # 'pm05' : pm5,
         'pm10' : pm10,
         'pm25' : pm25,
-        'pm50' : pm50,
+        # 'pm50' : pm50,
         'pm100': pm100,
     }
     return record
