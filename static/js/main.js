@@ -251,7 +251,7 @@ function graph(d) {
       // Color of vertical grid lines
       if (hasThemeLight) {
         ctx.strokeStyle = is_major
-          ? style.getPropertyValue("--color-dust03")
+          ? style.getPropertyValue("--color-gray-darker")
           : style.getPropertyValue("--color-gray");
       } else {
         ctx.strokeStyle = is_major
