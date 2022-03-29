@@ -51,9 +51,10 @@ except ImportError:
     from smbus import SMBus
 
 bus = SMBus(1)
-bme280 = BME280(i2c_dev=bus) # BME280 temperature, humidity and pressure sensor
-
-pms5003 = PMS5003() # PMS5003 particulate sensor
+# BME280 temperature, humidity and pressure sensor
+bme280 = BME280(i2c_dev=bus)
+# PMS5003 particulate sensor
+pms5003 = PMS5003()
 
 # Config the fan plugged to RPi
 if fan_gpio:
@@ -70,7 +71,7 @@ if temp_humi_compensation:
             temp = int(temp) / 1000.0
         return temp
 
-    # Tuning factor for compensation the temperature and humidity
+    # Tuning factor for compensate the temperature and humidity
     factor_temp = 3.10
     factor_humi = 1.26
 
@@ -170,17 +171,14 @@ def read_data(time):
         oxi_base = 20000
         oxi_raw = round(gases.oxidising, 0)
         oxi = round(math.pow(10, math.log10(oxi_raw/oxi_base) - 0.8129), 2)
-        # oxi = round(gases.oxidising / 1000, 1)
 
         red_base = 200000
         red_raw = round(gases.reducing, 0)
         red = round(math.pow(10, -1.25 * math.log10(red_raw/red_base) + 0.64), 2)
-        # red = round(gases.reducing / 1000)
 
         nh3_raw = round(gases.nh3, 0)
         nh3_base = 750000
         nh3 = round(math.pow(10, -1.8 * math.log10(nh3_raw/nh3_base) - 0.163), 2)
-        # nh3 = round(gases.nh3 / 1000)
     else:
         oxi = red = nh3 = 0
 
