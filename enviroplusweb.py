@@ -214,7 +214,8 @@ def read_data(time):
     }
     return record
 
-record = read_data(time()) # Throw away the first readings as not accurate
+# Throw away the first readings as not accurate
+record = read_data(time())
 data = []
 days = []
 
@@ -239,14 +240,17 @@ def record_time(r):
     t = r['time'].split()[3].split(':')
     return int(t[0]) * 60 + int(t[1])
 
-samples = 300 # Number of 1 second samples average per file record
+# Number of 1 second samples average per file record
+samples = 300
 samples_per_day = 24 * 3600 // samples
 
 def add_record(day, record):
-    if record_time(record) > 0:  # If not the first record of the day
+    # If not the first record of the day
+    if record_time(record) > 0:
         while len(day) == 0 or record_time(day[-1]) < record_time(record) - samples // 60: # Is there a gap
             if len(day):
-                filler = dict(day[-1]) # Duplicate the last record to forward fill
+                # Duplicate the last record to forward fill
+                filler = dict(day[-1])
                 t = record_time(filler) + samples // 60
             else:
                 filler = dict(record) # Need to back fill
@@ -264,8 +268,10 @@ def background():
     while run_flag:
         t = int(floor(time()))
         record = read_data(t)
-        data = data[-(samples - 1):] + [record] # Keep five minutes
-        if t % samples == samples - 1 and len(data) == samples: # At the end of a 5 minute period?
+        # Keep five minutes
+        data = data[-(samples - 1):] + [record]
+        # At the end of a 5 minute period?
+        if t % samples == samples - 1 and len(data) == samples:
             totals = sum_data(data)
             fname = filename(t - (samples - 1))
             with open(fname, "a+") as f:
@@ -274,7 +280,8 @@ def background():
             if not days or (last_file and last_file != fname):
                 days.append([])
             last_file = fname
-            add_record(days[-1], totals)        # Add to today, filling any gap from last reading if been stopped
+            # Add to today, filling any gap from last reading if been stopped
+            add_record(days[-1], totals)
         if lcd_screen and days:
             display_everything()
         sleep(max(t + 1 - time(), 0.1))
