@@ -103,7 +103,7 @@ if lcd_screen:
 
     units = ["°C",
             "%",
-            "mBar",
+            "hPa",
             "Lux"]
 
     if gas_sensor:
