@@ -44,8 +44,8 @@ const items_g = [
   {
     name: "nh3",
     colour: style.getPropertyValue("--color-violet"),
-    min: 0,
-    max: 100,
+    min: 1,
+    max: 300,
   },
   {
     name: "oxi",
@@ -56,8 +56,8 @@ const items_g = [
   {
     name: "red",
     colour: style.getPropertyValue("--color-orange"),
-    min: 0,
-    max: 100,
+    min: 1,
+    max: 1000,
   }
 ];
 const items_p = [
