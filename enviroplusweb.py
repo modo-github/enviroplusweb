@@ -107,9 +107,9 @@ if lcd_screen:
 
     if gas_sensor:
         units += [
-            "kΩ",
-            "kΩ",
-            "kΩ"]
+            "ppm",
+            "ppm",
+            "ppm"]
 
     if particulate_sensor:
         units += [
