@@ -166,7 +166,12 @@ def read_data(time):
     if gas_sensor:
         gases = gas.read_all()
 
-        # Change Ohms to PPM
+        # Readings in kΩ
+        # oxi = round(gases.oxidising / 1000, 1)
+        # red = round(gases.reducing / 1000)
+        # nh3 = round(gases.nh3 / 1000)
+
+        # Readings in ppm
         # https://forums.pimoroni.com/t/enviro-ohms-to-ppm/12207/6
         oxi_base = 20000
         oxi_raw = round(gases.oxidising, 0)
