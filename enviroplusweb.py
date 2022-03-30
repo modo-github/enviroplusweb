@@ -172,7 +172,7 @@ def read_data(time):
         # nh3 = round(gases.nh3 / 1000)
 
         # Readings in ppm
-        # https://forums.pimoroni.com/t/enviro-ohms-to-ppm/12207/6
+        # https://community.openhab.org/t/diy-weather-station-w-enviro-mics6814-converting-ohms-to-ppm/85923/18
         oxi_base = 20000
         oxi_raw = round(gases.oxidising, 0)
         oxi = round(math.pow(10, math.log10(oxi_raw/oxi_base) - 0.8129), 2)
