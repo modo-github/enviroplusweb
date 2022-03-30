@@ -101,7 +101,7 @@ Add a new entry at the very bottom with `@reboot` to specify that you want to ru
 
 ### Where are my data readings?
 
-Depends on where you run `enviroplusweb.py`. By default your data will be stored in the same place where you have the application, in a JSON format inside a folder called `/data`.  
+Depends on where you run `enviroplusweb.py`. By default your data will be stored in the same place where you have the application, in a JSON format inside a folder called `/enviro-data`.  
 But if you run the app at bootup (for example, using the _crontab_) then your folder `/data` will be at root.
 
 ### How can I get my Raspberry Pi IP?
