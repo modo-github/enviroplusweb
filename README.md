@@ -9,6 +9,8 @@ This simple Flask application serves a web page with the current sensor readings
 
 Forked from <https://github.com/nophead/EnviroPlusWeb>
 
+⚠️ Enviro readings must not be relied upon for critical applications.
+
 ## 📖 User guide
 
 ### Install
