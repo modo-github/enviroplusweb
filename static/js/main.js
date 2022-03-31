@@ -272,7 +272,6 @@ function graph(d) {
   ctx.stroke();
 
   // Plot each item
-  // var scaleFactors = "";
   var items = particulate_sensor
     ? items_ngp.concat(items_g).concat(items_p)
     : gas_sensor
@@ -282,18 +281,8 @@ function graph(d) {
     ctx.strokeStyle = item.colour;
     plotData(item.name, item.min, item.max);
     listScaleFactors(item);
-    /*
-    scaleFactors +=
-      "<tr><td>" +
-      item.name +
-      "</td><td>/" +
-      (item.max - item.min) +
-      "</td></tr>";
-      */
   }
 
-  // Update the legend (Scale factors)
-  // document.getElementById("scale-factors-tbody").innerHTML = scaleFactors;
 }
 
 // Draw each reading value on the grid
@@ -315,7 +304,6 @@ function plotData(dataSet, min, max) {
 function scaley(y, min, max) {
   return ((y - min) * yScale) / (max - min);
 }
-
 
 // Update the graph layout (width/height) if window resize
 window.addEventListener('resize', function () {
