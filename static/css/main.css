@@ -442,6 +442,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
     padding: 0;
   }
   .container-graph {
+    min-height: 20rem;
     padding-right: 0.5rem;
   }
 }
