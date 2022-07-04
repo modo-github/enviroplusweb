@@ -320,15 +320,15 @@ function scaley(y, min, max) {
   return ((y - min) * yScale) / (max - min);
 }
 
+// Uncheck/check readings to hide/show on graph
 function toggleValue(e) {
   var valueIndex = items_ngp.findIndex(( obj => obj.name == e.name));
   if (!e.checked) {
-    console.log('items_ngp: ', items_ngp);
     items_ngp[valueIndex].active = false;
   } else {
     items_ngp[valueIndex].active = true;
   }
-  getGraph();
+  getGraph(true);
 
 }
 
