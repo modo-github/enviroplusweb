@@ -20,28 +20,24 @@ let items_ngp = [
     colour: style.getPropertyValue("--color-red"),
     min: 0,
     max: 50,
-    active: true,
   },
   {
     name: "humi",
     colour: style.getPropertyValue("--color-blue"),
     min: 0,
     max: 100,
-    active: true,
   },
   {
     name: "pres",
     colour: style.getPropertyValue("--color-green"),
     min: 950,
     max: 1050,
-    active: true,
   },
   {
     name: "lux",
     colour: style.getPropertyValue("--color-yellow"),
     min: 0,
     max: 25000,
-    active: true,
   },
 ];
 let items_g = [
@@ -50,21 +46,18 @@ let items_g = [
     colour: style.getPropertyValue("--color-violet"),
     min: 0,
     max: 600,
-    active: true,
   },
   {
     name: "oxi",
     colour: style.getPropertyValue("--color-turquoise"),
     min: 0,
     max: 400,
-    active: true,
   },
   {
     name: "red",
     colour: style.getPropertyValue("--color-orange"),
     min: 0,
     max: 1000,
-    active: true,
   }
 ];
 let items_p = [
@@ -73,28 +66,25 @@ let items_p = [
     colour: style.getPropertyValue("--color-dust10"),
     min: 0,
     max: 750,
-    active: true,
   },
   {
     name: "pm25",
     colour: style.getPropertyValue("--color-dust25"),
     min: 0,
     max: 750,
-    active: true,
   },
   {
     name: "pm100",
     colour: style.getPropertyValue("--color-dust100"),
     min: 0,
     max: 750,
-    active: true,
   },
 ];
 var items = particulate_sensor
-? items_ngp.concat(items_g).concat(items_p)
-: gas_sensor
-  ? items_ngp.concat(items_g)
-  : items_ngp;
+  ? items_ngp.concat(items_g).concat(items_p)
+  : gas_sensor
+    ? items_ngp.concat(items_g)
+    : items_ngp;
 var firstLayoutRender = true;
 var containerCanvas;
 var canvas;
@@ -103,7 +93,7 @@ var dataGraph;
 var dataReadings;
 const yScaleSteps = 10;
 const yLabelHeight = 10;
-const xLabelHeight = 15;
+const xLabelHeight = 20;
 var xScale;
 var yScale;
 const yLabelWidth = 25;
@@ -289,7 +279,8 @@ function graph(d) {
   // Plot each item
   for (var item of items) {
     ctx.strokeStyle = item.colour;
-     if (document.getElementsByName(item.name)[0].checked) {
+    // Plot only items with checkbox checked
+    if (document.getElementsByName(item.name)[0].checked) {
       plotData(item.name, item.min, item.max);
     }
     listScaleFactors(item);
