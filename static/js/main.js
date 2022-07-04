@@ -14,70 +14,80 @@ var last_graph = 0;
 var hasThemeLight = body.classList.contains("theme-light");
 const style = getComputedStyle(document.body);
 // All colors values are declared at main.css
-const items_ngp = [
+let items_ngp = [
   {
     name: "temp",
     colour: style.getPropertyValue("--color-red"),
     min: 0,
     max: 50,
+    active: true,
   },
   {
     name: "humi",
     colour: style.getPropertyValue("--color-blue"),
     min: 0,
     max: 100,
+    active: true,
   },
   {
     name: "pres",
     colour: style.getPropertyValue("--color-green"),
     min: 950,
     max: 1050,
+    active: true,
   },
   {
     name: "lux",
     colour: style.getPropertyValue("--color-yellow"),
     min: 0,
     max: 25000,
+    active: true,
   },
 ];
-const items_g = [
+let items_g = [
   {
     name: "nh3",
     colour: style.getPropertyValue("--color-violet"),
     min: 0,
     max: 600,
+    active: true,
   },
   {
     name: "oxi",
     colour: style.getPropertyValue("--color-turquoise"),
     min: 0,
     max: 400,
+    active: true,
   },
   {
     name: "red",
     colour: style.getPropertyValue("--color-orange"),
     min: 0,
     max: 1000,
+    active: true,
   }
 ];
-const items_p = [
+let items_p = [
   {
     name: "pm10",
     colour: style.getPropertyValue("--color-dust10"),
     min: 0,
     max: 750,
+    active: true,
   },
   {
     name: "pm25",
     colour: style.getPropertyValue("--color-dust25"),
     min: 0,
     max: 750,
+    active: true,
   },
   {
     name: "pm100",
     colour: style.getPropertyValue("--color-dust100"),
     min: 0,
     max: 750,
+    active: true,
   },
 ];
 var firstLayoutRender = true;
@@ -279,7 +289,9 @@ function graph(d) {
       : items_ngp;
   for (var item of items) {
     ctx.strokeStyle = item.colour;
-    plotData(item.name, item.min, item.max);
+    if (item.active) {
+      plotData(item.name, item.min, item.max);
+    }
     listScaleFactors(item);
   }
 
@@ -291,7 +303,7 @@ function plotData(dataSet, min, max) {
   ctx.setLineDash([]);
   y0 = canvas.height - xLabelHeight;
   // Avoid undefined error when dataGraph is empty
-  if(typeof dataGraph[0] !== 'undefined'){
+  if (typeof dataGraph[0] !== 'undefined') {
     ctx.moveTo(yLabelWidth, y0 - scaley(dataGraph[0][dataSet], min, max));
   }
   for (var i = 1; i < dataGraph.length; i++) {
