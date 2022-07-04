@@ -93,7 +93,7 @@ var dataGraph;
 var dataReadings;
 const yScaleSteps = 10;
 const yLabelHeight = 10;
-const xLabelHeight = 20;
+const xLabelHeight = 15;
 var xScale;
 var yScale;
 const yLabelWidth = 30;
@@ -223,7 +223,7 @@ function graph(d) {
     Dec: 11,
   };
   ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
+  ctx.textBaseline = "top";
   for (var i = 0; i < dataGraph.length; i++) {
     var fields = dataGraph[i]["time"].match(/\S+/g); // split is broken!
     var t = fields[3].split(":");
