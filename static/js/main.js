@@ -321,21 +321,13 @@ function scaley(y, min, max) {
 }
 
 function toggleValue(e) {
-  console.log('e', e)
-  /*
-  // Get the checkbox
-  var checkBox = document.getElementById("myCheck");
-  // Get the output text
-  var text = document.getElementById("text");
-
-  // If the checkbox is checked, display the output text
-  if (checkBox.checked == true){
-    text.style.display = "block";
-  } else {
-    text.style.display = "none";
+  var selectedValue = e.name;
+  if (!e.checked) {
+    console.log('selectedValue: ', selectedValue)
+    console.log('items_ngp: ', items_ngp);
   }
-  */
-} 
+
+}
 
 // Update the graph layout (width/height) if window resize
 window.addEventListener('resize', function () {
