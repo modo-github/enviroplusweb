@@ -321,11 +321,15 @@ function scaley(y, min, max) {
 }
 
 function toggleValue(e) {
-  var selectedValue = e.name;
+  var valueIndex = items_ngp.findIndex(( obj => obj.name == e.name));
   if (!e.checked) {
     console.log('selectedValue: ', selectedValue)
     console.log('items_ngp: ', items_ngp);
+    items_ngp[valueIndex].active = false;
+  } else {
+    items_ngp[valueIndex].active = true;
   }
+  getGraph();
 
 }
 
