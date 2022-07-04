@@ -20,7 +20,7 @@ let items_ngp = [
     colour: style.getPropertyValue("--color-red"),
     min: 0,
     max: 50,
-    active: false,
+    active: true,
   },
   {
     name: "humi",
@@ -319,6 +319,23 @@ function plotData(dataSet, min, max) {
 function scaley(y, min, max) {
   return ((y - min) * yScale) / (max - min);
 }
+
+function toggleValue(e) {
+  console.log('e', e)
+  /*
+  // Get the checkbox
+  var checkBox = document.getElementById("myCheck");
+  // Get the output text
+  var text = document.getElementById("text");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+  */
+} 
 
 // Update the graph layout (width/height) if window resize
 window.addEventListener('resize', function () {
