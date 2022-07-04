@@ -289,8 +289,7 @@ function graph(d) {
   // Plot each item
   for (var item of items) {
     ctx.strokeStyle = item.colour;
-    console.log('selector: ', document.getElementsByName(item.name)[0].checked);
-    if (item.active) {
+     if (document.getElementsByName(item.name)[0].checked) {
       plotData(item.name, item.min, item.max);
     }
     listScaleFactors(item);
@@ -319,18 +318,6 @@ function plotData(dataSet, min, max) {
 // Calculate the place on the Y axis between the ranges min/max
 function scaley(y, min, max) {
   return ((y - min) * yScale) / (max - min);
-}
-
-// Uncheck/check readings to hide/show on graph
-function toggleReading(e) {
-  var valueIndex = items.findIndex(( obj => obj.name == e.name));
-  if (!e.checked) {
-    items[valueIndex].active = false;
-  } else {
-    items[valueIndex].active = true;
-  }
-  getGraph(true);
-
 }
 
 // Update the graph layout (width/height) if window resize
