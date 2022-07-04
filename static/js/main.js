@@ -20,7 +20,7 @@ let items_ngp = [
     colour: style.getPropertyValue("--color-red"),
     min: 0,
     max: 50,
-    active: true,
+    active: false,
   },
   {
     name: "humi",

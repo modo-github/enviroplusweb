@@ -53,6 +53,7 @@
   color: var(--color-dust10);
 }
 
+/* Checkbox colors */
 .color-red input[type="checkbox"] {
   background-color: var(--color-red);
   outline: 1px solid var(--color-red);
@@ -518,7 +519,6 @@ body[data-hasParticulateSensor="False"] .readings-pm {
 .container-readings input[type="checkbox"] {
   width: 0.75rem;
   height: 0.75rem;
-  background-color: transparent;
   border-radius: 0.25rem;
   appearance: none;
   -webkit-appearance: none;
