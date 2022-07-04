@@ -90,6 +90,11 @@ let items_p = [
     active: true,
   },
 ];
+var items = particulate_sensor
+? items_ngp.concat(items_g).concat(items_p)
+: gas_sensor
+  ? items_ngp.concat(items_g)
+  : items_ngp;
 var firstLayoutRender = true;
 var containerCanvas;
 var canvas;
@@ -282,11 +287,6 @@ function graph(d) {
   ctx.stroke();
 
   // Plot each item
-  var items = particulate_sensor
-    ? items_ngp.concat(items_g).concat(items_p)
-    : gas_sensor
-      ? items_ngp.concat(items_g)
-      : items_ngp;
   for (var item of items) {
     ctx.strokeStyle = item.colour;
     if (item.active) {
@@ -321,12 +321,12 @@ function scaley(y, min, max) {
 }
 
 // Uncheck/check readings to hide/show on graph
-function toggleValue(e) {
-  var valueIndex = items_ngp.findIndex(( obj => obj.name == e.name));
+function toggleReading(e) {
+  var valueIndex = items.findIndex(( obj => obj.name == e.name));
   if (!e.checked) {
-    items_ngp[valueIndex].active = false;
+    items[valueIndex].active = false;
   } else {
-    items_ngp[valueIndex].active = true;
+    items[valueIndex].active = true;
   }
   getGraph(true);
 
