@@ -223,7 +223,7 @@ function graph(d) {
     Dec: 11,
   };
   ctx.textAlign = "center";
-  ctx.textBaseline = "top";
+  ctx.textBaseline = "bottom";
   for (var i = 0; i < dataGraph.length; i++) {
     var fields = dataGraph[i]["time"].match(/\S+/g); // split is broken!
     var t = fields[3].split(":");
