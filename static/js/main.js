@@ -14,7 +14,7 @@ var last_graph = 0;
 var hasThemeLight = body.classList.contains("theme-light");
 const style = getComputedStyle(document.body);
 // All colors values are declared at main.css
-let items_ngp = [
+const items_ngp = [
   {
     name: "temp",
     colour: style.getPropertyValue("--color-red"),
@@ -40,7 +40,7 @@ let items_ngp = [
     max: 25000,
   },
 ];
-let items_g = [
+const items_g = [
   {
     name: "nh3",
     colour: style.getPropertyValue("--color-violet"),
@@ -60,7 +60,7 @@ let items_g = [
     max: 1000,
   }
 ];
-let items_p = [
+const items_p = [
   {
     name: "pm10",
     colour: style.getPropertyValue("--color-dust10"),
@@ -333,8 +333,8 @@ menuMainBtn.addEventListener("click", function () {
   menuMainContainer.classList.toggle("menu-settings-open");
   // Detect outside click
   document.addEventListener("click", function clickOutsideMenu(event) {
-    let clickMenuContainer = menuMainContainer.contains(event.target);
-    let clickMenuBtn = menuMainBtn.contains(event.target);
+    var clickMenuContainer = menuMainContainer.contains(event.target);
+    var clickMenuBtn = menuMainBtn.contains(event.target);
     if (
       !clickMenuContainer &&
       !clickMenuBtn &&
