@@ -93,10 +93,10 @@ var dataGraph;
 var dataReadings;
 const yScaleSteps = 10;
 const yLabelHeight = 10;
-const xLabelHeight = 20;
+const xLabelHeight = 30;
 var xScale;
 var yScale;
-const yLabelWidth = 25;
+const yLabelWidth = 40;
 const themeLightBtn = document.getElementById("theme-light");
 const themeDarkBtn = document.getElementById("theme-dark");
 
