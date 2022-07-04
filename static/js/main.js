@@ -289,7 +289,7 @@ function graph(d) {
   // Plot each item
   for (var item of items) {
     ctx.strokeStyle = item.colour;
-    console.log('selector: ', document.getElementsByName(item.name));
+    console.log('selector: ', document.getElementsByName(item.name)[0].checked);
     if (item.active) {
       plotData(item.name, item.min, item.max);
     }
