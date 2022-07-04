@@ -506,8 +506,8 @@ body[data-hasParticulateSensor="False"] .readings-pm {
   padding: 0 0 0.5rem 0;
 }
 .container-readings input[type="checkbox"] {
-  width: 1rem;
-  height: 1rem;
+  width: 0.75rem;
+  height: 0.75rem;
   background-color: transparent;
   border-radius: 0.25rem;
   appearance: none;
@@ -516,17 +516,23 @@ body[data-hasParticulateSensor="False"] .readings-pm {
   margin: 0;
   padding: 0;
   cursor: pointer;
+  opacity: 0.5;
 }
 .container-readings input[type="checkbox"] + label {
   cursor: pointer;
+  opacity: 0.5;
 }
 .container-readings input[type="checkbox"]:focus {
   outline: 1px solid #8f8f8f;
 }
 .container-readings input[type="checkbox"]:checked {
-  background: transparent
-    url('data:image/svg+xml,%3Csvg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath fill="%238f8f8f" d="M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z"/%3E%3C/svg%3E')
-    center center no-repeat;
+  background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath fill="%238f8f8f" d="M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.container-readings input[type="checkbox"]:checked,
+.container-readings input[type="checkbox"]:checked + label {
+  opacity: 1;
 }
 .container-readings .scale-factors td {
   text-transform: capitalize;
