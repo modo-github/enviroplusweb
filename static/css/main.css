@@ -434,11 +434,15 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
   .container-readings,
   .container-graph {
     max-height: none;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
   .container-readings {
     overflow: unset;
     margin-right: 0;
+    padding: 0;
+  }
+  .container-graph {
+    padding-right: 0.5rem;
   }
 }
 
