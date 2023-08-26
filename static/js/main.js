@@ -1,4 +1,5 @@
-/* EnviroPlusWeb */
+/** EnviroPlusWeb **/
+/* https://gitlab.com/idotj/enviroplusweb */
 const frequencies = {
   day: { major: 3 * 3600, minor: 3600, poll: 60 },
   week: { major: 24 * 3600, minor: 6 * 3600, poll: 600 },
@@ -46,13 +47,45 @@ const items_ngp = {
     min: 0,
     max: 25000,
   },
+  high: {
+    id: "high",
+    label: "High",
+    unit: "u",
+    color: style.getPropertyValue("--color-noise-high"),
+    min: 0,
+    max: 300,
+  },
+  mid: {
+    id: "mid",
+    label: "Mid",
+    unit: "u",
+    color: style.getPropertyValue("--color-noise-mid"),
+    min: 0,
+    max: 300,
+  },
+  low: {
+    id: "low",
+    label: "Low",
+    unit: "u",
+    color: style.getPropertyValue("--color-noise-low"),
+    min: 0,
+    max: 300,
+  },
+  amp: {
+    id: "amp",
+    label: "Amp",
+    unit: "u",
+    color: style.getPropertyValue("--color-noise-amp"),
+    min: 0,
+    max: 300,
+  },
 };
 const items_gas = {
   nh3: {
     id: "nh3",
     label: "NH3",
     unit: "kΩ",
-    color: style.getPropertyValue("--color-violet"),
+    color: style.getPropertyValue("--color-olive"),
     min: 0,
     max: 600,
   },
@@ -68,7 +101,7 @@ const items_gas = {
     id: "oxi",
     label: "Oxidising",
     unit: "kΩ",
-    color: style.getPropertyValue("--color-orange"),
+    color: style.getPropertyValue("--color-violet"),
     min: 0,
     max: 1000,
   },
@@ -80,7 +113,7 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust10"),
     min: 0,
-    max: 750,
+    max: 800,
   },
   pm25: {
     id: "pm25",
@@ -88,7 +121,7 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust25"),
     min: 0,
-    max: 750,
+    max: 800,
   },
   pm100: {
     id: "pm100",
@@ -96,7 +129,7 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust100"),
     min: 0,
-    max: 750,
+    max: 800,
   },
 };
 let items;
@@ -119,12 +152,14 @@ const ctxTemp = document.getElementById("graphChartTemp");
 const ctxHumi = document.getElementById("graphChartHumi");
 const ctxPres = document.getElementById("graphChartPres");
 const ctxLux = document.getElementById("graphChartLux");
+const ctxNoise = document.getElementById("graphChartNoise");
 const ctxGas = document.getElementById("graphChartGas");
 const ctxPm = document.getElementById("graphChartPm");
 let graphChartTemp;
 let graphChartHumi;
 let graphChartPres;
 let graphChartLux;
+let graphChartNoise;
 let graphChartGas;
 let graphChartPm;
 
@@ -146,7 +181,7 @@ function getData() {
   xhttp.send();
 }
 
-// Show live readings data in readings tables
+// Show live readings in
 function listReadings(d) {
   dataReadings = d;
   for (let i = 0; i < Object.keys(dataReadings).length; i++) {
@@ -176,7 +211,7 @@ function getGraph() {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        // console.log('getGraph(): ', JSON.parse(this.responseText));
+        console.log("getGraph(): ", JSON.parse(this.responseText));
         transformedData = JSON.parse(this.responseText).map((element) => {
           return {
             // Normalize data for the graph
@@ -185,6 +220,10 @@ function getGraph() {
             humi: element.humi,
             pres: element.pres,
             lux: element.lux,
+            high: element.high,
+            mid: element.mid,
+            low: element.low,
+            amp: element.amp,
             nh3: element.nh3,
             red: element.red,
             oxi: element.oxi,
@@ -214,6 +253,7 @@ function destroyAllCharts() {
   graphChartHumi.destroy();
   graphChartPres.destroy();
   graphChartLux.destroy();
+  graphChartNoise.destroy();
   if (gas_sensor) graphChartGas.destroy();
   if (particulate_sensor) graphChartPm.destroy();
 }
@@ -461,7 +501,113 @@ function drawGraph(data) {
     },
   });
 
-graphChartGas = new Chart(ctxGas, {
+  graphChartNoise = new Chart(ctxNoise, {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          label: items.high.id,
+          data: data,
+          parsing: {
+            yAxisKey: items.high.id,
+          },
+          yAxisID: "y",
+          borderColor: items.high.color,
+          borderWidth: 2,
+          pointBackgroundColor: items.high.color,
+          pointRadius: 1,
+        },
+        {
+          label: items.mid.id,
+          data: data,
+          parsing: {
+            yAxisKey: items.mid.id,
+          },
+          yAxisID: "y1",
+          borderColor: items.mid.color,
+          borderWidth: 2,
+          pointBackgroundColor: items.mid.color,
+          pointRadius: 1,
+        },
+        {
+          label: items.low.id,
+          data: data,
+          parsing: {
+            yAxisKey: items.low.id,
+          },
+          yAxisID: "y2",
+          borderColor: items.low.color,
+          borderWidth: 2,
+          pointBackgroundColor: items.low.color,
+          pointRadius: 1,
+        },
+        {
+          label: items.amp.id,
+          data: data,
+          parsing: {
+            yAxisKey: items.amp.id,
+          },
+          yAxisID: "y3",
+          borderColor: items.amp.color,
+          borderWidth: 2,
+          pointBackgroundColor: items.amp.color,
+          pointRadius: 1,
+        },
+      ],
+    },
+    options: {
+      bezierCurve: true,
+      tension: 0.1,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          min: items.high.min,
+          max: items.high.max,
+          ticks: {
+            callback: function (value) {
+              return value + " " + items.high.unit;
+            },
+          },
+        },
+        y1: {
+          min: items.high.min,
+          max: items.high.max,
+          display: false,
+        },
+        y2: {
+          min: items.high.min,
+          max: items.high.max,
+          display: false,
+        },
+        y3: {
+          min: items.high.min,
+          max: items.high.max,
+          display: false,
+        },
+        x: {
+          type: "time",
+          time: {
+            unit: graphfrequency,
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      parsing: {
+        xAxisKey: "time",
+      },
+      animation: {
+        onComplete: function () {
+          ctxNoise.classList.remove("loading-spinner");
+        },
+      },
+    },
+  });
+
+  graphChartGas = new Chart(ctxGas, {
     type: "line",
     data: {
       datasets: [
@@ -518,9 +664,13 @@ graphChartGas = new Chart(ctxGas, {
           },
         },
         y1: {
+          min: items.red.min,
+          max: items.red.max,
           display: false,
         },
         y2: {
+          min: items.oxi.min,
+          max: items.oxi.max,
           display: false,
         },
         x: {
@@ -680,7 +830,7 @@ setInterval(function () {
   getGraph();
 }, 900); // ~1s update rate
 
-window.addEventListener("resize", function(){
+window.addEventListener("resize", function () {
   destroyAllCharts();
   drawGraph(transformedData);
 });

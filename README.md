@@ -124,33 +124,35 @@ GNU General Public License v3.0
 
 ## 💬 FAQ
 
-### Where are my data readings saved?
+- ### Where are my data readings saved?
 
-Depends on where you run `enviroplusweb.py`. By default your data will be stored in the same place where you have the application, in a JSON format inside a folder called `/enviro-data`.  
-But if you run the app at bootup (for example, using the _crontab_) then your folder `/enviro-data` will be at `/home/pi` (if your default user is 'pi').
+  Depends on where you run `enviroplusweb.py`. By default your data will be stored in the same place where you have the application, in a JSON format inside a folder called `/enviro-data`.  
+  But if you run the app at bootup (for example, using the _crontab_) then your folder `/enviro-data` will be at `/home/pi` (if your default user is 'pi').
 
-### How can I get my Raspberry Pi IP?
+- ### How can I get my Raspberry Pi IP?
 
-Enter `hostname -I` in a Terminal window on your Raspberry Pi, then you will see the IPv4 and the IPv6.
+  Enter `hostname -I` in a Terminal window on your Raspberry Pi, then you will see the IPv4 and the IPv6.
 
-### My Raspberry Pi is running other services at localhost
+- ### My graphs looks empty, doesn't draw any line, but readings of each sensor appear in the header
 
-You can change the port to avoid any conflict with other applications. In that case edit the file `enviroplusweb.py` and find at the end this line:
+  You need to wait to have some data recorded in your Raspberry Pi. If you just run the app for first time, give it a few hours. 
 
-```python
-app.run(debug = False, host = '0.0.0.0', port = 80, use_reloader = False)
-```
+- ### My Raspberry Pi is running other services at localhost
 
-Just change the `port = 80` value for another number (for example `81`) and now you can access to your EnviroPlusWeb typing the ip address followed by :81
+  You can change the port to avoid any conflict with other applications. In that case edit the file `enviroplusweb.py` and find at the end this line:
 
-### I want to run my EnviroPlusWeb under HTTPS
+  ```python
+  app.run(debug = False, host = '0.0.0.0', port = 80, use_reloader = False)
+  ```
 
-By default you use HTTP to connect to your Raspberry Pi through your browser, but some browsers will redirect automatically to HTTPS. If you prefer to have your project running under HTTPS here you have a tutorial explaning how to setup Flask with HTTPS:
+  Just change the `port = 80` value for another number (for example `81`) and now you can access to your EnviroPlusWeb typing the ip address followed by :81
 
-https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https
+- ### I want to run my EnviroPlusWeb under HTTPS
+
+  By default you use HTTP to connect to your Raspberry Pi through your browser, but some browsers will redirect automatically to HTTPS. If you prefer to have your project running under HTTPS here you have a tutorial explaning how to setup Flask with HTTPS:  
+  <https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https>
 
 ### Other answered questions
 
 Check the [closed issues](https://gitlab.com/idotj/enviroplusweb/-/issues/?sort=created_date&state=closed&first_page_size=20), you might find your question there.  
 If nothing matches with your problem, check the [open issues](https://gitlab.com/idotj/enviroplusweb/-/issues/?sort=created_date&state=opened&first_page_size=20) or feel free to create a new one.
-

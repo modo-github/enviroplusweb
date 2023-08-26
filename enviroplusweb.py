@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #
+# Git repo <https://gitlab.com/idotj/enviroplusweb>
 # Forked from <https://github.com/nophead/EnviroPlusWeb>
 #
 # EnviroPlusWeb is free software: you can redistribute it and/or modify it under the terms of the
@@ -33,6 +34,7 @@ try:
 except ImportError:
     import ltr559
 from enviroplus import gas
+from enviroplus.noise import Noise
 from pms5003 import PMS5003, ReadTimeoutError as pmsReadTimeoutError
 import threading
 from time import sleep, time, asctime, localtime, strftime, gmtime
@@ -55,6 +57,8 @@ bus = SMBus(1)
 bme280 = BME280(i2c_dev=bus)
 # PMS5003 particulate sensor
 pms5003 = PMS5003()
+# Noise sensor
+noise = Noise()
 
 # Config the fan plugged to RPi
 if fan_gpio:
@@ -104,7 +108,11 @@ if lcd_screen:
     units = ["°C",
             "%",
             "hPa",
-            "Lux"]
+            "Lux",
+            "u",
+            "u",
+            "u",
+            "u"]
 
     if gas_sensor:
         units += [
@@ -162,6 +170,12 @@ def read_data(time):
 
     pressure = bme280.get_pressure()
     lux = ltr559.get_lux()
+    low, mid, high, amp = noise.get_noise_profile()
+    low *= 128
+    mid *= 128
+    high *= 128
+    amp *= 64
+
 
     if gas_sensor:
         gases = gas.read_all()
@@ -194,6 +208,10 @@ def read_data(time):
         'humi' : round(humidity,1),
         'pres' : round(pressure,1),
         'lux'  : round(lux),
+        'high' : round(high,2),
+        'mid'  : round(mid,2),
+        'low'  : round(low,2),
+        'amp'  : round(amp,2),        
         'oxi'  : oxi,
         'red'  : red,
         'nh3'  : nh3,
