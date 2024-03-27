@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #
+# Git repo <https://gitlab.com/idotj/enviroplusweb>
 # Forked from <https://github.com/nophead/EnviroPlusWeb>
 #
 # EnviroPlusWeb is free software: you can redistribute it and/or modify it under the terms of the
@@ -210,7 +211,7 @@ data = []
 days = []
 
 def filename(t):
-    return strftime("data/%Y_%j", localtime(t))
+    return strftime("enviro-data/%Y_%j", localtime(t))
 
 def sum_data(data):
     totals = {"time" : data[0]["time"]}
@@ -322,14 +323,14 @@ def read_day(fname):
     return day
 
 if __name__ == '__main__':
-    if not os.path.isdir('data'):
-        os.makedirs('data')
-    files =  sorted(os.listdir('data'))
+    if not os.path.isdir('enviro-data'):
+        os.makedirs('enviro-data')
+    files =  sorted(os.listdir('enviro-data'))
     for f in files:
-        days.append(read_day('data/' + f))
+        days.append(read_day('enviro-data/' + f))
     background_thread.start()
     try:
-        app.run(debug = False, host = '0.0.0.0', port = 81, use_reloader = False)
+        app.run(debug = False, host = '0.0.0.0', port = 80, use_reloader = False)
     except Exception as e:
         print(e)
         pass
