@@ -6,9 +6,9 @@ const frequencies = {
   month: { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
   year: { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 },
 };
-const gas_sensor = body.dataset.hasgassensor;
-const particulate_sensor = body.dataset.hasparticulatesensor;
-const fan_gpio = body.dataset.hasfangpio;
+const gas_sensor = ((body.dataset.hasgassensor).toLowerCase() === "true");
+const particulate_sensor = ((body.dataset.hasparticulatesensor).toLowerCase() === "true");
+const fan_gpio = ((body.dataset.hasfangpio).toLowerCase() === "true");
 let hasThemeLight = body.classList.contains("theme-light");
 const themeLightBtn = document.getElementById("theme-light");
 const themeDarkBtn = document.getElementById("theme-dark");
@@ -824,13 +824,14 @@ menuMainBtn.addEventListener("click", function () {
   });
 });
 
-// Call a function repetitively with 1 second interval
-setInterval(function () {
-  getData();
-  getGraph();
-}, 900); // ~1s update rate
-
+// Redraw graphs on window resize
 window.addEventListener("resize", function () {
   destroyAllCharts();
   drawGraph(transformedData);
 });
+
+// Call a function repetitively with ~1 second interval
+setInterval(function () {
+  getData();
+  getGraph();
+}, 900);

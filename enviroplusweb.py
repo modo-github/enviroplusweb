@@ -59,6 +59,8 @@ bme280 = BME280(i2c_dev=bus)
 pms5003 = PMS5003()
 # Noise sensor
 noise = Noise()
+# Folder to save the readings
+app_data = 'enviro-data'
 
 # Config the fan plugged to RPi
 if fan_gpio:
@@ -70,7 +72,7 @@ if fan_gpio:
 if temp_humi_compensation:
     # Get the temperature of the CPU
     def get_cpu_temperature():
-        with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
+        with open('/sys/class/thermal/thermal_zone0/temp', 'r') as f:
             temp = f.read()
             temp = int(temp) / 1000.0
         return temp
@@ -100,33 +102,33 @@ if lcd_screen:
     img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    path = os.path.dirname(os.path.realpath(__file__)) + "/static/fonts"
-    smallfont = ImageFont.truetype(path + "/asap/Asap-Bold.ttf", 10)
+    path = os.path.dirname(os.path.realpath(__file__)) + '/static/fonts'
+    smallfont = ImageFont.truetype(path + '/asap/Asap-Bold.ttf', 10)
     x_offset = 2
     y_offset = 2
 
-    units = ["°C",
-            "%",
-            "hPa",
-            "Lux",
-            "u",
-            "u",
-            "u",
-            "u"]
+    units = ['°C',
+            '%',
+            'hPa',
+            'Lux',
+            'u',
+            'u',
+            'u',
+            'u']
 
     if gas_sensor:
         units += [
-            "kΩ",
-            "kΩ",
-            "kΩ"]
+            'kΩ',
+            'kΩ',
+            'kΩ']
 
     if particulate_sensor:
         units += [
-            "μg/m3",
-            "μg/m3",
-            "μg/m3"]
+            'μg/m3',
+            'μg/m3',
+            'μg/m3']
 
-    # Displays all the text on the 0.96" LCD
+    # Displays all the text on the 0.96' LCD
     def display_everything():
         draw.rectangle((0, 0, WIDTH, HEIGHT), (0, 0, 0))
         column_count = 2
@@ -140,7 +142,7 @@ if lcd_screen:
             unit = units[i]
             x = x_offset + (WIDTH // column_count) * (i // row_count)
             y = y_offset + (HEIGHT // row_count) * (i % row_count)
-            message = "{}: {:s} {}".format(variable[:4], str(data_value), unit)
+            message = '{}: {:s} {}'.format(variable[:4], str(data_value), unit)
             tol = 1.01
             rgb = (255, 0, 255) if data_value > last_value * tol  else (0, 255, 255) if data_value < last_value / tol else (0, 255, 0)
             draw.text((x, y), message, font = smallfont, fill = rgb)
@@ -148,7 +150,7 @@ if lcd_screen:
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-log = logging.getLogger("werkzeug")
+log = logging.getLogger('werkzeug')
 log.disabled = True
 run_flag = True
 
@@ -191,7 +193,7 @@ def read_data(time):
                 particles = pms5003.read()
                 break
             except RuntimeError as e:
-                print("Particle read failed:", e.__class__.__name__)
+                print('Particle read failed: ', e.__class__.__name__)
                 if not run_flag:
                     raise e
                 pms5003.reset()
@@ -227,12 +229,12 @@ data = []
 days = []
 
 def filename(t):
-    return strftime("enviro-data/%Y_%j", localtime(t))
+    return strftime(app_data + '/%Y_%j', localtime(t))
 
 def sum_data(data):
-    totals = {"time" : data[0]["time"]}
+    totals = {'time' : data[0]['time']}
     keys = list(data[0].keys())
-    keys.remove("time")
+    keys.remove('time')
     for key in keys:
         totals[key] = 0
     for d in data:
@@ -262,9 +264,9 @@ def add_record(day, record):
             else:
                 filler = dict(record) # Need to back fill
                 t = 0                 # Only happens if the day is empty so most be the first entry
-            old_time = filler["time"] # Need to fix the time field
+            old_time = filler['time'] # Need to fix the time field
             colon_pos = old_time.find(':')
-            filler["time"] = old_time[:colon_pos - 2] + ("%02d:%02d" % (t / 60, t % 60)) + old_time[colon_pos + 3:]
+            filler['time'] = old_time[:colon_pos - 2] + ('%02d:%02d' % (t / 60, t % 60)) + old_time[colon_pos + 3:]
             day.append(filler)
     day.append(record)
 
@@ -281,7 +283,7 @@ def background():
         if t % samples == samples - 1 and len(data) == samples:
             totals = sum_data(data)
             fname = filename(t - (samples - 1))
-            with open(fname, "a+") as f:
+            with open(fname, 'a+') as f:
                 f.write(json.dumps(totals) + '\n')
             # Handle new day
             if not days or (last_file and last_file != fname):
@@ -302,7 +304,7 @@ def index():
 @app.route('/readings')
 def readings():
     if fan_gpio:
-        arg = request.args["fan"]
+        arg = request.args['fan']
         pwm.ChangeDutyCycle(int(arg))
     return record
 
@@ -320,7 +322,7 @@ def compress_data(ndays, nsamples):
 # 365 @ 1d = 1y
 @app.route('/graph')
 def graph():
-    arg = request.args["time"]
+    arg = request.args['time']
     if arg == 'day':
         last2 = []
         for day in days[-2:]:
@@ -336,7 +338,7 @@ def graph():
 
 def read_day(fname):
     day = []
-    print("reading " + fname)
+    print('reading ' + fname)
     with open(fname, 'r') as f:
         for line in f.readlines():
             record = json.loads(line)
@@ -344,16 +346,16 @@ def read_day(fname):
     return day
 
 if __name__ == '__main__':
-    if not os.path.isdir('enviro-data'):
-        os.makedirs('enviro-data')
-    files =  sorted(os.listdir('enviro-data'))
+    if not os.path.isdir(app_data):
+        os.makedirs(app_data)
+    files =  sorted(os.listdir(app_data))
     for f in files:
-        days.append(read_day('enviro-data/' + f))
+        days.append(read_day(app_data + '/' + f))
     background_thread.start()
     try:
         app.run(debug = False, host = '0.0.0.0', port = 80, use_reloader = False)
     except Exception as e:
         print(e)
     run_flag = False
-    print("Waiting for background to quit")
+    print('Waiting for background to quit')
     background_thread.join()
