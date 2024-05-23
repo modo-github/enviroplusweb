@@ -14,143 +14,216 @@ Forked from <https://github.com/nophead/EnviroPlusWeb>
 
 ## 📖 User guide
 
-### Install
+### Install (tested on Raspberry Pi OS Bullseye and Bookworm)
 
-To use the Enviro board, you’ll need to install its Python library.  
-Open a Terminal window and enter the following commands:
+To start with, open your terminal and install the necessary dependencies in your Raspberry Pi:
 
-```console
-git clone https://github.com/pimoroni/enviroplus-python
-
-cd enviroplus-python
-
-sudo ./install.sh
-
-sudo pip install smbus2
+```terminal
+sudo apt install python3-pip python3-cffi libportaudio2 python3-numpy python3-smbus python3-pil python3-setuptools python3-flask
 ```
 
-Once that’s all done, enter `sudo reboot` to restart your Raspberry Pi to apply the changes.  
-The install script enables I2C, SPI, and serial, disables the serial console, and enables the mini UART interface that Raspberry Pi uses to talk to the PMS5003 particulate sensor.
+After installation, enable i2c and SPI:
 
-To check that everything is working correctly, go to the enviroplus-python folder and run the all-in-one example:
-
-```console
-cd enviroplus-python
-
-cd examples
-
-python all-in-one.py
+```terminal
+sudo raspi-config nonint do_i2c 0
+sudo raspi-config nonint do_spi 0
 ```
 
-Tap your finger on the board’s light sensor to cycle through data from different sensors being displayed on its LCD. When you’re happy it’s all working, press CTRL+C to stop the program.
+Additionally if you are using a particule sensor [PMS5003](https://shop.pimoroni.com/products/pms5003-particulate-matter-sensor-with-cable?variant=29075640352851) you will need to perform the requiered configuration depending on your OS version:
 
-You can now install the EnviroPlusWeb, from a Terminal window enter:
+- **Bookworm**:
 
-```console
-cd
+  ```terminal
+  sudo raspi-config nonint do_serial_cons 1
+  sudo raspi-config nonint do_serial_hw 0
+  ```
 
+  Also edit your file `/boot/firmware/config.txt` and add the following lines at the end of the file:
+
+  ```terminal
+  dtoverlay=pi3-miniuart-bt
+  dtoverlay=adau7002-simple
+  ```
+
+- **Bullseye**:
+
+  ```terminal
+  sudo raspi-config nonint do_serial 1
+  ```
+
+  Also edit your file `/boot/config.txt` and add the following lines at the end of the file:
+
+  ```terminal
+  enable_uart=1
+  dtoverlay=pi3-miniuart-bt
+  dtoverlay=adau7002-simple
+  ```
+
+Reboot your Raspberry Pi to apply these changes.  
+
+Now it's time to install the Python libraries in the "enviroplusweb" virtual environment. For that, create a new one:
+
+```terminal
+python3 -m venv --system-site-packages $HOME/.virtualenvs/enviroplusweb
+```
+
+After creation, it has to be activated:
+
+```terminal
+source ~/.virtualenvs/enviroplusweb/bin/activate
+```
+
+And now the Enviro libraries can be installed:
+
+```terminal
+python3 -m pip install enviroplus
+```
+
+The system is ready to clone the project in your Raspberry Pi. To achieve this, type:
+
+```terminal
 git clone https://gitlab.com/idotj/enviroplusweb.git
-
-sudo pip install flask
 ```
 
-Now you are ready to run your EnviroPlusWeb. Just type:
+All set, you can now run the app:
 
-```console
-sudo python3 enviroplusweb.py
+```terminal
+cd enviroplusweb
+
+python enviroplusweb.py
 ```
 
-Open your browser and type the IP address of your Raspberry Pi, example: `http://192.168.1.142/`
+Open your browser and type the IP address of your Raspberry Pi followed by port :8080, example: `http://192.168.1.142:8080`
 
 ### Setup
 
 Check at the beginning of the file `enviroplusweb.py` the following lines and choose `True` or `False` depending on your config:
 
-- If you have an Enviro board without gas sensor, edit this line
-
-  ```python
-  gas_sensor = False
-  ```
-
-- If you don't have a particulate sensor [PMS5003](https://shop.pimoroni.com/products/pms5003-particulate-matter-sensor-with-cable?variant=29075640352851) attached, edit this line
-
-  ```python
-  particulate_sensor = False
-  ```
-
-- If you prefer to keep the Enviro LCD screen off, edit this line
+- If you prefer to keep the Enviro LCD screen off, edit this line:
 
   ```python
   lcd_screen = False
   ```
 
-- If you don't have a fan plugged on GPIO, edit this line
+- If you don't have a fan plugged into your Raspberry Pi, edit this line:
 
   ```python
   fan_gpio = False
   ```
 
-- If you need temperature and humidity compensation, edit this line
+- If you need temperature scale based on Fahrenheit, edit this line:
 
   ```python
-  temp_humi_compensation = True
+  temp_celsius = False
   ```
 
-Without a fan, temperature and humidity readings are not very accurate and will vary depending on how you assambled your Enviro board with your Raspberry Pi.  
-Find an alternative device/reference to measure the temperature and humidity. Then if needed you can compensate them changing the `factor_temp` and `factor_humi` values.
+- If you don't need temperature and humidity compensation, edit this line:
+
+  ```python
+  temp_humi_compensation = False
+  ```
+
+- If you have an Enviro board without gas sensor, edit this line:
+
+  ```python
+  gas_sensor = False
+  ```
+
+- If you don't have a particulate sensor [PMS5003](https://shop.pimoroni.com/products/pms5003-particulate-matter-sensor-with-cable?variant=29075640352851) plugged, edit this line:
+
+  ```python
+  particulate_sensor = False
+  ```
 
 ### Extra setup
 
 Maybe you want to run Enviro Plus Web at boot, then just type in the terminal:
 
-```console
+```terminal
 crontab -e
 ```
 
-Add a new entry at the very bottom with `@reboot` to specify that you want to run the command at boot, followed by the path where you clone the project.  
-Here you have an example:
+Add a new entry at the bottom with `@reboot` to specify that you want to run the command every time you restart your Raspberry Pi. Remember to replace in the path your HOSTNAME (if your default hostname is not 'raspberrypi').  
 
-```console
-@reboot sudo python3 /home/pi/enviroplusweb/enviroplusweb.py &
+```terminal
+@reboot /bin/bash -c 'source ~/.virtualenvs/enviroplusweb/bin/activate && sudo ~/.virtualenvs/enviroplusweb/bin/python /home/raspberrypi/enviroplusweb/enviroplusweb.py >> /home/raspberrypi/enviroplusweb/enviroplusweb.log 2>&1'
 ```
 
 ## 🚀 Improve me
 
-Feel free to add/improve the app and add more features.
+Feel free to add your features and improvements.
 
 ## ⚖️ License
 
-GNU General Public License v3.0
+GNU Affero General Public License v3.0
 
 ## 💬 FAQ
 
 - ### Where are my data readings saved?
 
-  Depends on where you run `enviroplusweb.py`. By default your data will be stored in the same place where you have the application, in a JSON format inside a folder called `/enviro-data`.  
-  But if you run the app at bootup (for example, using the _crontab_) then your folder `/enviro-data` will be at `/home/pi` (if your default user is 'pi').
+  Depends on where you run `enviroplusweb.py`. By default your data will be stored in the same place where you have the application, in JSON format inside a folder called `/enviroplusweb-data`.  
+  But if you run the app at bootup (for example, using the _crontab_) then your folder `/enviroplusweb-data` will be at `/home/raspberrypi` (if your default hostname is 'raspberrypi').
 
 - ### How can I get my Raspberry Pi IP?
 
   Enter `hostname -I` in a Terminal window on your Raspberry Pi, then you will see the IPv4 and the IPv6.
 
-- ### My graphs looks empty, doesn't draw any line, but readings of each sensor appear in the header
+- ### Graphs are empty, they don't draw any lines, but the live readings on the header are displayed
 
-  You need to wait to have some data recorded in your Raspberry Pi. If you just run the app for first time, give it a few hours. 
+  You need to wait to have some data recorded in your Raspberry Pi. If you just run the app for first time, give it some time to save readings (~25min).
 
-- ### My Raspberry Pi is running other services at localhost
+- ### The Enviro screen doesn't show any data
+
+  If you just run the app for first time, it's normal. You must wait (~25min) until a file with the most recent readings is generated.
+
+- ### Raspberry Pi is running other services at localhost
 
   You can change the port to avoid any conflict with other applications. In that case edit the file `enviroplusweb.py` and find at the end this line:
 
   ```python
-  app.run(debug = False, host = '0.0.0.0', port = 80, use_reloader = False)
+  app.run(debug=False, host='0.0.0.0', port=8080, use_reloader=False)
   ```
 
-  Just change the `port = 80` value for another number (for example `81`) and now you can access to your EnviroPlusWeb typing the ip address followed by :81
+  Just change the `port=8080` for another number (for example `4567`) and run again the app. Now you can access to your EnviroPlusWeb typing the ip address followed by `:4567`
+
+- ### Enviro Plus Web is running but I can't connect to the web server through my browser
+
+  If running your app, you can see in the terminal the following message:
+
+  ```terminal
+  * Serving Flask app 'enviroplusweb'
+  * Debug mode: off
+  Permission denied
+  ```
+
+  This problem may be due to `port=80` not being available to be used by the application and you have to use another port.
 
 - ### I want to run my EnviroPlusWeb under HTTPS
 
   By default you use HTTP to connect to your Raspberry Pi through your browser, but some browsers will redirect automatically to HTTPS. If you prefer to have your project running under HTTPS here you have a tutorial explaning how to setup Flask with HTTPS:  
   <https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https>
+
+- ### Sometimes my Raspberry Pi disconnects from the wifi and I can't connect again
+
+  There is an option that manages the power of the wifi and allows to put it in saving mode. Disabling this option may help you to avoid this problem. First check if the wifi power save feature is enabled or not:
+
+  ```terminal
+  iw wlan0 get power_save
+  ```
+
+  If it is enabled, then edit the following file (replace HOSTNAME with the name you set for your Raspberry Pi):
+
+  ```terminal
+  sudo nano /home/HOSTNAME/.bashrc
+  ```
+
+  And add the following line at the end:
+
+  ```terminal
+  sudo iwconfig wlan0 power off
+  ```
+
+  Reboot and check again typing the first command to see if the feature is enabled or not.
 
 ### Other answered questions
 

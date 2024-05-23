@@ -6,7 +6,7 @@ __pycache__/
 # Flask stuff
 instance/
 .webassets-cache
-enviro-data/
+enviroplusweb-data/
 
 # Celery stuff
 celerybeat-schedule
