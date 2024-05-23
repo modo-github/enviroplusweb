@@ -1,6 +1,9 @@
-/* EnviroWebPlus */
 
-/* CSS variables */
+/* Enviro Plus Web */
+/* More info at: */
+/* https://gitlab.com/idotj/enviroplusweb */
+
+/* Variables */
 :root {
   --color-white: #fff;
   --color-black: #14161b;
@@ -25,7 +28,7 @@
   --color-dust10: #8c796f;
 }
 
-/* Class colors */
+/* Color names */
 .color-white {
   color: var(--color-white);
 }
@@ -137,7 +140,7 @@ input {
   border-radius: 0.25rem;
   cursor: pointer;
 }
-/* Only for webkit browser engine */
+/* Only for webkit */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   select {
     padding-right: 0.5rem;
@@ -246,7 +249,7 @@ h1 {
   max-height: 2rem;
   margin-right: 1rem;
 }
-body[data-hasFanGPIO="False"] .container-btn-fanGpio {
+body[data-fan-gpio="False"] .container-btn-fanGpio {
   display: none !important;
 }
 .button-icon-svg {
@@ -275,7 +278,7 @@ body[data-hasFanGPIO="False"] .container-btn-fanGpio {
   stroke: unset !important;
 }
 
-/* Header Mobile version */
+/* Header - Mobile version */
 @media screen and (min-width: 1260px) {
   .container-menu-hamburger {
     display: none;

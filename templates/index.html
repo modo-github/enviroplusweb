@@ -29,9 +29,10 @@
 
   <body
     id="body"
-    data-hasGasSensor="{{ gas_sensor }}"
-    data-hasParticulateSensor="{{ particulate_sensor }}"
-    data-hasFanGPIO="{{ fan_gpio }}"
+    data-gas-sensor="{{ gas_sensor }}"
+    data-particulate-sensor="{{ particulate_sensor }}"
+    data-fan-gpio="{{ fan_gpio }}"
+    data-temp-celsius="{{ temp_celsius }}"
   >
     <script>
       // Load user theme-color
@@ -228,7 +229,6 @@
               viewBox="0 0 32 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              role="img"
               data-v-889bdcc8=""
               data-v-807110c0=""
             >
@@ -263,10 +263,7 @@
           <div class="graph-header">
             <h2 class="color-red">▣ Temperature:</h2>
             <div class="graph-header-readings">
-              <div>
-                <span id="temp">-</span>&deg;C &nbsp;⸱&nbsp;
-                <span id="temp-f">-</span>&deg;F
-              </div>
+              <div><span id="temp">-</span> <span id="tempScale">-</span></div>
             </div>
           </div>
           <div class="graph-chart">
@@ -333,7 +330,7 @@
               <div>
                 <span class="color-noise-amp">▣ Amp</span>
                 <span id="amp">-</span>&nbsp;u
-              </div>              
+              </div>
             </div>
           </div>
 

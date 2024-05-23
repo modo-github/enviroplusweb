@@ -1,24 +1,29 @@
-/** EnviroPlusWeb **/
-/* https://gitlab.com/idotj/enviroplusweb */
-const frequencies = {
-  day: { major: 3 * 3600, minor: 3600, poll: 60 },
-  week: { major: 24 * 3600, minor: 6 * 3600, poll: 600 },
-  month: { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
-  year: { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 },
-};
-const gas_sensor = ((body.dataset.hasgassensor).toLowerCase() === "true");
-const particulate_sensor = ((body.dataset.hasparticulatesensor).toLowerCase() === "true");
-const fan_gpio = ((body.dataset.hasfangpio).toLowerCase() === "true");
-let hasThemeLight = body.classList.contains("theme-light");
+/**
+ * Enviro Plus Web
+ * @author idotj
+ * @url https://gitlab.com/idotj/enviroplusweb
+ * @license GNU AGPLv3
+ */
+"use strict";
+
+const menuMainBtn = document.getElementById("menu-hamburger");
+const menuMainContainer = document.getElementById("container-menu-settings");
 const themeLightBtn = document.getElementById("theme-light");
 const themeDarkBtn = document.getElementById("theme-dark");
+let hasThemeLight = body.classList.contains("theme-light");
 const style = getComputedStyle(document.body);
-// All colors values are declared at main.css
+const fan_gpio = body.dataset.fanGpio.toLowerCase() === "true";
+const temp_celsius = body.dataset.tempCelsius.toLowerCase() === "true";
+const unitTemp = temp_celsius ? "°C" : "°F";
+const tempScale = document.getElementById("tempScale");
+const gas_sensor = body.dataset.gasSensor.toLowerCase() === "true";
+const particulate_sensor =
+  body.dataset.particulateSensor.toLowerCase() === "true";
 const items_ngp = {
   temp: {
     id: "temp",
     label: "Temperature",
-    unit: "°C",
+    unit: unitTemp,
     color: style.getPropertyValue("--color-red"),
     min: 0,
     max: 50,
@@ -135,16 +140,20 @@ const items_pm = {
 let items;
 if (particulate_sensor) {
   items = { ...items_ngp, ...items_gas, ...items_pm };
+} else if (gas_sensor) {
+  items = { ...items_ngp, ...items_gas };
 } else {
-  if (gas_sensor) {
-    items = { ...items_ngp, ...items_gas };
-  } else {
-    items = items_ngp;
-  }
+  items = items_ngp;
 }
 let firstRun = true;
 let dataReadings;
 let transformedData;
+const frequencies = {
+  day: { major: 3 * 3600, minor: 3600, poll: 60 },
+  week: { major: 24 * 3600, minor: 6 * 3600, poll: 600 },
+  month: { major: 7 * 24 * 3600, minor: 24 * 3600, poll: 1440 },
+  year: { major: 31 * 24 * 3600, minor: 7 * 24 * 3600, poll: 17280 },
+};
 let frequency;
 let last_frequency = "";
 let last_graph = 0;
@@ -181,7 +190,8 @@ function getData() {
   xhttp.send();
 }
 
-// Show live readings in
+// Show live readings
+tempScale.innerText = unitTemp;
 function listReadings(d) {
   dataReadings = d;
   for (let i = 0; i < Object.keys(dataReadings).length; i++) {
@@ -190,10 +200,6 @@ function listReadings(d) {
     let dataValue = Object.values(dataReadings)[i];
     if (typeof elementIdKey != "undefined" && elementIdKey != null) {
       elementIdKey.innerHTML = dataValue;
-      if (dataKey === "temp") {
-        const temp_f = dataValue * 1.8 + 32;
-        document.getElementById("temp-f").innerHTML = temp_f.toFixed(1);
-      }
     }
   }
 }
@@ -211,7 +217,7 @@ function getGraph() {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        console.log("getGraph(): ", JSON.parse(this.responseText));
+        // console.log("getGraph(): ", JSON.parse(this.responseText));
         transformedData = JSON.parse(this.responseText).map((element) => {
           return {
             // Normalize data for the graph
@@ -260,8 +266,6 @@ function destroyAllCharts() {
 
 // Draw graph with data
 function drawGraph(data) {
-  // console.log("drawGraph(): ", data);
-
   // Change time range to read better the X axis
   let graphfrequency;
   switch (frequency) {
@@ -792,18 +796,15 @@ function changeColorTheme() {
   localStorage.setItem("theme-color", this.id);
   hasThemeLight = !hasThemeLight;
 }
-themeLightBtn.onclick = changeColorTheme;
-themeDarkBtn.onclick = changeColorTheme;
+themeLightBtn.addEventListener("click", changeColorTheme);
+themeDarkBtn.addEventListener("click", changeColorTheme);
 
-// Control main menu (mobile)
-const menuMainBtn = document.getElementById("menu-hamburger");
-const menuMainContainer = document.getElementById("container-menu-settings");
-// Toggle menu by icon click
+// Main menu (mobile)
 menuMainBtn.addEventListener("click", function () {
   this.classList.toggle("btn-active");
   this.setAttribute("aria-expanded", this.classList.contains("btn-active"));
   menuMainContainer.classList.toggle("menu-settings-open");
-  // Detect outside click
+
   document.addEventListener("click", function clickOutsideMenu(event) {
     let clickMenuContainer = menuMainContainer.contains(event.target);
     let clickMenuBtn = menuMainBtn.contains(event.target);
@@ -812,7 +813,6 @@ menuMainBtn.addEventListener("click", function () {
       !clickMenuBtn &&
       menuMainContainer.classList.contains("menu-settings-open")
     ) {
-      // Close menu
       menuMainBtn.classList.toggle("btn-active");
       menuMainBtn.setAttribute(
         "aria-expanded",
