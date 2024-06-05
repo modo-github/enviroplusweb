@@ -203,27 +203,6 @@ GNU Affero General Public License v3.0
   By default you use HTTP to connect to your Raspberry Pi through your browser, but some browsers will redirect automatically to HTTPS. If you prefer to have your project running under HTTPS here you have a tutorial explaning how to setup Flask with HTTPS:  
   <https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https>
 
-- ### Sometimes my Raspberry Pi disconnects from the wifi and I can't connect again
-
-  There is an option that manages the power of the wifi and allows to put it in saving mode. Disabling this option may help you to avoid this problem. First check if the wifi power save feature is enabled or not:
-
-  ```terminal
-  iw wlan0 get power_save
-  ```
-
-  If it is enabled, then edit the following file (replace HOSTNAME with the name you set for your Raspberry Pi):
-
-  ```terminal
-  sudo nano /home/HOSTNAME/.bashrc
-  ```
-
-  And add the following line at the end:
-
-  ```terminal
-  sudo iwconfig wlan0 power off
-  ```
-
-  Reboot and check again typing the first command to see if the feature is enabled or not.
 
 ### Other answered questions
 
