@@ -104,7 +104,9 @@ All set, you can now run the app:
 
 ```terminal
 cd enviroplusweb
+```
 
+```terminal
 python enviroplusweb.py
 ```
 
