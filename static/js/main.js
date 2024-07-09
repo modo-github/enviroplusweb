@@ -92,7 +92,7 @@ const items_gas = {
     unit: "kΩ",
     color: style.getPropertyValue("--color-olive"),
     min: 0,
-    max: 600,
+    max: 1200,
   },
   oxi: {
     id: "red",
@@ -100,7 +100,7 @@ const items_gas = {
     unit: "kΩ",
     color: style.getPropertyValue("--color-turquoise"),
     min: 0,
-    max: 400,
+    max: 1200,
   },
   red: {
     id: "oxi",
@@ -108,7 +108,7 @@ const items_gas = {
     unit: "kΩ",
     color: style.getPropertyValue("--color-violet"),
     min: 0,
-    max: 1000,
+    max: 1200,
   },
 };
 const items_pm = {
@@ -659,11 +659,11 @@ function drawGraph(data) {
       maintainAspectRatio: false,
       scales: {
         y: {
-          min: items.oxi.min,
-          max: items.oxi.max,
+          min: items.nh3.min,
+          max: items.nh3.max,
           ticks: {
             callback: function (value) {
-              return value + " " + items.oxi.unit;
+              return value + " " + items.nh3.unit;
             },
           },
         },
