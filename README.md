@@ -35,10 +35,19 @@ Additionally if you are using a particule sensor [PMS5003](https://shop.pimoroni
 
   ```terminal
   sudo raspi-config nonint do_serial_cons 1
+  ```
+
+  ```terminal
   sudo raspi-config nonint do_serial_hw 0
   ```
 
-  Also edit your file `/boot/firmware/config.txt` and add the following lines at the end of the file:
+  Also edit your config.txt file by typing:
+
+  ```terminal
+  sudo nano /boot/firmware/config.txt
+  ```
+
+  and add the following lines at the end of the file:
 
   ```terminal
   dtoverlay=pi3-miniuart-bt
@@ -51,7 +60,13 @@ Additionally if you are using a particule sensor [PMS5003](https://shop.pimoroni
   sudo raspi-config nonint do_serial 1
   ```
 
-  Also edit your file `/boot/config.txt` and add the following lines at the end of the file:
+  Also edit your config.txt file by typing:
+
+  ```terminal
+  sudo nano /boot/config.txt
+  ```
+
+  and add the following lines at the end of the file:
 
   ```terminal
   enable_uart=1
@@ -59,7 +74,7 @@ Additionally if you are using a particule sensor [PMS5003](https://shop.pimoroni
   dtoverlay=adau7002-simple
   ```
 
-Reboot your Raspberry Pi to apply these changes.  
+Reboot your Raspberry Pi to apply these changes.
 
 Now it's time to install the Python libraries in the "enviroplusweb" virtual environment. For that, create a new one:
 
@@ -143,7 +158,7 @@ Maybe you want to run Enviro Plus Web at boot, then just type in the terminal:
 crontab -e
 ```
 
-Add a new entry at the bottom with `@reboot` to specify that you want to run the command every time you restart your Raspberry Pi. Remember to replace in the path your HOSTNAME (if your default hostname is not 'raspberrypi').  
+Add a new entry at the bottom with `@reboot` to specify that you want to run the command every time you restart your Raspberry Pi. Remember to replace in the path your HOSTNAME (if your default hostname is not 'raspberrypi').
 
 ```terminal
 @reboot /bin/bash -c 'source ~/.virtualenvs/enviroplusweb/bin/activate && sudo ~/.virtualenvs/enviroplusweb/bin/python /home/raspberrypi/enviroplusweb/enviroplusweb.py >> /home/raspberrypi/enviroplusweb/enviroplusweb.log 2>&1'
@@ -202,7 +217,6 @@ GNU Affero General Public License v3.0
 
   By default you use HTTP to connect to your Raspberry Pi through your browser, but some browsers will redirect automatically to HTTPS. If you prefer to have your project running under HTTPS here you have a tutorial explaning how to setup Flask with HTTPS:  
   <https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https>
-
 
 ### Other answered questions
 
