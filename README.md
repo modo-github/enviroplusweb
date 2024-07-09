@@ -26,6 +26,9 @@ After installation, enable i2c and SPI:
 
 ```terminal
 sudo raspi-config nonint do_i2c 0
+```
+
+```terminal
 sudo raspi-config nonint do_spi 0
 ```
 
