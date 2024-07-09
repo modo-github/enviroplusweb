@@ -198,10 +198,10 @@ GNU Affero General Public License v3.0
 
 - ### I got an error related with 'adau7002' while running Enviroplusweb
 
-  After initialising the application, a series of errors appears in the terminal, ending with the message:
+  After initialising the application, a series of errors appears in the terminal, ending with the message:  
   `ValueError: No input device matching 'adau7002'`
 
-  This bug has an [open thread](https://github.com/pimoroni/enviroplus-python/issues/11) and is related to the drivers that are responsible for running the microphone.  
+  This error has a related [open thread](https://github.com/pimoroni/enviroplus-python/issues/11) and looks like it's due to the drivers that are responsible for running the microphone.  
   At the moment the quickest solution is to reboot your raspberry pi.
 
 - ### Raspberry Pi is running other services at localhost
