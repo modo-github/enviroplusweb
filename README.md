@@ -196,6 +196,14 @@ GNU Affero General Public License v3.0
 
   If you just run the app for first time, it's normal. You must wait (~25min) until a file with the most recent readings is generated.
 
+- ### I got an error related with 'adau7002' while running Enviroplusweb
+
+  After initialising the application, a series of errors appears in the terminal, ending with the message:
+  `ValueError: No input device matching 'adau7002'`
+
+  This bug has an [open thread](https://github.com/pimoroni/enviroplus-python/issues/11) and is related to the drivers that are responsible for running the microphone.  
+  At the moment the quickest solution is to reboot your raspberry pi.
+
 - ### Raspberry Pi is running other services at localhost
 
   You can change the port to avoid any conflict with other applications. In that case edit the file `enviroplusweb.py` and find at the end this line:
