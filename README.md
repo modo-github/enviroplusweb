@@ -198,11 +198,13 @@ GNU Affero General Public License v3.0
 
 - ### I got an error related with 'adau7002' while running Enviroplusweb
 
-  After initialising the application, a series of errors appears in the terminal, ending with the message:  
-  `ValueError: No input device matching 'adau7002'`
+  When I connect a display via HDMI to the Raspberry Pi Zero W, this error shows in the terminal:  
+  `ValueError: No input device matching 'adau7002'`  
+  Simply disconnecting the HDMI cable solves the problem.
 
-  This error has a related [open thread](https://github.com/pimoroni/enviroplus-python/issues/11) and looks like it's due to the drivers that are responsible for running the microphone.  
-  At the moment the quickest solution is to reboot your raspberry pi.
+  Another case where this error occurs, is after a reboot at application launch (no display connected).  
+  It seems that the library that manages the audio is not very reliable. There is a [thread](https://github.com/pimoroni/enviroplus-python/issues/11) about this issue that is still open.  
+  At the moment the quickest solution is to reboot your Raspberry Pi again.
 
 - ### Raspberry Pi is running other services at localhost
 
@@ -230,6 +232,28 @@ GNU Affero General Public License v3.0
 
   By default you use HTTP to connect to your Raspberry Pi through your browser, but some browsers will redirect automatically to HTTPS. If you prefer to have your project running under HTTPS here you have a tutorial explaning how to setup Flask with HTTPS:  
   <https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https>
+
+- ### Sometimes my Raspberry Pi disconnects from the wifi and I can't connect again
+
+  There is an option that manages the power of the wifi and allows to put it in saving mode. Disabling this option may help you to avoid this problem. First check if the wifi power save feature is enabled or not:
+
+  ```terminal
+  iw wlan0 get power_save
+  ```
+
+  If it is enabled, then edit the following file (replace HOSTNAME with the name you set for your Raspberry Pi):
+
+  ```terminal
+  sudo nano /home/HOSTNAME/.bashrc
+  ```
+
+  And add the following line at the end:
+
+  ```terminal
+  sudo iwconfig wlan0 power off
+  ```
+
+  Reboot and check again typing the first command to see if the feature is enabled or not.
 
 ### Other answered questions
 
