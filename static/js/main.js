@@ -305,8 +305,7 @@ function drawGraph(data) {
       ],
     },
     options: {
-      bezierCurve: true,
-      tension: 0.9,
+      cubicInterpolationMode: "monotone",
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -358,8 +357,7 @@ function drawGraph(data) {
       ],
     },
     options: {
-      bezierCurve: true,
-      tension: 0.3,
+      cubicInterpolationMode: "monotone",
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -413,8 +411,7 @@ function drawGraph(data) {
       ],
     },
     options: {
-      bezierCurve: true,
-      tension: 0.6,
+      cubicInterpolationMode: "monotone",
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -468,8 +465,7 @@ function drawGraph(data) {
       ],
     },
     options: {
-      bezierCurve: true,
-      tension: 0.2,
+      cubicInterpolationMode: "monotone",
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -560,8 +556,7 @@ function drawGraph(data) {
       ],
     },
     options: {
-      bezierCurve: true,
-      tension: 0.1,
+      cubicInterpolationMode: "monotone",
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -654,8 +649,7 @@ function drawGraph(data) {
       ],
     },
     options: {
-      bezierCurve: true,
-      tension: 0.2,
+      cubicInterpolationMode: "monotone",
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -743,8 +737,7 @@ function drawGraph(data) {
       ],
     },
     options: {
-      bezierCurve: true,
-      tension: 0.2,
+      cubicInterpolationMode: "monotone",
       maintainAspectRatio: false,
       scales: {
         y: {
