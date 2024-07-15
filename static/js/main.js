@@ -58,7 +58,7 @@ const items_ngp = {
     unit: "u",
     color: style.getPropertyValue("--color-noise-high"),
     min: 0,
-    max: 300,
+    max: 600,
   },
   mid: {
     id: "mid",
@@ -66,7 +66,7 @@ const items_ngp = {
     unit: "u",
     color: style.getPropertyValue("--color-noise-mid"),
     min: 0,
-    max: 300,
+    max: 600,
   },
   low: {
     id: "low",
@@ -74,7 +74,7 @@ const items_ngp = {
     unit: "u",
     color: style.getPropertyValue("--color-noise-low"),
     min: 0,
-    max: 300,
+    max: 600,
   },
   amp: {
     id: "amp",
@@ -82,7 +82,7 @@ const items_ngp = {
     unit: "u",
     color: style.getPropertyValue("--color-noise-amp"),
     min: 0,
-    max: 300,
+    max: 600,
   },
 };
 const items_gas = {
