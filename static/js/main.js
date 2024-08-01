@@ -118,7 +118,7 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust10"),
     min: 0,
-    max: 800,
+    max: 80,
   },
   pm25: {
     id: "pm25",
@@ -126,7 +126,7 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust25"),
     min: 0,
-    max: 800,
+    max: 80,
   },
   pm100: {
     id: "pm100",
@@ -134,7 +134,7 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust100"),
     min: 0,
-    max: 800,
+    max: 80,
   },
 };
 let items;
