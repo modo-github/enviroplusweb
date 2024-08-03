@@ -58,7 +58,7 @@ const items_ngp = {
     unit: "u",
     color: style.getPropertyValue("--color-noise-high"),
     min: 0,
-    max: 600,
+    max: 100,
   },
   mid: {
     id: "mid",
@@ -66,7 +66,7 @@ const items_ngp = {
     unit: "u",
     color: style.getPropertyValue("--color-noise-mid"),
     min: 0,
-    max: 600,
+    max: 100,
   },
   low: {
     id: "low",
@@ -74,7 +74,7 @@ const items_ngp = {
     unit: "u",
     color: style.getPropertyValue("--color-noise-low"),
     min: 0,
-    max: 600,
+    max: 100,
   },
   amp: {
     id: "amp",
@@ -82,7 +82,7 @@ const items_ngp = {
     unit: "u",
     color: style.getPropertyValue("--color-noise-amp"),
     min: 0,
-    max: 600,
+    max: 100,
   },
 };
 const items_gas = {
@@ -92,7 +92,7 @@ const items_gas = {
     unit: "kΩ",
     color: style.getPropertyValue("--color-olive"),
     min: 0,
-    max: 1200,
+    max: 600,
   },
   oxi: {
     id: "red",
@@ -100,7 +100,7 @@ const items_gas = {
     unit: "kΩ",
     color: style.getPropertyValue("--color-turquoise"),
     min: 0,
-    max: 1200,
+    max: 600,
   },
   red: {
     id: "oxi",
@@ -108,7 +108,7 @@ const items_gas = {
     unit: "kΩ",
     color: style.getPropertyValue("--color-violet"),
     min: 0,
-    max: 1200,
+    max: 600,
   },
 };
 const items_pm = {
