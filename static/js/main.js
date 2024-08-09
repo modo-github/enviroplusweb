@@ -41,8 +41,8 @@ const items_ngp = {
     label: "Pressure",
     unit: "hPa",
     color: style.getPropertyValue("--color-green"),
-    min: 950,
-    max: 1050,
+    min: 980,
+    max: 1020,
   },
   lux: {
     id: "lux",
