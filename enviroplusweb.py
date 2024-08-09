@@ -34,7 +34,7 @@ from time import sleep, time, asctime, localtime, strftime
 # If you prefer to keep the Enviro LCD screen off, change the next value to False
 lcd_screen = True
 # If you don't have a fan plugged on GPIO, change the next value to False
-fan_gpio = True
+fan_gpio = False
 # Temperature scale in Celsius (switch to false to show in Fahrenheit)
 temp_celsius = True
 # Temperature and humidity compensation (edit values 'factor_temp' and 'factor_humi' to adjust them)
@@ -199,9 +199,9 @@ def read_data(time):
           raise e
         pms5003.reset()
         sleep(30)
-    pm100 = particles.pm_ug_per_m3(10)
+    pm100 = particles.pm_ug_per_m3(1.0)
     pm25 = particles.pm_ug_per_m3(2.5)
-    pm10 = particles.pm_ug_per_m3(1.0)
+    pm10 = particles.pm_ug_per_m3(10)
   else:
     pm100 = pm25 = pm10 = 0
 
