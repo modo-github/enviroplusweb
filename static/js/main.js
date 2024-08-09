@@ -92,7 +92,7 @@ const items_gas = {
     unit: "kΩ",
     color: style.getPropertyValue("--color-olive"),
     min: 0,
-    max: 600,
+    max: 500,
   },
   oxi: {
     id: "red",
@@ -100,7 +100,7 @@ const items_gas = {
     unit: "kΩ",
     color: style.getPropertyValue("--color-turquoise"),
     min: 0,
-    max: 600,
+    max: 500,
   },
   red: {
     id: "oxi",
@@ -108,7 +108,7 @@ const items_gas = {
     unit: "kΩ",
     color: style.getPropertyValue("--color-violet"),
     min: 0,
-    max: 600,
+    max: 500,
   },
 };
 const items_pm = {
@@ -118,7 +118,7 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust10"),
     min: 0,
-    max: 80,
+    max: 50,
   },
   pm25: {
     id: "pm25",
@@ -126,7 +126,7 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust25"),
     min: 0,
-    max: 80,
+    max: 50,
   },
   pm100: {
     id: "pm100",
@@ -134,7 +134,7 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust100"),
     min: 0,
-    max: 80,
+    max: 50,
   },
 };
 let items;
