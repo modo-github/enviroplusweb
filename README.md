@@ -8,13 +8,14 @@ Runs thanks to [Flask](https://flask.palletsprojects.com) and [Chart.js](https:/
 
 ![Screenshot](screenshot-darkTheme.jpg)
 
-Forked from <https://github.com/nophead/EnviroPlusWeb>
+OG Fork from <https://github.com/nophead/EnviroPlusWeb>
+Forked from <https://gitlab.com/idotj/enviroplusweb>
 
 ⚠️ Enviro readings must not be relied upon for critical applications.
 
 ## 📖 User guide
 
-### Install (tested on Raspberry Pi OS Bullseye and Bookworm)
+### Install (tested on Raspberry Pi OS Bookworm)
 
 To start with, open your terminal and install the necessary dependencies in your Raspberry Pi:
 
@@ -57,27 +58,11 @@ Additionally if you are using a particule sensor [PMS5003](https://shop.pimoroni
   dtoverlay=adau7002-simple
   ```
 
-- **Bullseye**:
-
-  ```terminal
-  sudo raspi-config nonint do_serial 1
-  ```
-
-  Also edit your config.txt file by typing:
-
-  ```terminal
-  sudo nano /boot/config.txt
-  ```
-
-  and add the following lines at the end of the file:
-
-  ```terminal
-  enable_uart=1
-  dtoverlay=pi3-miniuart-bt
-  dtoverlay=adau7002-simple
-  ```
-
 Reboot your Raspberry Pi to apply these changes.
+
+```
+sudo reboot -h now
+```
 
 Now it's time to install the Python libraries in the "enviroplusweb" virtual environment. For that, create a new one:
 
@@ -100,7 +85,7 @@ python3 -m pip install enviroplus
 The system is ready to clone the project in your Raspberry Pi. To achieve this, type:
 
 ```terminal
-git clone https://gitlab.com/idotj/enviroplusweb.git
+git clone https://github.com/modo-github/enviroplusweb.git
 ```
 
 All set, you can now run the app:
@@ -258,4 +243,4 @@ GNU Affero General Public License v3.0
 ### Other answered questions
 
 Check the [closed issues](https://gitlab.com/idotj/enviroplusweb/-/issues/?sort=created_date&state=closed&first_page_size=20), you might find your question there.  
-If nothing matches with your problem, check the [open issues](https://gitlab.com/idotj/enviroplusweb/-/issues/?sort=created_date&state=opened&first_page_size=20) or feel free to create a new one.
+If nothing matches with your problem, check the [open issues](https://gitlab.com/idotj/enviroplusweb/-/issues/?sort=created_date&state=opened&first_page_size=20) this is where the orginal was forked from. If you still have issues with my version please add an issue via github. 
