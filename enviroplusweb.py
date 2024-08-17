@@ -188,42 +188,44 @@ def read_data(time):
   else:
     oxi = red = nh3 = 0
 
-  if particulate_sensor:
-    while True:
-      try:
-        particles = pms5003.read()
-        break
-      except RuntimeError as e:
-        print('Particle read failed: ', e.__class__.__name__)
-        if not run_flag:
-          raise e
-        pms5003.reset()
-        sleep(30)
-    pm100 = particles.pm_ug_per_m3(1.0)
-    pm25 = particles.pm_ug_per_m3(2.5)
-    pm10 = particles.pm_ug_per_m3(10)
-  else:
-    pm100 = pm25 = pm10 = 0
+    if particulate_sensor:
+        while True:
+            try:
+                particles = pms5003.read()
+                break
+            except RuntimeError as e:
+                print('Particle read failed: ', e.__class__.__name__)
+                if not run_flag:
+                    raise e
+                pms5003.reset()
+                sleep(30)
+        pm1 = particles.pm_ug_per_m3(1.0)
+        pm25 = particles.pm_ug_per_m3(2.5)
+        pm10 = particles.pm_ug_per_m3(10)
 
-  record = {
-    'time': asctime(localtime(time)),
-    'temp': round(temperature, 1),
-    'humi': round(humidity, 1),
-    'pres': round(pressure, 1),
-    'lux': round(lux),
-    'high': round(high, 2),
-    'mid': round(mid, 2),
-    'low': round(low, 2),
-    'amp': round(amp, 2),
-    'oxi': oxi,
-    'red': red,
-    'nh3': nh3,
-    'pm10': pm10,
-    'pm25': pm25,
-    'pm100': pm100,
-  }
+    else:
+        pm1 = pm25 = pm10 = 0
 
-  return record
+    record = {
+        'time': asctime(localtime(time)),
+        'temp': round(temperature, 1),
+        'humi': round(humidity, 1),
+        'pres': round(pressure, 1),
+        'lux': round(lux),
+        'high': round(high, 2),
+        'mid': round(mid, 2),
+        'low': round(low, 2),
+        'amp': round(amp, 2),
+        'oxi': oxi,
+        'red': red,
+        'nh3': nh3,
+        'pm1': pm1,
+        'pm25': pm25,
+        'pm10': pm10,
+    }
+
+    return record
+
 
 
 # Throw away the first readings as not accurate
