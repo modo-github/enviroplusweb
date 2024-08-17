@@ -112,13 +112,13 @@ const items_gas = {
   },
 };
 const items_pm = {
-  pm1: {
-    id: "pm1",
-    label: "PM1",
+  pm10: {
+    id: "pm10",
+    label: "PM10.0",
     unit: "μg/m3",
-    color: style.getPropertyValue("--color-dust1"),
+    color: style.getPropertyValue("--color-dust10"),
     min: 0,
-    max: 800,
+    max: 50,
   },
   pm25: {
     id: "pm25",
@@ -126,15 +126,15 @@ const items_pm = {
     unit: "μg/m3",
     color: style.getPropertyValue("--color-dust25"),
     min: 0,
-    max: 800,
+    max: 50,
   },
-  pm10: {
-    id: "pm10",
-    label: "PM10",
+  pm100: {
+    id: "pm100",
+    label: "PM100",
     unit: "μg/m3",
-    color: style.getPropertyValue("--color-dust10"),
+    color: style.getPropertyValue("--color-dust100"),
     min: 0,
-    max: 800,
+    max: 50,
   },
 };
 let items;
@@ -233,9 +233,9 @@ function getGraph() {
             nh3: element.nh3,
             red: element.red,
             oxi: element.oxi,
-            pm1: element.pm1,
-            pm25: element.pm25,
             pm10: element.pm10,
+            pm100: element.pm100,
+            pm25: element.pm25,
           };
         });
 
@@ -305,7 +305,8 @@ function drawGraph(data) {
       ],
     },
     options: {
-      cubicInterpolationMode: "monotone",
+      bezierCurve: true,
+      tension: 0.9,
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -357,7 +358,8 @@ function drawGraph(data) {
       ],
     },
     options: {
-      cubicInterpolationMode: "monotone",
+      bezierCurve: true,
+      tension: 0.3,
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -411,7 +413,8 @@ function drawGraph(data) {
       ],
     },
     options: {
-      cubicInterpolationMode: "monotone",
+      bezierCurve: true,
+      tension: 0.6,
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -465,7 +468,8 @@ function drawGraph(data) {
       ],
     },
     options: {
-      cubicInterpolationMode: "monotone",
+      bezierCurve: true,
+      tension: 0.2,
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -556,7 +560,8 @@ function drawGraph(data) {
       ],
     },
     options: {
-      cubicInterpolationMode: "monotone",
+      bezierCurve: true,
+      tension: 0.1,
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -649,7 +654,8 @@ function drawGraph(data) {
       ],
     },
     options: {
-      cubicInterpolationMode: "monotone",
+      bezierCurve: true,
+      tension: 0.2,
       maintainAspectRatio: false,
       scales: {
         y: {
@@ -699,30 +705,6 @@ function drawGraph(data) {
     data: {
       datasets: [
         {
-          label: items.pm1.id,
-          data: data,
-          parsing: {
-            yAxisKey: items.pm1.id,
-          },
-          yAxisID: "y",
-          borderColor: items.pm1.color,
-          borderWidth: 2,
-          pointBackgroundColor: items.pm1.color,
-          pointRadius: 1,
-        },
-        {
-          label: items.pm25.id,
-          data: data,
-          parsing: {
-            yAxisKey: items.pm25.id,
-          },
-          yAxisID: "y",
-          borderColor: items.pm25.color,
-          borderWidth: 2,
-          pointBackgroundColor: items.pm25.color,
-          pointRadius: 1,
-        },
-        {
           label: items.pm10.id,
           data: data,
           parsing: {
@@ -734,21 +716,55 @@ function drawGraph(data) {
           pointBackgroundColor: items.pm10.color,
           pointRadius: 1,
         },
+        {
+          label: items.pm100.id,
+          data: data,
+          parsing: {
+            yAxisKey: items.pm100.id,
+          },
+          yAxisID: "y1",
+          borderColor: items.pm100.color,
+          borderWidth: 2,
+          pointBackgroundColor: items.pm100.color,
+          pointRadius: 1,
+        },
+        {
+          label: items.pm25.id,
+          data: data,
+          parsing: {
+            yAxisKey: items.pm25.id,
+          },
+          yAxisID: "y2",
+          borderColor: items.pm25.color,
+          borderWidth: 2,
+          pointBackgroundColor: items.pm25.color,
+          pointRadius: 1,
+        },
       ],
     },
     options: {
-      cubicInterpolationMode: "monotone",
+      bezierCurve: true,
+      tension: 0.2,
       maintainAspectRatio: false,
       scales: {
         y: {
-          beginAtZero: true,
-          grace: "60%",
+          min: items.pm10.min,
+          max: items.pm10.max,
           ticks: {
-            stepSize: 10,
             callback: function (value) {
-              return value + " " + items.pm1.unit;
+              return value + " " + items.pm100.unit;
             },
           },
+        },
+        y1: {
+          min: items.pm100.min,
+          max: items.pm100.max,
+          display: false,
+        },
+        y2: {
+          min: items.pm25.min,
+          max: items.pm25.max,
+          display: false,
         },
         x: {
           type: "time",
