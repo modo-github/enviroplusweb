@@ -76,8 +76,8 @@ if temp_humi_compensation:
       temp = int(temp) / 1000.0
     return temp
 
-  factor_temp = 1.15  #this is for sense direct on board
-  factor_humi = 1.50
+  factor_temp = 2.80  #this is for sense direct on board
+  factor_humi = 1.35
 
 # Create ST7735 LCD display class
 if lcd_screen:
