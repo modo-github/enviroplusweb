@@ -22,9 +22,9 @@
   --color-olive: #808000;
   --color-violet: #771e9b;
   --color-turquoise: #40826c;
-  --color-dust100: #57473a;
+  --color-dust1: #8c796f;
   --color-dust25: #715f54;
-  --color-dust10: #8c796f;
+  --color-dust10: #57473a;
 }
 
 /* Color names */
@@ -67,8 +67,8 @@
 .color-turquoise {
   color: var(--color-turquoise);
 }
-.color-pmColor100 {
-  color: var(--color-dust100);
+.color-pmColor1 {
+  color: var(--color-dust1);
 }
 .color-pmColor25 {
   color: var(--color-dust25);

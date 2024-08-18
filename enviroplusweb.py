@@ -199,11 +199,12 @@ def read_data(time):
           raise e
         pms5003.reset()
         sleep(30)
-    pm100 = particles.pm_ug_per_m3(1.0)
+    pm1 = particles.pm_ug_per_m3(1.0)
     pm25 = particles.pm_ug_per_m3(2.5)
     pm10 = particles.pm_ug_per_m3(10)
+
   else:
-    pm100 = pm25 = pm10 = 0
+    pm1 = pm25 = pm10 = 0
 
   record = {
     'time': asctime(localtime(time)),
@@ -218,9 +219,9 @@ def read_data(time):
     'oxi': oxi,
     'red': red,
     'nh3': nh3,
-    'pm10': pm10,
+    'pm1': pm1,
     'pm25': pm25,
-    'pm100': pm100,
+    'pm10': pm10,
   }
 
   return record
